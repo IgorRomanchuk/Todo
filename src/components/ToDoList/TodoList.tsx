@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { TodoModel } from "../../models/todoItem.model";
-import { styled } from "styled-components";
-
-const ContainerStyle = styled.div`
-  height: 150px;
-  font-size: 14px;
-  text-align: left;
-  padding: 5px;
-`;
+import { ContainerStyle } from "./styles";
 
 type Props = {
   todo: TodoModel;

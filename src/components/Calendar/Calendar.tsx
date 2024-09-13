@@ -1,38 +1,5 @@
-import { styled } from "styled-components";
 import { daysAndMonth } from "./calendarData";
-
-const CalendarStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 10px;
-`;
-
-const CalendarHeaderStyle = styled.div`
-  display: flex;
-  justify-content: "space-between";
-`;
-
-const CalendarBodyStyle = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  width: 350px;
-  min-height: 196px;
-`;
-
-const ArrowLeftStyle = styled.span`
-  cursor: pointer;
-  margin-right: 15px;
-`;
-
-const ArrowRightStyle = styled.span`
-  cursor: pointer;
-  margin-left: 15px;
-`;
+import { ArrowLeftStyle, ArrowRightStyle, CalendarBodyStyle, CalendarHeaderStyle, CalendarStyle } from "./styles";
 
 type Props = {
   setYear: (e: (value: number) => number) => void;
@@ -50,6 +17,7 @@ const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
   const changeMonthToRight = () => {
     if (month === 12) return setMonth(1);
     setMonth((prev) => prev + 1);
+    console.log(daysAndMonth[month - 1])
     if (daysAndMonth[month - 1].days === day[day.length - 1]) {
       setDay((prev) => [prev[0], daysAndMonth[month].days]);
     }
@@ -58,6 +26,9 @@ const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
   const changeMonthToLeft = () => {
     if (month === 1) return setMonth(12);
     setMonth((prev) => prev - 1);
+    if (daysAndMonth[month - 1].days === day[day.length - 1]) {
+      setDay((prev) => [prev[0], daysAndMonth[month].days]);
+    }
   };
 
   return (

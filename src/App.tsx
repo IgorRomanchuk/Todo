@@ -7,21 +7,9 @@ import moment from "moment";
 import Weather from "./components/Weather/Weather";
 import { TodoModel } from "./models/todoItem.model";
 import TodoColumn from "./components/ColumnList/ColumnList";
-import "./App.css";
-import { styled } from "styled-components";
+import { AppStyle, ColumnsStyle, HeaderStyle, LoadingStyle } from "./styles";
 
 const statusTodos = ["todo", "in progress", "done"];
-
-const ColumnsStyle = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-`;
-
-const LoadingStyle = styled.div`
- position: "absolute;
- top: 50%;
-`;
 
 function App() {
   const [todoList, setTodoList] = useState<TodoModel[]>(
@@ -57,8 +45,8 @@ function App() {
   }, [todoList]);
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <AppStyle>
+      <HeaderStyle>
         <h1> To Do List</h1>
         <Input setTodoList={setTodoList} day={day} month={month} year={year} />
         <Calendar
@@ -92,8 +80,8 @@ function App() {
             </ColumnsStyle>
           </>
         )}
-      </header>
-    </div>
+      </HeaderStyle>
+    </AppStyle>
   );
 }
 

@@ -1,19 +1,6 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { TodoModel } from "../../models/todoItem.model";
-
-const ContainerStyle = styled.div`
-  display: flex;
-`;
-
-const InputStyle = styled.input`
-  font-size: 12px;
-  width: 200px;
-  &:focus {
-    border: 3px solid red;
-    box-shadow: 0px 0px 2px red;
-  }
-`;
+import { ContainerStyle, InputStyle } from "./styles";
 
 type Props = {
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void

@@ -1,11 +1,7 @@
 import moment from "moment";
 import { TodoModel } from "../../models/todoItem.model";
 import TodoList from "../ToDoList/TodoList";
-import { styled } from "styled-components";
-
-const ContainerStyle = styled.div`
-  display: flex;
-`;
+import { ContainerStyle } from "./styles";
 
 type Props = {
   todoList: TodoModel[];
