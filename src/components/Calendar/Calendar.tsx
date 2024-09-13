@@ -1,4 +1,38 @@
+import { styled } from "styled-components";
 import { daysAndMonth } from "./calendarData";
+
+const CalendarStyle = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+`;
+
+const CalendarHeaderStyle = styled.div`
+  display: flex;
+  justify-content: "space-between";
+`;
+
+const CalendarBodyStyle = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 350px;
+  min-height: 196px;
+`;
+
+const ArrowLeftStyle = styled.span`
+  cursor: pointer;
+  margin-right: 15px;
+`;
+
+const ArrowRightStyle = styled.span`
+  cursor: pointer;
+  margin-left: 15px;
+`;
 
 type Props = {
   setYear: (e: (value: number) => number) => void;
@@ -27,47 +61,17 @@ const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        position: "absolute",
-        bottom: "10px",
-        left: "10px",
-        border: "2px solid white",
-        borderRadius: "10px",
-        padding: "10px",
-      }}
-    >
+    <CalendarStyle>
       <div>
-        <p style={{ display: "flex", justifyContent: "space-between" }}>
-          <span
-            onClick={changeYearToLeft}
-            style={{ cursor: "pointer", marginRight: "15px" }}
-          >{`<<`}</span>
-          <span
-            onClick={changeMonthToLeft}
-            style={{ cursor: "pointer", marginRight: "15px" }}
-          >{`<`}</span>
+        <CalendarHeaderStyle>
+          <ArrowLeftStyle onClick={changeYearToLeft}>{`<<`}</ArrowLeftStyle>
+          <ArrowLeftStyle onClick={changeMonthToLeft}>{`<`}</ArrowLeftStyle>
           {year + " " + daysAndMonth[month - 1].month}
-          <span
-            onClick={changeMonthToRight}
-            style={{ cursor: "pointer", marginLeft: "15px" }}
-          >{`>`}</span>
-          <span
-            onClick={changeYearToRight}
-            style={{ cursor: "pointer", marginLeft: "15px" }}
-          >{`>>`}</span>
-        </p>
+          <ArrowRightStyle onClick={changeMonthToRight}>{`>`}</ArrowRightStyle>
+          <ArrowRightStyle onClick={changeYearToRight}>{`>>`}</ArrowRightStyle>
+        </CalendarHeaderStyle>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(7, 1fr)",
-            width: "350px",
-            minHeight: "196px",
-          }}
-        >
+        <CalendarBodyStyle>
           {[...new Array(daysAndMonth[month - 1].days)].map((_, i) => (
             <p
               onClick={() => {
@@ -98,16 +102,15 @@ const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
                     ? "1px solid red"
                     : "none"
                 }`,
-                borderRadius: `${day.includes(i + 1) ? "10px" : "none"}`,
               }}
             >
               {i + 1}
             </p>
           ))}
-        </div>
+        </CalendarBodyStyle>
         <button onClick={() => setDay([])}>reset</button>
       </div>
-    </div>
+    </CalendarStyle>
   );
 };
 

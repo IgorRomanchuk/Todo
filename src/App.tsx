@@ -8,8 +8,20 @@ import Weather from "./components/Weather/Weather";
 import { TodoModel } from "./models/todoItem.model";
 import TodoColumn from "./components/ColumnList/ColumnList";
 import "./App.css";
+import { styled } from "styled-components";
 
 const statusTodos = ["todo", "in progress", "done"];
+
+const ColumnsStyle = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+`;
+
+const LoadingStyle = styled.div`
+ position: "absolute;
+ top: 50%;
+`;
 
 function App() {
   const [todoList, setTodoList] = useState<TodoModel[]>(
@@ -58,17 +70,11 @@ function App() {
           month={month}
         />
         {loading ? (
-          <p style={{ position: "absolute", top: "50%" }}>...Loading</p>
+          <LoadingStyle style={{ position: "absolute", top: "50%" }}>...Loading</LoadingStyle>
         ) : (
           <>
             <Weather error={error} weather={weather} />
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                width: "100%",
-              }}
-            >
+            <ColumnsStyle>
               {statusTodos.map((status) => (
                 <div key={status}>
                   <div>{status}</div>
@@ -83,7 +89,7 @@ function App() {
                   />
                 </div>
               ))}
-            </div>
+            </ColumnsStyle>
           </>
         )}
       </header>

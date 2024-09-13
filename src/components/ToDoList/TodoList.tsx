@@ -1,5 +1,13 @@
 import { useState } from "react";
 import { TodoModel } from "../../models/todoItem.model";
+import { styled } from "styled-components";
+
+const ContainerStyle = styled.div`
+  height: 150px;
+  font-size: 14px;
+  text-align: left;
+  padding: 5px;
+`;
 
 type Props = {
   todo: TodoModel;
@@ -8,24 +16,11 @@ type Props = {
   value: string;
 };
 
-const TodoList = ({
-  todo,
-  setValue,
-  setTodoList,
-  value,
-}: Props) => {
+const TodoList = ({ todo, setValue, setTodoList, value }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState(todo.status);
   return (
-    <div
-      key={todo.id}
-      style={{
-        height: "150px",
-        fontSize: "14px",
-        textAlign: "left",
-        padding: "5px",
-      }}
-    >
+    <ContainerStyle key={todo.id}>
       {edit ? (
         <input value={value} onChange={(e) => setValue(e.target.value)} />
       ) : (
@@ -59,9 +54,7 @@ const TodoList = ({
       <button
         onClick={() => {
           const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-          setTodoList(
-            arr.filter((item: TodoModel,) => todo.id !== item.id)
-          );
+          setTodoList(arr.filter((item: TodoModel) => todo.id !== item.id));
         }}
       >
         delete
@@ -100,7 +93,7 @@ const TodoList = ({
           save
         </button>
       )}
-    </div>
+    </ContainerStyle>
   );
 };
 

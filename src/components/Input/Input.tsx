@@ -2,6 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { TodoModel } from "../../models/todoItem.model";
 
+const ContainerStyle = styled.div`
+  display: flex;
+`;
+
 const InputStyle = styled.input`
   font-size: 12px;
   width: 200px;
@@ -21,7 +25,7 @@ type Props = {
 const Input = ({ setTodoList, day, month, year }: Props) => {
   const [value, setValue] = useState("");
   return (
-    <div style={{ display: "flex" }}>
+    <ContainerStyle>
       <InputStyle
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -45,7 +49,7 @@ const Input = ({ setTodoList, day, month, year }: Props) => {
       >
         Add todo
       </button>
-    </div>
+    </ContainerStyle>
   );
 };
 
