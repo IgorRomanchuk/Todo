@@ -3,8 +3,8 @@ import { TodoModel } from "../../models/todoItem.model";
 
 type Props = {
   todo: TodoModel;
-  setValue: any;
-  setTodoList: any;
+  setValue: (e: string) => void;
+  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
   value: string;
 };
 

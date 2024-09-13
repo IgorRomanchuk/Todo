@@ -1,6 +1,6 @@
 export interface TodoModel {
   value: string
-  date: string,
+  date: Date,
   status: string,
   id: string
 }

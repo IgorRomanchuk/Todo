@@ -4,9 +4,9 @@ import TodoList from "../ToDoList/TodoList";
 
 type Props = {
   todoList: TodoModel[];
-  setValue: any;
+  setValue: (e: string) => void;
   setTodoList: any;
-  value: any;
+  value: string;
   year: number;
   month: number;
   day: number[];

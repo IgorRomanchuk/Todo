@@ -3,7 +3,7 @@ import { daysAndMonth } from "./calendarData";
 type Props = {
   setYear: (e: (value: number) => number) => void;
   year: number;
-  setDay: (e: (value: number[]) => number[]) => void;
+  setDay: (e: ((value: number[]) => number[]) | number[]) => void;
   day: number[];
   setMonth: (e: number | ((value: number) => number)) => void;
   month: number;

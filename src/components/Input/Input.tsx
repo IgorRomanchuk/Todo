@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { TodoModel } from "../../models/todoItem.model";
 
 const InputStyle = styled.input`
   font-size: 12px;
@@ -11,7 +12,7 @@ const InputStyle = styled.input`
 `;
 
 type Props = {
-  setTodoList: (e: any) => void;
+  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void
   day: number[];
   month: number;
   year: number;
@@ -30,7 +31,7 @@ const Input = ({ setTodoList, day, month, year }: Props) => {
       <button
         onClick={() => {
           if (!value || day.length > 1) return null;
-          setTodoList((prev: any) => [
+          setTodoList((prev) => [
             ...prev,
             {
               value,
