@@ -3,24 +3,27 @@ import { daysAndMonth } from "./calendarData";
 type Props = {
   setYear: (e: (value: number) => number) => void;
   year: number;
-  setDay: (e: number) => void;
-  day: number;
+  setDay: (e: (value: number[]) => number[]) => void;
+  day: number[];
   setMonth: (e: number | ((value: number) => number)) => void;
   month: number;
 };
 const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
   const changeYearToRight = () => setYear((prev) => prev + 1);
 
-  const changeYearToLeft = () => setYear((prev: any) => prev - 1);
+  const changeYearToLeft = () => setYear((prev) => prev - 1);
 
   const changeMonthToRight = () => {
     if (month === 12) return setMonth(1);
-    setMonth((prev: any) => prev + 1);
+    setMonth((prev) => prev + 1);
+    if (daysAndMonth[month - 1].days === day[day.length - 1]) {
+      setDay((prev) => [prev[0], daysAndMonth[month].days]);
+    }
   };
 
   const changeMonthToLeft = () => {
     if (month === 1) return setMonth(12);
-    setMonth((prev: any) => prev - 1);
+    setMonth((prev) => prev - 1);
   };
 
   return (
@@ -51,7 +54,7 @@ const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
             onClick={changeMonthToRight}
             style={{ cursor: "pointer", marginLeft: "15px" }}
           >{`>`}</span>
-             <span
+          <span
             onClick={changeYearToRight}
             style={{ cursor: "pointer", marginLeft: "15px" }}
           >{`>>`}</span>
@@ -67,18 +70,42 @@ const Calendar = ({ setYear, year, setDay, day, month, setMonth }: Props) => {
         >
           {[...new Array(daysAndMonth[month - 1].days)].map((_, i) => (
             <p
-              onClick={() => setDay(i + 1)}
+              onClick={() => {
+                if (!day.length) return setDay([i + 1]);
+                if (day.length > 1) {
+                  if (i + 1 > (day[day.length - 1] + day[0]) / 2) {
+                    setDay((prev) => [prev[0], i + 1]);
+                  } else {
+                    setDay((prev) => [i + 1, prev[prev.length - 1]]);
+                  }
+                } else {
+                  if (i + 1 > day[0]) {
+                    setDay((prev) => [prev[0], i + 1]);
+                  } else {
+                    setDay((prev) => [i + 1, prev[prev.length - 1]]);
+                  }
+                }
+              }}
               key={i}
               style={{
                 cursor: "pointer",
-                border: `${day === i + 1 ? "1px solid white" : "none"}`,
-                borderRadius: `${day === i + 1 ? "10px" : "none"}`,
+                border: `${
+                  day.includes(i + 1)
+                    ? "1px solid white"
+                    : day.length > 1 &&
+                      day[0] < i + 1 &&
+                      day[day.length - 1] > i + 1
+                    ? "1px solid red"
+                    : "none"
+                }`,
+                borderRadius: `${day.includes(i + 1) ? "10px" : "none"}`,
               }}
             >
               {i + 1}
             </p>
           ))}
         </div>
+        <button onClick={() => setDay([])}>reset</button>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const InputStyle = styled.input`
 
 type Props = {
   setTodoList: (e: any) => void;
-  day: number;
+  day: number[];
   month: number;
   year: number;
 };
@@ -20,7 +20,7 @@ type Props = {
 const Input = ({ setTodoList, day, month, year }: Props) => {
   const [value, setValue] = useState("");
   return (
-    <div style={{ display: 'flex'}}>
+    <div style={{ display: "flex" }}>
       <InputStyle
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -29,15 +29,17 @@ const Input = ({ setTodoList, day, month, year }: Props) => {
       />
       <button
         onClick={() => {
-          if (!value) return null
+          if (!value || day.length > 1) return null;
           setTodoList((prev: any) => [
             ...prev,
             {
               value,
-              date: new Date(year, month - 1, day + 1)
+              date: new Date(year, month - 1, day[0] + 1),
+              status: "todo",
+              id: new Date().toISOString(),
             },
           ]);
-          setValue('')
+          setValue("");
         }}
       >
         Add todo

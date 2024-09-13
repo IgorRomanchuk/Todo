@@ -2,23 +2,25 @@ import React, { useEffect, useState } from "react";
 import Input from "./components/Input/Input";
 import Calendar from "./components/Calendar/Calendar";
 import { dateTypes } from "./constants";
-import "./App.css";
 import axios from "axios";
 import moment from "moment";
 import Weather from "./components/Weather/Weather";
-import TodoList from "./components/ToDoList/TodoList";
+import { TodoModel } from "./models/todoItem.model";
+import TodoColumn from "./components/ColumnList/ColumnList";
+import "./App.css";
+
+const statusTodos = ["todo", "in progress", "done"];
 
 function App() {
-  const [todoList, setTodoList] = useState(
+  const [todoList, setTodoList] = useState<TodoModel[]>(
     JSON.parse(localStorage.getItem("todoList") || "[]") || []
   );
   const [weather, setWeather] = useState<any>();
   const [year, setYear] = useState<number>(+moment().format(dateTypes.year));
   const [month, setMonth] = useState<number>(+moment().format(dateTypes.month));
-  const [day, setDay] = useState<number>(+moment().format(dateTypes.day));
+  const [day, setDay] = useState<number[]>([+moment().format(dateTypes.day)]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [edit, setEdit] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   useEffect(() => {
     setLoading(true);
@@ -27,7 +29,7 @@ function App() {
         params: {
           key: "a46222fbd0194c21bd6183145241109",
           q: "Гродно",
-          dt: moment(new Date(year, month - 1, day)).format(dateTypes.date),
+          dt: moment(new Date(year, month - 1, day[0])).format(dateTypes.date),
         },
       })
       .then((res) => {
@@ -60,26 +62,28 @@ function App() {
         ) : (
           <>
             <Weather error={error} weather={weather} />
-            {todoList.map((item: any, i: number) => {
-              return (
-                <div key={i}>
-                  {moment(new Date(year, month - 1, day + 1)).format(
-                    dateTypes.date
-                  ) === moment(item.date).format(dateTypes.date) && (
-                    <div style={{ display: "flex" }}>
-                      <TodoList
-                        item={item}
-                        todoList={todoList}
-                        setValue={setValue}
-                        setTodoList={setTodoList}
-                        value={value}
-                        i={i}
-                      />
-                    </div>
-                  )}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                width: "100%",
+              }}
+            >
+              {statusTodos.map((status) => (
+                <div key={status}>
+                  <div>{status}</div>
+                  <TodoColumn
+                    year={year}
+                    month={month}
+                    day={day}
+                    todoList={todoList.filter((item) => item.status === status)}
+                    setValue={setValue}
+                    setTodoList={setTodoList}
+                    value={value}
+                  />
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </>
         )}
       </header>

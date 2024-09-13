@@ -1,40 +1,78 @@
-import moment from "moment";
-import { dateTypes } from "../../constants";
 import { useState } from "react";
+import { TodoModel } from "../../models/todoItem.model";
+
+type Props = {
+  todo: TodoModel;
+  setValue: any;
+  setTodoList: any;
+  value: string;
+};
 
 const TodoList = ({
-  item,
-  todoList,
+  todo,
   setValue,
   setTodoList,
   value,
-  i,
-}: any) => {
+}: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
-
+  const [selectValue, setSelectValue] = useState(todo.status);
   return (
-    <>
+    <div
+      key={todo.id}
+      style={{
+        height: "150px",
+        fontSize: "14px",
+        textAlign: "left",
+        padding: "5px",
+      }}
+    >
       {edit ? (
         <input value={value} onChange={(e) => setValue(e.target.value)} />
       ) : (
-        <p>{item.value}</p>
+        <>
+          <p>{todo.value}</p>
+          <select
+            value={selectValue}
+            onChange={(e) => {
+              const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+              setSelectValue(e.target.value);
+              setTodoList(
+                arr.map((item: TodoModel) => {
+                  if (todo.id === item.id) {
+                    return {
+                      ...item,
+                      status: e.target.value,
+                    };
+                  } else {
+                    return item;
+                  }
+                })
+              );
+            }}
+          >
+            <option value="todo">Todo</option>
+            <option value="in progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
+        </>
       )}
       <button
         onClick={() => {
-          const index = todoList.findIndex(
-            (value: any) => value.value === item.value
+          const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+          setTodoList(
+            arr.filter((item: TodoModel,) => todo.id !== item.id)
           );
-          setTodoList(todoList.filter((item: any, i: number) => i !== index));
         }}
       >
         delete
       </button>
+
       {!edit ? (
         <>
           <button
             onClick={() => {
               setEdit(true);
-              setValue(item.value)
+              setValue(todo.value);
             }}
           >
             edit
@@ -43,11 +81,10 @@ const TodoList = ({
       ) : (
         <button
           onClick={() => {
-            const index = todoList.findIndex(
-              (value: any) => value.value === item.value
-            );
-            const a = todoList.map((item: any, i: number) => {
-              if (i === index) {
+            const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+
+            const a = arr.map((item: TodoModel) => {
+              if (todo.id === item.id) {
                 return {
                   ...item,
                   value,
@@ -63,7 +100,7 @@ const TodoList = ({
           save
         </button>
       )}
-    </>
+    </div>
   );
 };
 
