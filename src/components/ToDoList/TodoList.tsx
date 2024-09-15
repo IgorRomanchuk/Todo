@@ -12,79 +12,91 @@ type Props = {
 const TodoList = ({ todo, setValue, setTodoList, value }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState(todo.status);
+
+  const handleSetTodoList = () => {
+    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+
+    setTodoList(
+      arr.map((item: TodoModel) => {
+        if (todo.id === item.id) {
+          return {
+            ...item,
+            value,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
+    setEdit(false);
+  };
+
+  const handleChangeStatus = (status: string) => {
+    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+    setSelectValue(status);
+    setTodoList(
+      arr.map((item: TodoModel) => {
+        if (todo.id === item.id) {
+          return {
+            ...item,
+            status,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleDeleteTodo = () => {
+    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+    setTodoList(arr.filter((item: TodoModel) => todo.id !== item.id));
+  };
+
+  const handleClickEdit = () => {
+    setEdit(true);
+    setValue(todo.value);
+  };
+
   return (
     <ContainerStyle key={todo.id}>
       {edit ? (
-        <input value={value} onChange={(e) => setValue(e.target.value)} />
-      ) : (
-        <>
-          <p>{todo.value}</p>
-          <select
-            value={selectValue}
-            onChange={(e) => {
-              const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-              setSelectValue(e.target.value);
-              setTodoList(
-                arr.map((item: TodoModel) => {
-                  if (todo.id === item.id) {
-                    return {
-                      ...item,
-                      status: e.target.value,
-                    };
-                  } else {
-                    return item;
-                  }
-                })
-              );
-            }}
-          >
-            <option value="todo">Todo</option>
-            <option value="in progress">In progress</option>
-            <option value="done">Done</option>
-          </select>
-        </>
-      )}
-      <button
-        onClick={() => {
-          const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-          setTodoList(arr.filter((item: TodoModel) => todo.id !== item.id));
-        }}
-      >
-        delete
-      </button>
-
-      {!edit ? (
-        <>
-          <button
-            onClick={() => {
-              setEdit(true);
-              setValue(todo.value);
-            }}
-          >
-            edit
-          </button>
-        </>
-      ) : (
-        <button
-          onClick={() => {
-            const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-
-            const a = arr.map((item: TodoModel) => {
-              if (todo.id === item.id) {
-                return {
-                  ...item,
-                  value,
-                };
-              } else {
-                return item;
-              }
-            });
-            setTodoList(a);
-            setEdit(false);
+        <div
+          style={{
+            padding: "8px 12px",
+            minHeight: "64px",
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
           }}
         >
-          save
-        </button>
+          <textarea value={value} onChange={(e) => setValue(e.target.value)} />
+          <button onClick={handleSetTodoList}>save</button>
+        </div>
+      ) : (
+        <div
+          style={{
+            padding: "8px 12px",
+            minHeight: "64px",
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
+          }}
+        >
+          <p>{todo.value}</p>
+          <div>
+            <select
+              value={selectValue}
+              onChange={(e) => handleChangeStatus(e.target.value)}
+            >
+              <option value="todo">Todo</option>
+              <option value="in progress">In progress</option>
+              <option value="done">Done</option>
+            </select>
+            <button onClick={handleDeleteTodo}>delete</button>
+            <button onClick={handleClickEdit}>edit</button>
+          </div>
+        </div>
       )}
     </ContainerStyle>
   );

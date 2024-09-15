@@ -1,8 +1,12 @@
 import { styled } from "styled-components";
 
 export const ContainerStyle = styled.div`
-  height: 150px;
+  background-color: white;
   font-size: 14px;
   text-align: left;
-  padding: 5px;
+  border-radius: 8px;
+  max-width: 205px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  flex-grow: 1;
 `;
