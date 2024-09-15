@@ -7,7 +7,7 @@ import moment from "moment";
 import Weather from "./components/Weather/Weather";
 import { TodoModel } from "./models/todoItem.model";
 import TodoColumn from "./components/ColumnList/ColumnList";
-import { AppStyle, ColumnsStyle, HeaderStyle, LoadingStyle } from "./styles";
+import { AppStyle, ColumnsStyle, HeaderStyle, LoadingStyle, TitleStyle } from "./styles";
 
 const statusTodos = ["todo", "in progress", "done"];
 
@@ -47,21 +47,20 @@ function App() {
   return (
     <AppStyle>
       <HeaderStyle>
-        <h1> To Do List</h1>
+        <TitleStyle>To Do List</TitleStyle>
         <Input setTodoList={setTodoList} day={day} month={month} year={year} />
         <Calendar
           setYear={setYear}
           year={year}
           setDay={setDay}
-          day={day}
+          period={day}
           setMonth={setMonth}
           month={month}
         />
         {loading ? (
-          <LoadingStyle style={{ position: "absolute", top: "50%" }}>...Loading</LoadingStyle>
+          <LoadingStyle>...Loading</LoadingStyle>
         ) : (
           <>
-            <Weather error={error} weather={weather} />
             <ColumnsStyle>
               {statusTodos.map((status) => (
                 <div key={status}>
@@ -81,6 +80,7 @@ function App() {
           </>
         )}
       </HeaderStyle>
+      <Weather error={error} weather={weather} />
     </AppStyle>
   );
 }

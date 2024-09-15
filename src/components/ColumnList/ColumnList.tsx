@@ -25,7 +25,7 @@ const ColumnList = ({
     <>
       {todoList.map((item: TodoModel, i: number) => {
         return (
-          <ContainerStyle key={i} style={{ display: "flex" }}>
+          <ContainerStyle key={i}>
             {moment(
               new Date(year, month - 1, day[day.length - 1] + 1)
             ).isSameOrAfter(item.date) &&

@@ -1,4 +1,4 @@
-import { WeatherContainer } from "./styles";
+import { TextStyle, WeatherContainer } from "./styles";
 
 type Props = {
   weather: any;
@@ -16,10 +16,10 @@ const Weather = ({ weather, error }: Props) => {
         <img height={64} width={64} src={weather.forecast.forecastday[0].day.condition.icon} alt="" />
       )}
       {weather && (
-        <span>{weather.forecast.forecastday[0].day.maxtemp_c}&deg;</span>
+        <TextStyle>{weather.forecast.forecastday[0].day.maxtemp_c}&deg;</TextStyle>
       )}
       {weather && (
-        <span>{weather.forecast.forecastday[0].day.mintemp_c}&deg;</span>
+        <TextStyle>{weather.forecast.forecastday[0].day.mintemp_c}&deg;</TextStyle>
       )}
     </WeatherContainer>
   );

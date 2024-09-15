@@ -13,6 +13,9 @@ export const HeaderStyle = styled.header`
   font-size: calc(10px + 2vmin);
   color: white;
 `
+export const TitleStyle = styled.h1`
+  margin-top: 100px;
+`;
 
 export const ColumnsStyle = styled.div`
   display: grid;

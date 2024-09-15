@@ -3,7 +3,7 @@ import { TodoModel } from "../../models/todoItem.model";
 import { ContainerStyle, InputStyle } from "./styles";
 
 type Props = {
-  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void
+  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
   day: number[];
   month: number;
   year: number;
@@ -11,6 +11,21 @@ type Props = {
 
 const Input = ({ setTodoList, day, month, year }: Props) => {
   const [value, setValue] = useState("");
+
+  const handleSetTodoList = () => {
+    if (!value || day.length > 1 || !day.length) return null;
+    setTodoList((prev) => [
+      ...prev,
+      {
+        value,
+        date: new Date(year, month - 1, day[0] + 1),
+        status: "todo",
+        id: new Date().toISOString(),
+      },
+    ]);
+    setValue("");
+  };
+
   return (
     <ContainerStyle>
       <InputStyle
@@ -19,23 +34,7 @@ const Input = ({ setTodoList, day, month, year }: Props) => {
         type="text"
         autoFocus={true}
       />
-      <button
-        onClick={() => {
-          if (!value || day.length > 1) return null;
-          setTodoList((prev) => [
-            ...prev,
-            {
-              value,
-              date: new Date(year, month - 1, day[0] + 1),
-              status: "todo",
-              id: new Date().toISOString(),
-            },
-          ]);
-          setValue("");
-        }}
-      >
-        Add todo
-      </button>
+      <button onClick={handleSetTodoList}>Add todo</button>
     </ContainerStyle>
   );
 };
