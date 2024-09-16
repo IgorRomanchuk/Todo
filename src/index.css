@@ -41,6 +41,10 @@ img {
   cursor: pointer;
 }
 
+select {
+  cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

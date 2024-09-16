@@ -46,6 +46,7 @@ const Calendar = ({
     if (month === 1) return setMonth(12);
     setMonth((prev) => prev - 1);
   };
+  
   const handleDatePick = (item: number) => {
     if (!period.length) return setPeriod([item]);
     if (period.length > 1) {
