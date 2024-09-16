@@ -1,7 +1,5 @@
 import { useMemo } from "react";
 import {
-  ArrowLeftStyle,
-  ArrowRightStyle,
   ButtonStyle,
   CalendarBodyStyle,
   CalendarHeaderStyle,
@@ -11,6 +9,10 @@ import {
   DayTextStyle,
 } from "./styles";
 import moment from "moment";
+import leftArrows from "../../assets/img/leftArrows.svg";
+import rightArrows from "../../assets/img/rightArrows.svg";
+import rightArrow from "../../assets/img/rightArrow.svg";
+import leftArrow from "../../assets/img/leftArrow.svg";
 import { getAmountDays } from "../../utils";
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -72,13 +74,37 @@ const Calendar = ({
     <CalendarStyle>
       <div>
         <CalendarHeaderStyle>
-          <ArrowLeftStyle onClick={changeYearToLeft}>{`<<`}</ArrowLeftStyle>
-          <ArrowLeftStyle onClick={changeMonthToLeft}>{`<`}</ArrowLeftStyle>
+          <img
+            src={leftArrows}
+            onClick={changeYearToLeft}
+            height={20}
+            width={20}
+            alt="leftArrows"
+          />
+          <img
+            src={leftArrow}
+            onClick={changeMonthToLeft}
+            height={20}
+            width={20}
+            alt="leftArrows"
+          />
           <CalendarHeaderTextStyle>
             {moment(`${year}-${month}`).format("YYYY MMMM")}
           </CalendarHeaderTextStyle>
-          <ArrowRightStyle onClick={changeMonthToRight}>{`>`}</ArrowRightStyle>
-          <ArrowRightStyle onClick={changeYearToRight}>{`>>`}</ArrowRightStyle>
+          <img
+            src={rightArrow}
+            onClick={changeMonthToRight}
+            height={20}
+            width={20}
+            alt="rightArrow"
+          />
+          <img
+            src={rightArrows}
+            onClick={changeYearToRight}
+            height={20}
+            width={20}
+            alt="rightArrows"
+          />
         </CalendarHeaderStyle>
 
         <CalendarBodyStyle>

@@ -34,22 +34,6 @@ export const CalendarBodyStyle = styled.div`
   max-width: 350px;
 `;
 
-export const ArrowLeftStyle = styled.span`
-  cursor: pointer;
-  margin-right: 15px;
-  font-size: 15px;
-  color: black;
-  font-weight: 600;
-`;
-
-export const ArrowRightStyle = styled.span`
-  cursor: pointer;
-  margin-left: 15px;
-  font-size: 15px;
-  color: black;
-  font-weight: 600;
-`;
-
 export const DayTextStyle = styled.span<{ $active?: boolean; }>`
   margin: 1px;
   font-size: 15px;
