@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 export const CalendarStyle = styled.div`
   display: flex;
@@ -46,12 +46,17 @@ export const ArrowRightStyle = styled.span`
   font-weight: 600;
 `;
 
-export const DayTextStyle = styled.span`
+export const DayTextStyle = styled.span<{ $active?: boolean; }>`
   margin: 1px;
   font-size: 15px;
   cursor: pointer;
   color: black;
   font-weight: 600;
+  ${props => props.$active && css`
+    border-radius: 50%;
+    background-color: #282c34;
+    color: white;
+  `}
 `;
 
 export const DayNameTextStyle = styled.span`

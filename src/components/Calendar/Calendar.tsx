@@ -92,15 +92,12 @@ const Calendar = ({
             <DayTextStyle
               onClick={() => handleDatePick(item)}
               key={item}
-              style={{
-                ...(period.length >= 1 &&
-                  period[0] <= item &&
-                  period[period.length - 1] >= item && {
-                    borderRadius: "50%",
-                    backgroundColor: "#282c34",
-                    color: "white",
-                  }),
-              }}
+              $active={
+                period.length >= 1 &&
+                period[0] <= item &&
+                period[period.length - 1] >= item &&
+                true
+              }
             >
               {item}
             </DayTextStyle>
