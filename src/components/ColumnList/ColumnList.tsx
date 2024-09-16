@@ -10,7 +10,7 @@ type Props = {
   value: string;
   year: number;
   month: number;
-  day: number[];
+  period: number[];
 };
 const ColumnList = ({
   todoList,
@@ -19,7 +19,7 @@ const ColumnList = ({
   value,
   year,
   month,
-  day,
+  period,
 }: Props) => {
   return (
     <>
@@ -27,9 +27,9 @@ const ColumnList = ({
         return (
           <ContainerStyle key={i}>
             {moment(
-              new Date(year, month - 1, day[day.length - 1] + 1)
+              new Date(year, month - 1, period[period.length - 1] + 1)
             ).isSameOrAfter(item.date) &&
-              moment(new Date(year, month - 1, day[0] + 1)).isSameOrBefore(
+              moment(new Date(year, month - 1, period[0] + 1)).isSameOrBefore(
                 item.date
               ) && (
                 <TodoList

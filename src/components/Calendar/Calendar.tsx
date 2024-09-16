@@ -18,7 +18,7 @@ const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 type Props = {
   setYear: (e: (value: number) => number) => void;
   year: number;
-  setDay: (e: ((value: number[]) => number[]) | number[]) => void;
+  setPeriod: (e: ((value: number[]) => number[]) | number[]) => void;
   period: number[];
   setMonth: (e: number | ((value: number) => number)) => void;
   month: number;
@@ -26,7 +26,7 @@ type Props = {
 const Calendar = ({
   setYear,
   year,
-  setDay,
+  setPeriod,
   period,
   month,
   setMonth,
@@ -45,18 +45,18 @@ const Calendar = ({
     setMonth((prev) => prev - 1);
   };
   const handleDatePick = (item: number) => {
-    if (!period.length) return setDay([item]);
+    if (!period.length) return setPeriod([item]);
     if (period.length > 1) {
       if (item > (period[period.length - 1] + period[0]) / 2) {
-        setDay((prev) => [prev[0], item]);
+        setPeriod((prev) => [prev[0], item]);
       } else {
-        setDay((prev) => [item, prev[prev.length - 1]]);
+        setPeriod((prev) => [item, prev[prev.length - 1]]);
       }
     } else {
       if (item > period[0]) {
-        setDay((prev) => [prev[0], item]);
+        setPeriod((prev) => [prev[0], item]);
       } else {
-        setDay((prev) => [item, prev[prev.length - 1]]);
+        setPeriod((prev) => [item, prev[prev.length - 1]]);
       }
     }
   };
@@ -106,7 +106,7 @@ const Calendar = ({
             </DayTextStyle>
           ))}
         </CalendarBodyStyle>
-        <ButtonStyle onClick={() => setDay([])}>reset</ButtonStyle>
+        <ButtonStyle onClick={() => setPeriod([])}>reset</ButtonStyle>
       </div>
     </CalendarStyle>
   );
