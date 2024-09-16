@@ -13,6 +13,7 @@ import leftArrows from "../../assets/img/leftArrows.svg";
 import rightArrows from "../../assets/img/rightArrows.svg";
 import rightArrow from "../../assets/img/rightArrow.svg";
 import leftArrow from "../../assets/img/leftArrow.svg";
+import { dateTypes } from "../../constants";
 import { getAmountDays } from "../../utils";
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -56,7 +57,7 @@ const Calendar = ({
     }
   };
 
-  let firstDay = moment(`${year}-${month}`).startOf("month").format("dd");
+  let firstDay = moment(`${year}-${month}`).startOf("month").format(dateTypes.dayName);
 
   const days = useMemo(
     () => getAmountDays(moment(`${year}-${month}`).daysInMonth()),
@@ -82,7 +83,7 @@ const Calendar = ({
             alt="leftArrows"
           />
           <CalendarHeaderTextStyle>
-            {moment(`${year}-${month}`).format("YYYY MMMM")}
+            {moment(`${year}-${month}`).format(dateTypes.yearAndMonth)}
           </CalendarHeaderTextStyle>
           <img
             src={rightArrow}
