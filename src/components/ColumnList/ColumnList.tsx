@@ -1,6 +1,6 @@
 import moment from "moment";
 import { TodoModel } from "../../models/todoItem.model";
-import TodoList from "../ToDoList/TodoList";
+import TodoList from "../TodoCard/TodoCard";
 import { ContainerStyle } from "./styles";
 
 type Props = {

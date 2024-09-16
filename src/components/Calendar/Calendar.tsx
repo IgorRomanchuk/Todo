@@ -46,21 +46,13 @@ const Calendar = ({
     if (month === 1) return setMonth(12);
     setMonth((prev) => prev - 1);
   };
-  
+
   const handleDatePick = (item: number) => {
     if (!period.length) return setPeriod([item]);
-    if (period.length > 1) {
-      if (item > (period[period.length - 1] + period[0]) / 2) {
-        setPeriod((prev) => [prev[0], item]);
-      } else {
-        setPeriod((prev) => [item, prev[prev.length - 1]]);
-      }
+    if (item > (period[period.length - 1] + period[0]) / 2) {
+      setPeriod((prev) => [prev[0], item]);
     } else {
-      if (item > period[0]) {
-        setPeriod((prev) => [prev[0], item]);
-      } else {
-        setPeriod((prev) => [item, prev[prev.length - 1]]);
-      }
+      setPeriod((prev) => [item, prev[prev.length - 1]]);
     }
   };
 
