@@ -7,7 +7,14 @@ import moment from "moment";
 import Weather from "./components/Weather/Weather";
 import { TodoModel } from "./models/todoItem.model";
 import TodoColumn from "./components/ColumnList/ColumnList";
-import { AppStyle, ColumnsStyle, HeaderStyle, LoadingStyle, TitleStyle } from "./styles";
+import {
+  AppStyle,
+  ColumnsStyle,
+  HeaderStyle,
+  LoadingStyle,
+  TitleStyle,
+} from "./styles";
+import WeatherService from "./service/weather.service";
 
 const statusTodos = ["todo", "in progress", "done"];
 
@@ -24,14 +31,7 @@ function App() {
   const [value, setValue] = useState<string>("");
   useEffect(() => {
     setLoading(true);
-    axios
-      .get("http://api.weatherapi.com/v1/history.json", {
-        params: {
-          key: "a46222fbd0194c21bd6183145241109",
-          q: "Гродно",
-          dt: moment(new Date(year, month - 1, day[0])).format(dateTypes.date),
-        },
-      })
+    WeatherService.getWeather(year, month, day)
       .then((res) => {
         setWeather(res.data);
         setError(false);

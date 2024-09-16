@@ -83,7 +83,7 @@ const Calendar = ({
 
         <CalendarBodyStyle>
           {weekDays.map((item) => (
-            <DayNameTextStyle>{item}</DayNameTextStyle>
+            <DayNameTextStyle key={item}>{item}</DayNameTextStyle>
           ))}
           {Array.from({ length: weekDays.indexOf(firstDay) }).map((_, i) => (
             <p key={i}></p>
