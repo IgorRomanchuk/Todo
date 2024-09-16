@@ -8,7 +8,8 @@ import { TodoModel } from "./models/todoItem.model";
 import TodoColumn from "./components/ColumnList/ColumnList";
 import {
   AppStyle,
-  ColumnsStyle,
+  ColumnsContainerStyle,
+  ColumnStyle,
   HeaderStyle,
   LoadingStyle,
   TitleStyle,
@@ -60,9 +61,9 @@ function App() {
           <LoadingStyle>...Loading</LoadingStyle>
         ) : (
           <>
-            <ColumnsStyle>
+            <ColumnsContainerStyle>
               {statusTodos.map((status) => (
-                <div key={status}>
+                <ColumnStyle key={status}>
                   <div>{status}</div>
                   <TodoColumn
                     year={year}
@@ -73,9 +74,9 @@ function App() {
                     setTodoList={setTodoList}
                     value={value}
                   />
-                </div>
+                </ColumnStyle>
               ))}
-            </ColumnsStyle>
+            </ColumnsContainerStyle>
           </>
         )}
       </HeaderStyle>

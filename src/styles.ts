@@ -15,13 +15,27 @@ export const HeaderStyle = styled.header`
 `
 export const TitleStyle = styled.h1`
   margin-top: 100px;
+  @media (max-width: 900px) {
+    margin-top: 250px;
+  }
+  @media (max-width: 610px) {
+    margin-top: 350px;
+  }
 `;
 
-export const ColumnsStyle = styled.div`
+export const ColumnsContainerStyle = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
+  @media (max-width: 550px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
+
+export const ColumnStyle = styled.div`
+  margin: 0 5px; 
+  margin-bottom: 20px;
+`
 
 export const LoadingStyle = styled.div`
  position: "absolute;
