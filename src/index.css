@@ -30,6 +30,17 @@ textarea {
     sans-serif;
 }
 
+button {
+  padding: 0;
+  border: none;
+  color: inherit;
+  background-color: transparent;
+}
+
+img {
+  cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

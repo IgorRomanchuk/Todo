@@ -3,14 +3,22 @@ import { styled } from "styled-components";
 export const ContainerStyle = styled.div`
   display: flex;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  align-items: center;
 `;
 
 export const InputStyle = styled.input`
   font-size: 12px;
   width: 200px;
-  &:focus {
-    border: 3px solid red;
-    box-shadow: 0px 0px 2px red;
-  }
+  height: 20px;
 `;
+
+export const ButtonStyle = styled.button`
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: white;
+  padding: 2px 8px;
+  cursor: pointer;
+  height: 24.66px
+`

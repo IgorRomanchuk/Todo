@@ -10,3 +10,28 @@ export const ContainerStyle = styled.div`
   margin-top: 10px;
   flex-grow: 1;
 `;
+
+export const CardStyle = styled.div`
+  padding: 8px 12px;
+  min-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`
+
+export const ImageContainerStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const SaveIconStyle = styled.img`
+  align-self: end;
+  &:hover {
+  transform: scale(1.1)
+  }
+`
+
+export const IconStyle = styled.img`
+  &:hover {
+    transform: scale(1.1)
+  }
+`

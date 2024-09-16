@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { TodoModel } from "../../models/todoItem.model";
-import { ContainerStyle } from "./styles";
+import deleteIcon from "../../assets/img/delete.svg";
+import editIcon from "../../assets/img/edit.svg";
+import saveIcon from "../../assets/img/save.svg";
+import { CardStyle, ContainerStyle, IconStyle, ImageContainerStyle, SaveIconStyle } from "./styles";
 
 type Props = {
   todo: TodoModel;
@@ -61,30 +64,24 @@ const TodoList = ({ todo, setValue, setTodoList, value }: Props) => {
   return (
     <ContainerStyle key={todo.id}>
       {edit ? (
-        <div
-          style={{
-            padding: "8px 12px",
-            minHeight: "64px",
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-          }}
-        >
-          <textarea value={value} onChange={(e) => setValue(e.target.value)} />
-          <button onClick={handleSetTodoList}>save</button>
-        </div>
+        <CardStyle>
+          <textarea
+            autoFocus={edit ? true : false}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <SaveIconStyle
+            onClick={handleSetTodoList}
+            height={25}
+            width={25}
+            src={saveIcon}
+            alt="save"
+          />
+        </CardStyle>
       ) : (
-        <div
-          style={{
-            padding: "8px 12px",
-            minHeight: "64px",
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-          }}
-        >
+        <CardStyle>
           <p>{todo.value}</p>
-          <div>
+          <ImageContainerStyle>
             <select
               value={selectValue}
               onChange={(e) => handleChangeStatus(e.target.value)}
@@ -93,10 +90,22 @@ const TodoList = ({ todo, setValue, setTodoList, value }: Props) => {
               <option value="in progress">In progress</option>
               <option value="done">Done</option>
             </select>
-            <button onClick={handleDeleteTodo}>delete</button>
-            <button onClick={handleClickEdit}>edit</button>
-          </div>
-        </div>
+            <IconStyle
+              onClick={handleDeleteTodo}
+              height={25}
+              width={25}
+              src={deleteIcon}
+              alt="delete"
+            />
+            <IconStyle
+              onClick={handleClickEdit}
+              height={25}
+              width={25}
+              src={editIcon}
+              alt="edit"
+            />
+          </ImageContainerStyle>
+        </CardStyle>
       )}
     </ContainerStyle>
   );

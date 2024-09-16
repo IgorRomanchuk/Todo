@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TodoModel } from "../../models/todoItem.model";
-import { ContainerStyle, InputStyle } from "./styles";
+import { ButtonStyle, ContainerStyle, InputStyle } from "./styles";
 
 type Props = {
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
@@ -34,7 +34,7 @@ const Input = ({ setTodoList, day, month, year }: Props) => {
         type="text"
         autoFocus={true}
       />
-      <button onClick={handleSetTodoList}>Add todo</button>
+      <ButtonStyle onClick={handleSetTodoList}>Add todo</ButtonStyle>
     </ContainerStyle>
   );
 };

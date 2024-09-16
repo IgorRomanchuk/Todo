@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import {
   ArrowLeftStyle,
   ArrowRightStyle,
+  ButtonStyle,
   CalendarBodyStyle,
   CalendarHeaderStyle,
   CalendarHeaderTextStyle,
@@ -73,7 +74,7 @@ const Calendar = ({
         <CalendarHeaderStyle>
           <ArrowLeftStyle onClick={changeYearToLeft}>{`<<`}</ArrowLeftStyle>
           <ArrowLeftStyle onClick={changeMonthToLeft}>{`<`}</ArrowLeftStyle>
-          <CalendarHeaderTextStyle style={{ fontSize: "15px", width: "115px" }}>
+          <CalendarHeaderTextStyle>
             {moment(`${year}-${month}`).format("YYYY MMMM")}
           </CalendarHeaderTextStyle>
           <ArrowRightStyle onClick={changeMonthToRight}>{`>`}</ArrowRightStyle>
@@ -93,15 +94,19 @@ const Calendar = ({
               key={item}
               style={{
                 ...(period.length >= 1 &&
-                period[0] <= item &&
-                period[period.length - 1] >= item && { borderRadius: '50%', backgroundColor: '#282c34', color: 'white'})
+                  period[0] <= item &&
+                  period[period.length - 1] >= item && {
+                    borderRadius: "50%",
+                    backgroundColor: "#282c34",
+                    color: "white",
+                  }),
               }}
             >
               {item}
             </DayTextStyle>
           ))}
         </CalendarBodyStyle>
-        <button onClick={() => setDay([])}>reset</button>
+        <ButtonStyle onClick={() => setDay([])}>reset</ButtonStyle>
       </div>
     </CalendarStyle>
   );

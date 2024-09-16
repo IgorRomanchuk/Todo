@@ -15,6 +15,8 @@ export const CalendarStyle = styled.div`
 export const CalendarHeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 2px solid black;
 `;
 
 export const CalendarHeaderTextStyle = styled.p`
@@ -59,3 +61,14 @@ export const DayNameTextStyle = styled.span`
   color: black;
   font-weight: 600;
 `;
+
+export const ButtonStyle = styled.button`
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: white;
+  padding: 2px 8px;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5px;
+`
