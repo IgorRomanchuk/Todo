@@ -7,13 +7,12 @@ import { CardStyle, ContainerStyle, IconStyle, ImageContainerStyle, SaveIconStyl
 
 type Props = {
   todo: TodoModel;
-  setValue: (e: string) => void;
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
-  value: string;
 };
 
-const TodoList = ({ todo, setValue, setTodoList, value }: Props) => {
+const TodoList = ({ todo, setTodoList }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
+  const [value, setValue] = useState<string>('');
   const [selectValue, setSelectValue] = useState(todo.status);
 
   const handleSetTodoList = () => {

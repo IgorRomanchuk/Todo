@@ -5,22 +5,12 @@ import { ContainerStyle } from "./styles";
 
 type Props = {
   todoList: TodoModel[];
-  setValue: (e: string) => void;
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
-  value: string;
   year: number;
   month: number;
   period: number[];
 };
-const ColumnList = ({
-  todoList,
-  setValue,
-  setTodoList,
-  value,
-  year,
-  month,
-  period,
-}: Props) => {
+const ColumnList = ({ todoList, setTodoList, year, month, period }: Props) => {
   return (
     <>
       {todoList.map((item: TodoModel, i: number) => {
@@ -31,14 +21,7 @@ const ColumnList = ({
             ).isSameOrAfter(item.date) &&
               moment(new Date(year, month - 1, period[0] + 1)).isSameOrBefore(
                 item.date
-              ) && (
-                <TodoList
-                  todo={item}
-                  setValue={setValue}
-                  setTodoList={setTodoList}
-                  value={value}
-                />
-              )}
+              ) && <TodoList todo={item} setTodoList={setTodoList} />}
           </ContainerStyle>
         );
       })}

@@ -28,7 +28,7 @@ function App() {
   const [period, setPeriod] = useState<number[]>([+moment().format(dateTypes.day)]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
+  
   useEffect(() => {
     setLoading(true);
     WeatherService.getWeather(year, month, period)
@@ -70,9 +70,7 @@ function App() {
                     month={month}
                     period={period}
                     todoList={todoList.filter((item) => item.status === status)}
-                    setValue={setValue}
                     setTodoList={setTodoList}
-                    value={value}
                   />
                 </ColumnStyle>
               ))}
