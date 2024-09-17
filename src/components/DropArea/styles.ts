@@ -13,7 +13,7 @@ export const DropAreaStyle = styled.div<{ $showDrop?: boolean }>`
       color: #dcdcdc;
       border: 1px dashed #dcdcdc;
       border-radius: 10px;
-      padding: 15px;
+      padding: 5px;
       opacity: 1;
       transition: all 0.2s ease-in-out;
       font-size: 14px;
