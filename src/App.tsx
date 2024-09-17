@@ -28,6 +28,8 @@ function App() {
   const [period, setPeriod] = useState<number[]>([+moment().format(dateTypes.day)]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  const [draggableCard, setDraggableCard] = useState<null | string>(null);
   
   useEffect(() => {
     setLoading(true);
@@ -66,11 +68,14 @@ function App() {
                 <ColumnStyle key={status}>
                   <div>{status}</div>
                   <TodoColumn
+                    status={status}
                     year={year}
                     month={month}
                     period={period}
                     todoList={todoList.filter((item) => item.status === status)}
                     setTodoList={setTodoList}
+                    draggableCard={draggableCard}
+                    setDraggableCard={setDraggableCard}
                   />
                 </ColumnStyle>
               ))}

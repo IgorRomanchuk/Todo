@@ -3,16 +3,23 @@ import { TodoModel } from "../../models/todoItem.model";
 import deleteIcon from "../../assets/img/delete.svg";
 import editIcon from "../../assets/img/edit.svg";
 import saveIcon from "../../assets/img/save.svg";
-import { CardStyle, ContainerStyle, IconStyle, ImageContainerStyle, SaveIconStyle } from "./styles";
+import {
+  CardStyle,
+  ContainerStyle,
+  IconStyle,
+  ImageContainerStyle,
+  SaveIconStyle,
+} from "./styles";
 
 type Props = {
   todo: TodoModel;
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
+  setDraggableCard: (e: string | null) => void;
 };
 
-const TodoList = ({ todo, setTodoList }: Props) => {
+const TodoList = ({ todo, setTodoList, setDraggableCard }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
   const [selectValue, setSelectValue] = useState(todo.status);
 
   const handleSetTodoList = () => {
@@ -61,7 +68,12 @@ const TodoList = ({ todo, setTodoList }: Props) => {
   };
 
   return (
-    <ContainerStyle key={todo.id}>
+    <ContainerStyle
+      key={todo.id}
+      draggable
+      onDragStart={() => setDraggableCard(todo.id)}
+      onDragEnd={() => setDraggableCard(null)}
+    >
       {edit ? (
         <CardStyle>
           <textarea

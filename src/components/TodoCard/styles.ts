@@ -5,10 +5,15 @@ export const ContainerStyle = styled.div`
   font-size: 14px;
   text-align: left;
   border-radius: 8px;
-  max-width: 205px;
+  width: 205px;
   margin-bottom: 10px;
   margin-top: 10px;
   flex-grow: 1;
+  cursor: grab;
+  &:active {
+    opacity: 0.7;
+    border-radius: 10px;
+  }
 `;
 
 export const CardStyle = styled.div`
