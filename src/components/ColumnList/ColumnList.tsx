@@ -44,9 +44,9 @@ const ColumnList = ({
   return (
     <>
       <DropArea onDrag={onDrag} status={status} />
-      {todoList.map((item: TodoModel, i: number) => {
+      {todoList.map((item: TodoModel) => {
         return (
-          <ContainerStyle key={i}>
+          <ContainerStyle key={item.id}>
             {moment(
               new Date(year, month - 1, period[period.length - 1] + 1)
             ).isSameOrAfter(item.date) &&
