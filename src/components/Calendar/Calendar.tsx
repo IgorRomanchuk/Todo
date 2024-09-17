@@ -57,10 +57,10 @@ const Calendar = ({
     }
   };
 
-  let firstDay = moment(`${year}-${month}`).startOf("month").format(dateTypes.dayName);
+  let firstDay = moment(new Date(`${year}-${month}`)).startOf("month").format(dateTypes.dayName);
 
   const days = useMemo(
-    () => getAmountDays(moment(`${year}-${month}`).daysInMonth()),
+    () => getAmountDays(moment(new Date(`${year}-${month}`)).daysInMonth()),
     [year, month]
   );
 
@@ -83,7 +83,7 @@ const Calendar = ({
             alt="leftArrows"
           />
           <CalendarHeaderTextStyle>
-            {moment(`${year}-${month}`).format(dateTypes.yearAndMonth)}
+            {moment(new Date(`${year}-${month}`)).format(dateTypes.yearAndMonth)}
           </CalendarHeaderTextStyle>
           <img
             src={rightArrow}
