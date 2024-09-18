@@ -12,3 +12,8 @@ export const CalendarHeaderTextStyle = styled.p`
   width: 115px;
 `;
 
+export const ImageStyle = styled.img`
+  width: 20px;
+  height: 20px
+`
+
