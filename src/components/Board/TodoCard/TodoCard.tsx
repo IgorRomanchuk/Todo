@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TodoModel } from "../../models/todoItem.model";
-import deleteIcon from "../../assets/img/delete.svg";
-import editIcon from "../../assets/img/edit.svg";
-import saveIcon from "../../assets/img/save.svg";
+import { TodoModel } from "../../../models/todoItem.model";
+import deleteIcon from "../../../assets/img/delete.svg";
+import editIcon from "../../../assets/img/edit.svg";
+import saveIcon from "../../../assets/img/save.svg";
 import {
   CardStyle,
   ContainerStyle,

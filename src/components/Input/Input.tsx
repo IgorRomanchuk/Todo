@@ -4,12 +4,15 @@ import { ButtonStyle, ContainerStyle, InputStyle } from "./styles";
 
 type Props = {
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
-  period: number[];
-  month: number;
-  year: number;
+  date: {
+    period: number[];
+    month: number;
+    year: number;
+  };
 };
 
-const Input = ({ setTodoList, period, month, year }: Props) => {
+const Input = ({ setTodoList, date }: Props) => {
+  const { year, month, period } = date;
   const [value, setValue] = useState("");
 
   const handleSetTodoList = () => {
