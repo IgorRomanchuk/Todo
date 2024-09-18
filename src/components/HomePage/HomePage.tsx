@@ -8,7 +8,7 @@ import Board from "../Board/Board";
 import { TodoModel } from "../../models/todoItem.model";
 import { AppStyle, ContainerStyle, TitleStyle } from "./styles";
 
-function HomePage() {
+const HomePage = () => {
   const [todoList, setTodoList] = useState<TodoModel[]>(
     JSON.parse(localStorage.getItem("todoList") || "[]") || []
   );
