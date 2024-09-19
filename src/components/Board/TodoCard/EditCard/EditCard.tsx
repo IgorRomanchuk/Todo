@@ -1,10 +1,11 @@
 import { TodoModel } from "../../../../models/todoItem.model";
 import saveIcon from "../../../../assets/img/save.svg";
 import { SaveIconStyle } from "./styles";
+import TodoService from "../../../../service/todos.service";
 
 type Props = {
   todo: TodoModel;
-  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
+  setTodoList: (e: TodoModel[]) => void;
   setEdit: (e: boolean) => void;
   edit: boolean;
   value: string;
@@ -13,10 +14,8 @@ type Props = {
 
 const EditCard = ({ setTodoList, todo, setEdit, edit, value, setValue }: Props) => {
   const handleSetTodoList = () => {
-    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-
     setTodoList(
-      arr.map((item: TodoModel) => {
+      TodoService.getTodos().map((item: TodoModel) => {
         if (todo.id === item.id) {
           return {
             ...item,

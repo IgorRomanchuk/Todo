@@ -6,7 +6,7 @@ import SaveCard from "./SaveCard/SaveCard";
 
 type Props = {
   todo: TodoModel;
-  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
+  setTodoList: (e: TodoModel[]) => void;
   setDraggableCard: (e: string | null) => void;
 };
 

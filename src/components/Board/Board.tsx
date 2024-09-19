@@ -4,6 +4,7 @@ import { ColumnsContainerStyle, ColumnStyle } from "./styles";
 import { TodoModel } from "../../models/todoItem.model";
 import { useEffect, useState } from "react";
 import Input from "./Input/Input";
+import TodoService from "../../service/todos.service";
 
 const statusTodos = ["todo", "in progress", "done"];
 
@@ -13,9 +14,7 @@ type Props = {
 };
 
 const Board = ({ period, date }: Props) => {
-  const [todoList, setTodoList] = useState<TodoModel[]>(
-    JSON.parse(localStorage.getItem("todoList") || "[]") || []
-  );
+  const [todoList, setTodoList] = useState<TodoModel[]>(TodoService.getTodos());
   const [draggableCard, setDraggableCard] = useState<null | string>(null);
 
   useEffect(() => {

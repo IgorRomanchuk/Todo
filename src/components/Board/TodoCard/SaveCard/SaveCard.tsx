@@ -3,25 +3,21 @@ import deleteIcon from "../../../../assets/img/delete.svg";
 import editIcon from "../../../../assets/img/edit.svg";
 import { useState } from "react";
 import { IconStyle, ImageContainerStyle } from "./styles";
+import TodoService from "../../../../service/todos.service";
 
 type Props = {
   todo: TodoModel;
-  setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
+  setTodoList: (e: TodoModel[]) => void;
   setEdit: (e: boolean) => void;
   setValue: (e: string) => void;
 };
 
-const SaveCard = ({
-  setTodoList,
-  todo,
-  setEdit,
-  setValue,
-}: Props) => {
+const SaveCard = ({ setTodoList, todo, setEdit, setValue }: Props) => {
   const [selectValue, setSelectValue] = useState(todo.status);
-
   const handleDeleteTodo = () => {
-    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-    setTodoList(arr.filter((item: TodoModel) => todo.id !== item.id));
+    setTodoList(
+      TodoService.getTodos().filter((item: TodoModel) => todo.id !== item.id)
+    );
   };
 
   const handleClickEdit = () => {
