@@ -24,10 +24,3 @@ export const CardStyle = styled.div`
   flex-direction: column;
 `;
 
-export const IconStyle = styled.img`
-  width: 25px;
-  height: 25px;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
