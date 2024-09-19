@@ -2,7 +2,7 @@ import { Moment } from "moment"
 
 export interface TodoModel {
   value: string
-  date: Date | Moment,
+  date: Moment,
   status: string,
   id: string
 }
