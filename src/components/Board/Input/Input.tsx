@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { TodoModel } from "../../models/todoItem.model";
+import { TodoModel } from "../../../models/todoItem.model";
 import { ButtonStyle, ContainerStyle, InputStyle } from "./styles";
+import { DateModel } from "../../../models/date.model";
+import moment from "moment";
 
 type Props = {
   setTodoList: (e: (value: TodoModel[]) => TodoModel[]) => void;
-  date: {
-    period: number[];
-    month: number;
-    year: number;
-  };
+  date: DateModel;
 };
 
 const Input = ({ setTodoList, date }: Props) => {
@@ -21,7 +19,7 @@ const Input = ({ setTodoList, date }: Props) => {
       ...prev,
       {
         value,
-        date: new Date(year, month - 1, period[0] + 1),
+        date: moment(`${year}-${month}-${period[0] + 1}`, "YYYY-MM-DD"),
         status: "todo",
         id: new Date().toISOString(),
       },

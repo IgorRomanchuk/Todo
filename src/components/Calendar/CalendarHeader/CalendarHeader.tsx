@@ -8,16 +8,18 @@ import leftArrows from "../../../assets/img/leftArrows.svg";
 import rightArrows from "../../../assets/img/rightArrows.svg";
 import rightArrow from "../../../assets/img/rightArrow.svg";
 import leftArrow from "../../../assets/img/leftArrow.svg";
+import { DateModel } from "../../../models/date.model";
 import moment from "moment";
 
 type Props = {
   setYear: (e: (value: number) => number) => void;
   setMonth: (e: number | ((value: number) => number)) => void;
-  year: number;
-  month: number;
+  date: DateModel;
 };
 
-const CalendarHeader = ({ setYear, setMonth, year, month }: Props) => {
+const CalendarHeader = ({ setYear, setMonth, date }: Props) => {
+  const { year, month } = date;
+
   const changeYearToRight = () => setYear((prev) => prev + 1);
   const changeYearToLeft = () => setYear((prev) => prev - 1);
 

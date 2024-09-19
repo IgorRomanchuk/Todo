@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { TextStyle, WeatherContainer } from "./styles";
 import WeatherService from "../../service/weather.service";
+import { DateModel } from "../../models/date.model";
 
 type Props = {
-  date: {
-    period: number[];
-    month: number;
-    year: number;
-  };
+  date: DateModel
 };
 
 const Weather = ({ date }: Props) => {

@@ -1,23 +1,20 @@
-import moment from "moment";
+import { useMemo } from "react";
 import { CalendarBodyStyle, DayNameTextStyle, DayTextStyle } from "./styles";
 import { dateTypes } from "../../../constants";
 import { getAmountDays } from "../../../utils";
-import { useMemo } from "react";
+import { DateModel } from "../../../models/date.model";
+import moment from "moment";
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 type Props = {
-  date: {
-    period: number[];
-    month: number;
-    year: number;
-  };
+  date: DateModel;
   setPeriod: (e: ((value: number[]) => number[]) | number[]) => void;
 };
 
-const CalendarBody = ({date, setPeriod}: Props) => {
+const CalendarBody = ({ date, setPeriod }: Props) => {
   const { year, month, period } = date;
-  
+
   const handleDatePick = (item: number) => {
     if (!period.length) return setPeriod([item]);
     if (item > (period[period.length - 1] + period[0]) / 2) {
