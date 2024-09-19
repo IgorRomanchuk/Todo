@@ -22,21 +22,12 @@ export const CardStyle = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-`
-
-export const ImageContainerStyle = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-export const SaveIconStyle = styled.img`
-  align-self: end;
-  &:hover {
-  transform: scale(1.1)
-  }
-`
+`;
 
 export const IconStyle = styled.img`
+  width: 25px;
+  height: 25px;
   &:hover {
-    transform: scale(1.1)
+    transform: scale(1.1);
   }
-`
+`;
