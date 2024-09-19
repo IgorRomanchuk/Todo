@@ -1,20 +1,32 @@
 import { ButtonStyle, CalendarStyle } from "./styles";
 import CalendarHeader from "./CalendarHeader/CalendarHeader";
 import CalendarBody from "./CalendarBody/CalendarBody";
-import { DateModel } from "../../models/date.model";
+import { Moment } from "moment";
 
 type Props = {
-  setYear: (e: (value: number) => number) => void;
   setPeriod: (e: ((value: number[]) => number[]) | number[]) => void;
-  setMonth: (e: number | ((value: number) => number)) => void;
-  date: DateModel;
+  period: number[];
+  date: Moment;
+  setDate: (e: (value: Moment) => Moment) => void;
 };
-const Calendar = ({ setYear, setPeriod, setMonth, date }: Props) => {
+const Calendar = ({
+  setPeriod,
+  period,
+  date,
+  setDate,
+}: Props) => {
   return (
     <CalendarStyle>
       <div>
-        <CalendarHeader setYear={setYear} setMonth={setMonth} date={date} />
-        <CalendarBody date={date} setPeriod={setPeriod} />
+        <CalendarHeader
+          setDate={setDate}
+          date={date}
+        />
+        <CalendarBody
+          period={period}
+          date={date}
+          setPeriod={setPeriod}
+        />
         <ButtonStyle onClick={() => setPeriod([])}>reset</ButtonStyle>
       </div>
     </CalendarStyle>

@@ -2,18 +2,17 @@ import { useMemo } from "react";
 import { CalendarBodyStyle, DayNameTextStyle, DayTextStyle } from "./styles";
 import { dateTypes } from "../../../constants";
 import { getAmountDays } from "../../../utils";
-import { DateModel } from "../../../models/date.model";
-import moment from "moment";
+import moment, { Moment } from "moment";
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 type Props = {
-  date: DateModel;
   setPeriod: (e: ((value: number[]) => number[]) | number[]) => void;
+  date: Moment;
+  period: number[]
 };
 
-const CalendarBody = ({ date, setPeriod }: Props) => {
-  const { year, month, period } = date;
+const CalendarBody = ({ period, setPeriod, date }: Props) => {
 
   const handleDatePick = (item: number) => {
     if (!period.length) return setPeriod([item]);
@@ -24,20 +23,20 @@ const CalendarBody = ({ date, setPeriod }: Props) => {
     }
   };
 
-  let firstDay = moment(`${year}-${month}`, "YYYY-MM")
-    .startOf("month")
-    .format(dateTypes.dayName);
-
   const days = useMemo(
-    () => getAmountDays(moment(`${year}-${month}`, "YYYY-MM").daysInMonth()),
-    [year, month]
+    () => getAmountDays(moment(date).daysInMonth()),
+    [date]
   );
   return (
     <CalendarBodyStyle>
       {weekDays.map((item) => (
         <DayNameTextStyle key={item}>{item}</DayNameTextStyle>
       ))}
-      {Array.from({ length: weekDays.indexOf(firstDay) }).map((_, i) => (
+      {Array.from({
+        length: weekDays.indexOf(
+          date.startOf("month").format(dateTypes.dayName)
+        ),
+      }).map((_, i) => (
         <p key={i}></p>
       ))}
       {days.map((item) => (

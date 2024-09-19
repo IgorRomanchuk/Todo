@@ -10,12 +10,12 @@ const key = 'a46222fbd0194c21bd6183145241109'
 class WeatherService {
   endpoint: string = "/history.json";
 
-  getWeather = (year: number, month: number, period: number[]) =>
+  getWeather = (date: string, period: number[]) =>
     axios.get(`${BASE_URL}${this.endpoint}`, {
       params: {
         key,
         q: "Гродно",
-        dt: moment(`${year}-${month}-${period[0]}`, "YYYY-MM-DD").format(dateTypes.date),
+        dt: moment(`${date}-${period[0]}`, "YYYY-MM-DD").format(dateTypes.date),
       },
     });
 }

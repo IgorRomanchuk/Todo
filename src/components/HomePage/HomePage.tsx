@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import Calendar from "../Calendar/Calendar";
 import { dateTypes } from "../../constants";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import Weather from "../Weather/Weather";
 import Board from "../Board/Board";
 import { AppStyle, ContainerStyle, TitleStyle } from "./styles";
 
 const HomePage = () => {
-  const [year, setYear] = useState<number>(+moment().format(dateTypes.year));
-  const [month, setMonth] = useState<number>(+moment().format(dateTypes.month));
+  const [date, setDate] = useState<Moment>(moment());
   const [period, setPeriod] = useState<number[]>([
     +moment().format(dateTypes.day),
   ]);
@@ -18,14 +17,14 @@ const HomePage = () => {
       <ContainerStyle>
         <TitleStyle>To Do List</TitleStyle>
         <Calendar
-          setYear={setYear}
           setPeriod={setPeriod}
-          setMonth={setMonth}
-          date={{ year, month, period }}
+          period={period}
+          date={date}
+          setDate={setDate}
         />
-        <Board date={{ year, month, period }} />
+        <Board date={date} period={period} />
       </ContainerStyle>
-      <Weather date={{ year, month, period }} />
+      <Weather date={date} period={period} />
     </AppStyle>
   );
 };

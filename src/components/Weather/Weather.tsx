@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react";
 import { TextStyle, WeatherContainer } from "./styles";
 import WeatherService from "../../service/weather.service";
-import { DateModel } from "../../models/date.model";
+import { Moment } from "moment";
 
 type Props = {
-  date: DateModel
+  period: number[];
+  date: Moment;
 };
 
-const Weather = ({ date }: Props) => {
-  const { year, month, period } = date;
+const Weather = ({ period, date }: Props) => {
   const [weather, setWeather] = useState<any>();
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
-    WeatherService.getWeather(year, month, period)
+    WeatherService.getWeather(date.format("YYYY-MM"), period)
       .then((res) => {
         setWeather(res.data);
         setError(false);
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, [period, month, year]);
+  }, [period, date]);
 
   if (loading) {
     return <WeatherContainer>...Loading</WeatherContainer>;
