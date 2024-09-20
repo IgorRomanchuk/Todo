@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { CalendarBodyStyle, DayNameTextStyle, DayTextStyle } from "./styles";
-import { dateTypes } from "../../../constants";
-import { getAmountDays } from "../../../utils";
+import { dateTypes } from "../../../constants/dateTypes";
+import { getAmountDays } from "../../../utils/getAmountDays";
 import moment, { Moment } from "moment";
 
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];

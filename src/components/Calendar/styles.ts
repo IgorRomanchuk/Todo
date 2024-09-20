@@ -5,7 +5,7 @@ export const CalendarStyle = styled.div`
   flex-direction: row;
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 0;
   border: 2px solid white;
   border-radius: 10px;
   padding: 10px;

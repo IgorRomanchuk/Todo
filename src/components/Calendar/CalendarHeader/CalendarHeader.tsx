@@ -1,4 +1,4 @@
-import { dateTypes } from "../../../constants";
+import { dateTypes } from "../../../constants/dateTypes";
 import {
   CalendarHeaderStyle,
   CalendarHeaderTextStyle,
@@ -22,7 +22,7 @@ const CalendarHeader = ({ setDate, date }: Props) => {
     setDate((prev) => moment(prev).subtract(1, "y"));
 
   const changeMonthToRight = () => setDate((prev) => moment(prev).add(1, "M"));
-  
+
   const changeMonthToLeft = () =>
     setDate((prev) => moment(prev).subtract(1, "M"));
   return (

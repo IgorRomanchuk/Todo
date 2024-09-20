@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Calendar from "../Calendar/Calendar";
-import { dateTypes } from "../../constants";
+import Calendar from "../../components/Calendar/Calendar";
+import { dateTypes } from "../../constants/dateTypes";
 import moment, { Moment } from "moment";
-import Weather from "../Weather/Weather";
-import Board from "../Board/Board";
-import { AppStyle, ContainerStyle, TitleStyle } from "./styles";
+import Weather from "../../components/Weather/Weather";
+import Board from "../../components/Board/Board";
+import { HomePageStyle, ContainerStyle, TitleStyle } from "./styles";
 
 const HomePage = () => {
   const [date, setDate] = useState<Moment>(moment());
@@ -13,7 +13,7 @@ const HomePage = () => {
   ]);
 
   return (
-    <AppStyle>
+    <HomePageStyle>
       <ContainerStyle>
         <TitleStyle>To Do List</TitleStyle>
         <Calendar
@@ -25,7 +25,7 @@ const HomePage = () => {
         <Board date={date} period={period} />
       </ContainerStyle>
       <Weather date={date} period={period} />
-    </AppStyle>
+    </HomePageStyle>
   );
 };
 
