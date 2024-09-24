@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { TodoModel } from "../../../models/todoItem.model";
 import { CardStyle, ContainerStyle } from "./styles";
-import EditCard from "./EditCard/EditCard";
 import SaveCard from "./SaveCard/SaveCard";
+import EditCard from "./EditCard/EditCard";
 
 type Props = {
   todo: TodoModel;
@@ -12,7 +12,6 @@ type Props = {
 
 const TodoList = ({ todo, setTodoList, setDraggableCard }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
 
   return (
     <ContainerStyle
@@ -23,21 +22,18 @@ const TodoList = ({ todo, setTodoList, setDraggableCard }: Props) => {
     >
       {edit ? (
         <CardStyle>
-          <EditCard
+          <SaveCard
             edit={edit}
             setEdit={setEdit}
             setTodoList={setTodoList}
-            setValue={setValue}
             todo={todo}
-            value={value}
           />
         </CardStyle>
       ) : (
         <CardStyle>
-          <SaveCard
+          <EditCard
             setEdit={setEdit}
             setTodoList={setTodoList}
-            setValue={setValue}
             todo={todo}
           />
         </CardStyle>

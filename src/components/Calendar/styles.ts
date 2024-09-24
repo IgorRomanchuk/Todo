@@ -3,17 +3,11 @@ import { styled } from "styled-components";
 export const CalendarStyle = styled.div`
   display: flex;
   flex-direction: row;
-  position: absolute;
-  top: 10px;
-  left: 0;
   border: 2px solid white;
   border-radius: 10px;
   padding: 10px;
   background-color: white;
-  @media (max-width: 610px) {
-    left: 50%;
-    transform: translateX(-50%);
-  }
+
 `;
 
 export const ButtonStyle = styled.button`

@@ -7,26 +7,27 @@ import moment, { Moment } from "moment";
 const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 type Props = {
-  setPeriod: (e: ((value: number[]) => number[]) | number[]) => void;
-  date: Moment;
-  period: number[]
+  setPeriod?: (e: ((value: number[]) => number[]) | number[]) => void;
+  date: string | Moment;
+  period?: number[];
+  setDate: (e: Moment | string) => void;
 };
 
-const CalendarBody = ({ period, setPeriod, date }: Props) => {
-
-  const handleDatePick = (item: number) => {
-    if (!period.length) return setPeriod([item]);
-    if (item > (period[period.length - 1] + period[0]) / 2) {
-      setPeriod((prev) => [prev[0], item]);
+const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
+  const handleDatePick = (day: number) => {
+    if (period && setPeriod) {
+      if (!period.length) return setPeriod([day]);
+      if (day > (period[period.length - 1] + period[0]) / 2) {
+        setPeriod((prev) => [prev[0], day]);
+      } else {
+        setPeriod((prev) => [day, prev[prev.length - 1]]);
+      }
     } else {
-      setPeriod((prev) => [item, prev[prev.length - 1]]);
+      setDate(moment(date).date(day));
     }
   };
 
-  const days = useMemo(
-    () => getAmountDays(moment(date).daysInMonth()),
-    [date]
-  );
+  const days = useMemo(() => getAmountDays(moment(date).daysInMonth()), [date]);
   return (
     <CalendarBodyStyle>
       {weekDays.map((item) => (
@@ -34,7 +35,7 @@ const CalendarBody = ({ period, setPeriod, date }: Props) => {
       ))}
       {Array.from({
         length: weekDays.indexOf(
-          date.startOf("month").format(dateTypes.dayName)
+          moment(date).startOf("month").format(dateTypes.dayName)
         ),
       }).map((_, i) => (
         <p key={i}></p>
@@ -44,10 +45,10 @@ const CalendarBody = ({ period, setPeriod, date }: Props) => {
           onClick={() => handleDatePick(item)}
           key={item}
           $active={
-            period.length >= 1 &&
-            period[0] <= item &&
-            period[period.length - 1] >= item &&
-            true
+            +moment(date).format("D") === item ||
+            (period && period.length >= 1 &&
+              period[0] <= item &&
+              period[period.length - 1] >= item)
           }
         >
           {item}
