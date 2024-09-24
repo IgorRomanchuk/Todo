@@ -5,7 +5,7 @@ import DropArea from "../DropArea/DropArea";
 import TodosService from "../../../service/todos.service";
 
 type Props = {
-  todoList: TodoModel[] | [];
+  todoList: TodoModel[];
   setTodoList: (e: TodoModel[]) => void;
   status: string;
   draggableCard: string | null;
