@@ -4,10 +4,10 @@ import CalendarBody from "./CalendarBody/CalendarBody";
 import { Moment } from "moment";
 
 type Props = {
-  setPeriod: (e: ((value: number[]) => number[]) | number[]) => void;
-  period: number[];
-  date: Moment;
-  setDate: (e: (value: Moment) => Moment) => void;
+  setPeriod?: (e: ((value: number[]) => number[]) | number[]) => void;
+  period?: number[];
+  date: Moment | string;
+  setDate: (e: Moment | string) => void;
 };
 const Calendar = ({
   setPeriod,
@@ -23,11 +23,12 @@ const Calendar = ({
           date={date}
         />
         <CalendarBody
+          setDate={setDate}
           period={period}
           date={date}
           setPeriod={setPeriod}
         />
-        <ButtonStyle onClick={() => setPeriod([])}>reset</ButtonStyle>
+        {setPeriod && <ButtonStyle onClick={() => setPeriod([])}>reset</ButtonStyle>}
       </div>
     </CalendarStyle>
   );

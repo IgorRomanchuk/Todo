@@ -1,4 +1,4 @@
-import { dateTypes } from "../../../constants";
+import { dateTypes } from "../../../constants/dateTypes";
 import {
   CalendarHeaderStyle,
   CalendarHeaderTextStyle,
@@ -11,26 +11,29 @@ import leftArrow from "../../../assets/img/leftArrow.svg";
 import moment, { Moment } from "moment";
 
 type Props = {
-  date: Moment;
-  setDate: (e: (value: Moment) => Moment) => void;
+  date: Moment | string;
+  setDate: (e: string | Moment) => void;
 };
 
 const CalendarHeader = ({ setDate, date }: Props) => {
-  const changeYearToRight = () => setDate((prev) => moment(prev).add(1, "y"));
+  const changeYearToRight = () =>
+    setDate(moment(date, "YYYY-MM-DD").add(1, "y"));
 
   const changeYearToLeft = () =>
-    setDate((prev) => moment(prev).subtract(1, "y"));
+    setDate(moment(date, "YYYY-MM-DD").subtract(1, "y"));
 
-  const changeMonthToRight = () => setDate((prev) => moment(prev).add(1, "M"));
-  
+  const changeMonthToRight = () =>
+    setDate(moment(date, "YYYY-MM-DD").add(1, "M"));
+
   const changeMonthToLeft = () =>
-    setDate((prev) => moment(prev).subtract(1, "M"));
+    setDate(moment(date, "YYYY-MM-DD").subtract(1, "M"));
+
   return (
     <CalendarHeaderStyle>
       <ImageStyle src={leftArrows} onClick={changeYearToLeft} alt="arrow" />
       <ImageStyle src={leftArrow} onClick={changeMonthToLeft} alt="arros" />
       <CalendarHeaderTextStyle>
-        {date.format(dateTypes.yearAndMonth)}
+        {moment(date, "YYYY-MM").format(dateTypes.yearAndMonth)}
       </CalendarHeaderTextStyle>
       <ImageStyle src={rightArrow} onClick={changeMonthToRight} alt="arrow" />
       <ImageStyle src={rightArrows} onClick={changeYearToRight} alt="arrow" />

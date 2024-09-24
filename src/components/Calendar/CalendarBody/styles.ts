@@ -12,6 +12,7 @@ export const DayTextStyle = styled.span<{ $active?: boolean }>`
   cursor: pointer;
   color: black;
   font-weight: 600;
+  text-align: center;
   ${(props) =>
     props.$active &&
     css`

@@ -2,9 +2,10 @@ import { TodoModel } from "../../../models/todoItem.model";
 import TodoCard from "../TodoCard/TodoCard";
 import { ContainerStyle } from "./styles";
 import DropArea from "../DropArea/DropArea";
+import TodosService from "../../../service/todos.service";
 
 type Props = {
-  todoList: TodoModel[];
+  todoList: TodoModel[] | [];
   setTodoList: (e: TodoModel[]) => void;
   status: string;
   draggableCard: string | null;
@@ -17,38 +18,41 @@ const Column = ({
   draggableCard,
   setDraggableCard,
 }: Props) => {
-  const onDrop = (status: string) => {
+  const onDrop = async (status: string) => {
     if (draggableCard == null || draggableCard === undefined) return;
-    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
-    const index = arr.findIndex((item: TodoModel) => item.id === draggableCard);
-    setTodoList(
-      arr.map((item: TodoModel, i: number) => {
-        if (i === index) {
-          return {
-            ...item,
-            status,
-          };
-        } else {
-          return item;
-        }
-      })
+    const index = TodosService.getTodos().findIndex(
+      (item: TodoModel) => item.id === draggableCard
     );
+    const arr = TodosService.getTodos().map((item: TodoModel, i: number) => {
+      if (i === index) {
+        return {
+          ...item,
+          status,
+        };
+      } else {
+        return item;
+      }
+    });
+    await TodosService.setTodos(arr)
+    setTodoList(arr);
+
   };
   return (
     <>
       <DropArea onDrop={() => onDrop(status)} />
-      {todoList.map((item: TodoModel) => (
-        <ContainerStyle key={item.id}>
-          <>
-            <TodoCard
-              setDraggableCard={setDraggableCard}
-              todo={item}
-              setTodoList={setTodoList}
-            />
-            <DropArea onDrop={() => onDrop(status)} />
-          </>
-        </ContainerStyle>
-      ))}
+      {todoList &&
+        todoList.map((item: TodoModel) => (
+          <ContainerStyle key={item.id}>
+            <>
+              <TodoCard
+                setDraggableCard={setDraggableCard}
+                todo={item}
+                setTodoList={setTodoList}
+              />
+              <DropArea onDrop={() => onDrop(status)} />
+            </>
+          </ContainerStyle>
+        ))}
     </>
   );
 };

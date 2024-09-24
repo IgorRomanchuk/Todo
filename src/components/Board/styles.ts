@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const ColumnsContainerStyle = styled.div`
+  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;

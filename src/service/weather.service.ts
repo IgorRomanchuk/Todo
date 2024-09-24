@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 import moment from "moment";
-import { dateTypes } from "../constants";
+import { dateTypes } from "../constants/dateTypes";
 
 const BASE_URL = 'http://api.weatherapi.com/v1';
 
