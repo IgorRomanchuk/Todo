@@ -14,7 +14,7 @@ type Props = {
 };
 
 const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
-  console.log(period);
+  
   const handleDatePick = (day: number) => {
     if (period && setPeriod) {
       if (!period.length) return setPeriod([day]);

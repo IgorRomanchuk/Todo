@@ -16,7 +16,6 @@ export const WeatherContainer = styled.div`
     left: 350px;
   };
   @media (max-width: 610px) {
-    top: 30%;
     left: 50%;
     transform: translateX(-50%) scale(2);
   }

@@ -17,10 +17,7 @@ export const TitleStyle = styled.h1`
   margin-top: 100px;
   margin-bottom: 0;
   @media (max-width: 900px) {
-    margin-top: 250px;
-  }
-  @media (max-width: 610px) {
-    margin-top: 350px;
+    margin-top: 150px;
   }
 `;
 
