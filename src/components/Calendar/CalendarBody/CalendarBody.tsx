@@ -14,6 +14,7 @@ type Props = {
 };
 
 const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
+  console.log(period);
   const handleDatePick = (day: number) => {
     if (period && setPeriod) {
       if (!period.length) return setPeriod([day]);
@@ -45,8 +46,9 @@ const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
           onClick={() => handleDatePick(item)}
           key={item}
           $active={
-            +moment(date).format("D") === item ||
-            (period && period.length >= 1 &&
+            (+moment(date).format("D") === item && !period) ||
+            (period &&
+              period.length >= 1 &&
               period[0] <= item &&
               period[period.length - 1] >= item)
           }

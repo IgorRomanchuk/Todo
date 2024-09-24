@@ -31,6 +31,7 @@ const Board = ({ period, date }: Props) => {
                 status={status}
                 todoList={todoList.filter(
                   (item) =>
+                    !!period.length &&
                     moment(date)
                       .date(period[period.length - 1])
                       .isSameOrAfter(item.date, "date") &&

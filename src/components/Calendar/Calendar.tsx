@@ -9,26 +9,26 @@ type Props = {
   date: Moment | string;
   setDate: (e: Moment | string) => void;
 };
-const Calendar = ({
-  setPeriod,
-  period,
-  date,
-  setDate,
-}: Props) => {
+const Calendar = ({ setPeriod, period, date, setDate }: Props) => {
   return (
     <CalendarStyle>
       <div>
-        <CalendarHeader
-          setDate={setDate}
-          date={date}
-        />
+        <CalendarHeader setDate={setDate} date={date} />
         <CalendarBody
           setDate={setDate}
           period={period}
           date={date}
           setPeriod={setPeriod}
         />
-        {setPeriod && <ButtonStyle onClick={() => setPeriod([])}>reset</ButtonStyle>}
+        {setPeriod && (
+          <ButtonStyle
+            onClick={() => {
+              setPeriod([]);
+            }}
+          >
+            reset
+          </ButtonStyle>
+        )}
       </div>
     </CalendarStyle>
   );
