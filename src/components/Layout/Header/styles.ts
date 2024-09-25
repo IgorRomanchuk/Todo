@@ -1,9 +1,9 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 export const HeaderStyle = styled.header`
   background-color: #de7f0e;
   display: flex;
-  padding: 0 10px; 
+  padding: 0 10px;
 `;
 
 export const HeaderContainerStyle = styled.div`
@@ -14,16 +14,26 @@ export const HeaderContainerStyle = styled.div`
   height: 45px;
 `;
 
-export const HeaderListStyle = styled.ul`
+export const HeaderMenuStyle = styled.ul`
   display: flex;
   justify-content: space-between;
   max-width: 250px;
   flex-grow: 1;
-  fontSize: 20px;
+  fontsize: 20px;
   color: white;
   font-weight: 600;
   padding: 10px 0;
   li {
     cursor: pointer;
   }
+`;
+
+export const HeaderMenuItemStyle = styled.li<{ $active?: boolean }>`
+  cursor: pointer;
+  color: white;
+  ${(props) =>
+    props.$active &&
+    css`
+      color: black;
+    `}
 `;
