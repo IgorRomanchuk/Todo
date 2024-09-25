@@ -1,11 +1,15 @@
-import { Controller, useForm } from "react-hook-form";
-import Calendar from "../../components/Calendar/Calendar";
+import { SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import TodosService from "../../service/todos.service";
 import { ButtonStyle, FormBoxStyle } from "./styles";
-import { TodoModel } from "../../models/todoItem.model";
+import InputForm from "../../components/Form/InputForm/InputForm";
+import SelectForm from "../../components/Form/SelectForm/SelectForm";
 import { URL_HOME } from "../../constants/clientUrl";
 import { useNavigate } from "react-router-dom";
+import ControllerForm from "../../components/Form/ControllerForm/ControllerForm";
+import { IForm } from "../../models/form.model";
+
+
 
 const CreateTodo = () => {
   const navigate = useNavigate();
@@ -15,7 +19,7 @@ const CreateTodo = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<IForm>({
     defaultValues: {
       title: "",
       description: "",
@@ -25,31 +29,24 @@ const CreateTodo = () => {
     },
   });
 
-  const addTodo = async (todo: TodoModel) => {
+  const addTodo: SubmitHandler<IForm> = async (todo) => {
     let arr = TodosService.getTodos();
-    await TodosService.setTodos([...arr, todo])
+    await TodosService.setTodos([...arr, todo]);
     navigate(URL_HOME);
   };
 
   return (
-    <form onSubmit={handleSubmit((data: any) => addTodo(data))}>
+    <form onSubmit={handleSubmit((data) => addTodo(data))}>
       <FormBoxStyle>
-        <Controller
-          name="date"
-          control={control}
-          render={({ field }) => {
-            return <Calendar date={field.value} setDate={field.onChange} />;
-          }}
+        <ControllerForm name="date" control={control} />
+        <InputForm
+          name="title"
+          register={register}
+          required={true}
+          error={errors.title}
         />
-        <input placeholder="title" {...register("title", { required: true })} />
-        {errors.title && <p>title is required.</p>}
-        <input placeholder="description" {...register("description")} />
-        <select {...register("status")}>
-          <option value="todo">Todo</option>
-          <option value="in progress">In progress</option>
-          <option value="done">Done</option>
-        </select>
-
+        <InputForm name="description" register={register} />
+        <SelectForm name="status" register={register} />
         <ButtonStyle type="submit">Add todo</ButtonStyle>
       </FormBoxStyle>
     </form>
