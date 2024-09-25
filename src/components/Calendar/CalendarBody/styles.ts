@@ -13,6 +13,9 @@ export const DayTextStyle = styled.span<{ $active?: boolean }>`
   color: black;
   font-weight: 600;
   text-align: center;
+  height: 26px;
+  width: 26px;
+  line-height: 26px;
   ${(props) =>
     props.$active &&
     css`
