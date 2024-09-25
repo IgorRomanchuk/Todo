@@ -6,7 +6,7 @@ import InputForm from "../../components/Form/InputForm/InputForm";
 import SelectForm from "../../components/Form/SelectForm/SelectForm";
 import { URL_HOME } from "../../constants/clientUrl";
 import { useNavigate } from "react-router-dom";
-import ControllerForm from "../../components/Form/ControllerForm/ControllerForm";
+import CalendarControllerForm from "../../components/Form/CalendarControllerForm/CalendarControllerForm";
 import { IForm } from "../../models/form.model";
 
 const CreateTodo = () => {
@@ -36,7 +36,7 @@ const CreateTodo = () => {
   return (
     <form onSubmit={handleSubmit((data) => addTodo(data))}>
       <FormBoxStyle>
-        <ControllerForm name="date" control={control} />
+        <CalendarControllerForm name="date" control={control} />
         <InputForm
           name="title"
           register={register}
