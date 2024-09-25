@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import ControllerForm from "../../components/Form/ControllerForm/ControllerForm";
 import { IForm } from "../../models/form.model";
 
-
-
 const CreateTodo = () => {
   const navigate = useNavigate();
 
