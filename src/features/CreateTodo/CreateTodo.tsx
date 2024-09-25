@@ -2,11 +2,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 import TodosService from "../../service/todos.service";
 import { ButtonStyle, FormBoxStyle } from "./styles";
-import InputForm from "../../components/Form/InputForm/InputForm";
-import SelectForm from "../../components/Form/SelectForm/SelectForm";
+import Input from "../../components/Form/Input/Input";
+import Select from "../../components/Form/Select/Select";
 import { URL_HOME } from "../../constants/clientUrl";
 import { useNavigate } from "react-router-dom";
-import CalendarControllerForm from "../../components/Form/CalendarControllerForm/CalendarControllerForm";
+import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
 import { IForm } from "../../models/form.model";
 
 const CreateTodo = () => {
@@ -36,15 +36,15 @@ const CreateTodo = () => {
   return (
     <form onSubmit={handleSubmit((data) => addTodo(data))}>
       <FormBoxStyle>
-        <CalendarControllerForm name="date" control={control} />
-        <InputForm
+        <CalendarControllerDate name="date" control={control} />
+        <Input
           name="title"
           register={register}
           required={true}
           error={errors.title}
         />
-        <InputForm name="description" register={register} />
-        <SelectForm name="status" register={register} />
+        <Input name="description" register={register} />
+        <Select name="status" register={register} />
         <ButtonStyle type="submit">Add todo</ButtonStyle>
       </FormBoxStyle>
     </form>

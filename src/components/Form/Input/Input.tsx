@@ -8,7 +8,7 @@ type Props = {
   error?: FieldError;
 };
 
-const InputForm = ({
+const Input = ({
   name,
   register,
   required = false,
@@ -23,4 +23,4 @@ const InputForm = ({
   );
 };
 
-export default InputForm;
+export default Input;

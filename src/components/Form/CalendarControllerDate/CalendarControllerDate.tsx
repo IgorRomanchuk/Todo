@@ -7,7 +7,7 @@ type Props = {
   control: Control<IForm>;
 };
 
-const CalendarControllerForm = ({
+const CalendarControllerDate = ({
   name,
   control,
 }: Props) => {
@@ -22,4 +22,4 @@ const CalendarControllerForm = ({
   );
 };
 
-export default CalendarControllerForm;
+export default CalendarControllerDate;
