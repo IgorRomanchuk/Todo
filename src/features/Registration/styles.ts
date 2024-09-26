@@ -1,14 +1,21 @@
 import { styled } from "styled-components";
 
-export const FormBoxStyle = styled.div`
+export const ContainerStyle = styled.div`
+  min-height: 100vh;
+  background-color: #7a5fd3;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 100px;
+`;
+
+export const FormBoxStyle = styled.div`
   width: 220px;
-  gap: 30px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const ButtonStyle = styled.button`

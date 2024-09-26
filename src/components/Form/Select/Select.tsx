@@ -1,18 +1,19 @@
 import { UseFormRegister } from "react-hook-form";
-import { IForm } from "../../../models/form.model";
+import { CreateTodoModel } from "../../../models/form.model";
+import { SelectStyle } from "./styles";
 
 type Props = {
   name: "title" | "description" | "status" | "date" | "id";
-  register: UseFormRegister<IForm>;
+  register: UseFormRegister<CreateTodoModel>;
 };
 
 const Select = ({ name, register, ...props }: Props) => {
   return (
-    <select {...register(name)} {...props}>
+    <SelectStyle {...register(name)} {...props}>
       <option value="todo">Todo</option>
       <option value="in progress">In progress</option>
       <option value="done">Done</option>
-    </select>
+    </SelectStyle>
   );
 };
 

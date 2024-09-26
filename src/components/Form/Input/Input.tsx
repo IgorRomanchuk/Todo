@@ -1,10 +1,13 @@
 import { FieldError, UseFormRegister } from "react-hook-form";
-import { IForm } from "../../../models/form.model";
+import { CreateTodoModel } from "../../../models/form.model";
+import { IntputStyle } from "./styles";
 
 type Props = {
-  name: "title" | "description" | "status" | "date" | "id";
-  register: UseFormRegister<IForm>;
+  // name: "title" | "description" | "status" | "date" | "id";
+  name: any;
+  register: UseFormRegister<CreateTodoModel | any>;
   required?: boolean;
+  valueAsNumber?: boolean
   error?: FieldError;
 };
 
@@ -12,12 +15,13 @@ const Input = ({
   name,
   register,
   required = false,
+  valueAsNumber = false,
   error,
   ...props
 }: Props) => {
   return (
     <>
-      <input placeholder={name} {...register(name, { required })} {...props} />
+      <IntputStyle placeholder={name} {...register(name, { required, valueAsNumber })} {...props} />
       {error && <p>{`${name} is required`}</p>}
     </>
   );

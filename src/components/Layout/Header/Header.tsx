@@ -29,13 +29,13 @@ const pages = [
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <HeaderStyle>
       <HeaderContainerStyle>
         <HeaderMenuStyle>
           {pages.map((item) => (
             <HeaderMenuItemStyle
+              key={item.name}
               $active={location.pathname === item.url ? true : false}
               onClick={() => navigate(item.url)}
             >

@@ -7,7 +7,7 @@ import Select from "../../components/Form/Select/Select";
 import { URL_HOME } from "../../constants/clientUrl";
 import { useNavigate } from "react-router-dom";
 import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
-import { IForm } from "../../models/form.model";
+import { CreateTodoModel } from "../../models/form.model";
 
 const CreateTodo = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const CreateTodo = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<IForm>({
+  } = useForm<CreateTodoModel>({
     defaultValues: {
       title: "",
       description: "",
@@ -27,7 +27,7 @@ const CreateTodo = () => {
     },
   });
 
-  const addTodo: SubmitHandler<IForm> = async (todo) => {
+  const addTodo: SubmitHandler<CreateTodoModel> = async (todo) => {
     let arr = TodosService.getTodos();
     await TodosService.setTodos([...arr, todo]);
     navigate(URL_HOME);

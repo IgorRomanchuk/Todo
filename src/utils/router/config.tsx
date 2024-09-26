@@ -8,12 +8,14 @@ import {
   URL_CREATE_TODO,
   URL_TODO_LIST,
   URL_NOT_FOUND,
+  URL_REGISTER
 } from "../../constants/clientUrl";
 
 const HomePage = lazy(() => import("../../features/HomePage/HomePage"));
 const CreateTodo = lazy(() => import("../../features/CreateTodo/CreateTodo"));
 const NotFound = lazy(() => import("../../features/NotFound/NotFound"));
 const TodoList = lazy(() => import("../../features/TodoList"));
+const Registration = lazy(() => import("../../features/Registration"));
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +55,12 @@ export const router = createBrowserRouter([
           <Layout>
             <CreateTodo />
           </Layout>
+        ),
+      },
+      {
+        path: URL_REGISTER,
+        element: (
+            <Registration />
         ),
       },
     ],

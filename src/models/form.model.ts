@@ -1,6 +1,6 @@
 import { Moment } from "moment";
 
-export interface IForm {
+export interface CreateTodoModel {
   title: string,
   description: string,
   status: string,
