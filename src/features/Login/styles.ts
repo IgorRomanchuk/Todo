@@ -28,15 +28,6 @@ export const ButtonStyle = styled.button`
   font-weight: 600;
 `;
 
-export const TextAccountStyle = styled.p`
-  margin-top: 20px;
-  color: white;
-  span {
-    color: black;
-    cursor: pointer;
-  }
-`;
-
 export const TitleStyle = styled.h1`
   margin-bottom: 20px;
   color: white;

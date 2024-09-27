@@ -3,11 +3,15 @@ import {
   URL_TODO_LIST,
   URL_CREATE_TODO,
   URL_HOME,
+  URL_REGISTER,
 } from "../../../constants/clientUrl";
+import AuthService from "../../../service/auth.service";
+import { useAuth } from "../../../utils/hooks/useAuth";
 import {
   HeaderContainerStyle,
   HeaderMenuItemStyle,
   HeaderMenuStyle,
+  HeaderSignOutStyle,
   HeaderStyle,
 } from "./styles";
 
@@ -29,6 +33,14 @@ const pages = [
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {setIsLogged} = useAuth();
+
+  const signOut = () => {
+    AuthService.removeToken();
+    setIsLogged(false)
+    navigate(URL_REGISTER);
+  };
+
   return (
     <HeaderStyle>
       <HeaderContainerStyle>
@@ -43,6 +55,7 @@ const Header = () => {
             </HeaderMenuItemStyle>
           ))}
         </HeaderMenuStyle>
+        <HeaderSignOutStyle onClick={() => signOut()}>Sign out</HeaderSignOutStyle>
       </HeaderContainerStyle>
     </HeaderStyle>
   );

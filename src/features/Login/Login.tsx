@@ -4,23 +4,22 @@ import {
   ButtonStyle,
   ContainerStyle,
   FormBoxStyle,
-  TextAccountStyle,
   TitleStyle,
 } from "./styles";
 import AuthService from "../../service/auth.service";
-import { AuthModel } from "./model/auth.model";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
+import { AuthModel } from "../Registration/model/auth.model";
 import { useNavigate } from "react-router-dom";
-import { URL_HOME, URL_LOGIN } from "../../constants/clientUrl";
+import { URL_HOME } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";
 
-export const Registration = () => {
+export const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
   const { setIsLogged } = useAuth();
-
+  
   const {
     register,
     reset,
@@ -34,13 +33,12 @@ export const Registration = () => {
     },
   });
 
-  const registrate: SubmitHandler<AuthModel> = async (data) => {
+  const signIn: SubmitHandler<AuthModel> = async (data) => {
     try {
       setLoading(true);
-      const token: string = (await AuthService.register(data)).data
-        .access_token;
-      AuthService.setToken(token);
-      setIsLogged(true);
+      const token: string = (await AuthService.signIn(data)).data.access_token;
+      AuthService.setToken(token)
+      setIsLogged(true)
       navigate(URL_HOME);
     } catch (err: any) {
       setError(err.message);
@@ -52,8 +50,8 @@ export const Registration = () => {
 
   return (
     <ContainerStyle>
-      <TitleStyle>Sign up</TitleStyle>
-      <form onSubmit={handleSubmit((data) => registrate(data))}>
+      <TitleStyle>Sign in</TitleStyle>
+      <form onSubmit={handleSubmit((data) => signIn(data))}>
         <FormBoxStyle>
           <Input
             name="telegram_id"
@@ -77,18 +75,12 @@ export const Registration = () => {
           {loading ? (
             <Loading />
           ) : (
-            <ButtonStyle type="submit">Register</ButtonStyle>
+            <ButtonStyle type="submit">Sign in</ButtonStyle>
           )}
 
           {error && <p>{error}</p>}
         </FormBoxStyle>
       </form>
-      <TextAccountStyle>
-        Do you have an account?{" "}
-        <span onClick={() => navigate(URL_LOGIN)}>
-          sign in
-        </span>
-      </TextAccountStyle>
     </ContainerStyle>
   );
 };

@@ -12,6 +12,8 @@ export const HeaderContainerStyle = styled.div`
   flex-grow: 1;
   margin: 0 auto;
   height: 45px;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const HeaderMenuStyle = styled.ul`
@@ -36,4 +38,9 @@ export const HeaderMenuItemStyle = styled.li<{ $active?: boolean }>`
     css`
       color: black;
     `}
+`;
+
+export const HeaderSignOutStyle = styled.p`
+  cursor: pointer;
+  color: white;
 `;
