@@ -1,8 +1,9 @@
 import { TodoModel } from "../../../../models/todoItem.model";
 import saveIcon from "../../../../assets/img/save.svg";
 import { SaveIconStyle, TextAreaStyle } from "./styles";
-import TodoService from "../../../../service/todos.service";
+import TodosService from "../../../../service/todos.service";
 import { useState } from "react";
+import { useAuth } from "../../../../utils/hooks/useAuth";
 
 type Props = {
   todo: TodoModel;
@@ -12,13 +13,16 @@ type Props = {
 };
 
 const SaveCard = ({ setTodoList, todo, setEdit, edit }: Props) => {
+  const { user } = useAuth();
   const [title, setTitle] = useState<string>(todo.title);
   const [description, setDescription] = useState<string | undefined>(
     todo.description
   );
 
   const handleSetTodoList = async () => {
-    const arr = TodoService.getTodos().map((item: TodoModel) => {
+    const arr = await TodosService.getTodos();
+    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    arr[indexTodos].todos = arr[indexTodos].todos.map((item: TodoModel) => {
       if (todo.id === item.id) {
         return {
           ...item,
@@ -29,8 +33,8 @@ const SaveCard = ({ setTodoList, todo, setEdit, edit }: Props) => {
         return item;
       }
     });
-    setTodoList(arr);
-    await TodoService.setTodos(arr);
+    setTodoList(arr[indexTodos].todos);
+    await TodosService.setTodos(arr);
     setEdit(false);
   };
   return (

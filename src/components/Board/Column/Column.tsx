@@ -3,6 +3,7 @@ import TodoCard from "../TodoCard/TodoCard";
 import { ContainerStyle } from "./styles";
 import DropArea from "../DropArea/DropArea";
 import TodosService from "../../../service/todos.service";
+import { useAuth } from "../../../utils/hooks/useAuth";
 
 type Props = {
   todoList: TodoModel[];
@@ -18,25 +19,31 @@ const Column = ({
   draggableCard,
   setDraggableCard,
 }: Props) => {
+  const { user } = useAuth();
+
   const onDrop = async (status: string) => {
     if (draggableCard == null || draggableCard === undefined) return;
-    const index = TodosService.getTodos().findIndex(
+    const arr = await TodosService.getTodos();
+    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    const index = arr[indexTodos].todos.findIndex(
       (item: TodoModel) => item.id === draggableCard
     );
-    const arr = TodosService.getTodos().map((item: TodoModel, i: number) => {
-      if (i === index) {
-        return {
-          ...item,
-          status,
-        };
-      } else {
-        return item;
+    arr[indexTodos].todos = arr[indexTodos].todos.map(
+      (item: TodoModel, i: number) => {
+        if (i === index) {
+          return {
+            ...item,
+            status,
+          };
+        } else {
+          return item;
+        }
       }
-    });
-    await TodosService.setTodos(arr)
-    setTodoList(arr);
-
+    );
+    setTodoList(arr[indexTodos].todos);
+    await TodosService.setTodos(arr);
   };
+
   return (
     <>
       <DropArea onDrop={() => onDrop(status)} />

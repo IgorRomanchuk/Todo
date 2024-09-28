@@ -8,7 +8,8 @@ import {
   TextDescriptionStyle,
   TextTitleStyle,
 } from "./styles";
-import TodoService from "../../../../service/todos.service";
+import TodosService from "../../../../service/todos.service";
+import { useAuth } from "../../../../utils/hooks/useAuth";
 
 type Props = {
   todo: TodoModel;
@@ -17,34 +18,36 @@ type Props = {
 };
 
 const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
+  const { user } = useAuth();
   const [selectValue, setSelectValue] = useState(todo.status);
   const handleDeleteTodo = async () => {
-    const arr = await TodoService.getTodos();
-    await TodoService.setTodos(
-      arr.filter((item: TodoModel) => todo.id !== item.id)
-    );
-    setTodoList(arr.filter((item: TodoModel) => todo.id !== item.id));
+    const arr = await TodosService.getTodos();
+    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    arr[indexTodos].todos = arr[indexTodos].todos.filter((item: any) => item.id !== todo.id);
+    setTodoList(arr[indexTodos].todos)
+    await TodosService.setTodos(arr)
   };
 
   const handleClickEdit = () => {
     setEdit(true);
   };
 
-  const handleChangeStatus = (status: string) => {
-    const arr = JSON.parse(localStorage.getItem("todoList") || "[]");
+  const handleChangeStatus = async (status: string) => {
     setSelectValue(status);
-    setTodoList(
-      arr.map((item: TodoModel) => {
-        if (todo.id === item.id) {
-          return {
-            ...item,
-            status,
-          };
-        } else {
-          return item;
-        }
-      })
-    );
+    const arr = await TodosService.getTodos();
+    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    arr[indexTodos].todos = arr[indexTodos].todos.map((item: TodoModel) => {
+      if (todo.id === item.id) {
+        return {
+          ...item,
+          status,
+        };
+      } else {
+        return item;
+      }
+    });
+    setTodoList(arr[indexTodos].todos)
+    await TodosService.setTodos(arr)
   };
   return (
     <>
