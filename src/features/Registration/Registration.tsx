@@ -8,7 +8,7 @@ import {
   TitleStyle,
 } from "./styles";
 import AuthService from "../../service/auth.service";
-import { AuthModel } from "./model/auth.model";
+import { AuthModel } from "../../models/auth.model";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";

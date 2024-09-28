@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
-import { AuthModel } from "../features/Registration/model/auth.model";
+import { AuthModel } from "../models/auth.model";
 
 class AuthService {
   endpoint: string = "auth";

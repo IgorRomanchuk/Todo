@@ -9,7 +9,7 @@ import {
 import AuthService from "../../service/auth.service";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
-import { AuthModel } from "../Registration/model/auth.model";
+import { AuthModel } from "../../models/auth.model";
 import { useNavigate } from "react-router-dom";
 import { URL_HOME } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";
