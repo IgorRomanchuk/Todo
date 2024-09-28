@@ -1,27 +1,32 @@
-import { FieldError, UseFormRegister } from "react-hook-form";
-import { CreateTodoModel } from "../../../models/form.model";
+import {
+  FieldError,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from "react-hook-form";
 import { IntputStyle } from "./styles";
 
-type Props = {
-  // name: "title" | "description" | "status" | "date" | "id";
-  name: any;
-  register: UseFormRegister<CreateTodoModel | any>;
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  register: UseFormRegister<T>;
   required?: boolean;
-  valueAsNumber?: boolean
+  valueAsNumber?: boolean;
   error?: FieldError;
-};
+}
 
-const Input = ({
+const Input = <T extends FieldValues>({
   name,
   register,
   required = false,
   valueAsNumber = false,
   error,
-  ...props
-}: Props) => {
+}: Props<T>) => {
   return (
     <>
-      <IntputStyle placeholder={name} {...register(name, { required, valueAsNumber })} {...props} />
+      <IntputStyle
+        placeholder={name}
+        {...register(name, { required, valueAsNumber })}
+      />
       {error && <p>{`${name} is required`}</p>}
     </>
   );

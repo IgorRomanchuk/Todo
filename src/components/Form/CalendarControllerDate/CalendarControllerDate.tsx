@@ -1,16 +1,15 @@
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import Calendar from "../../Calendar/Calendar";
-import { CreateTodoModel } from "../../../models/form.model";
 
-type Props = {
-  name: "title" | "description" | "status" | "date" | "id";
-  control: Control<CreateTodoModel>;
-};
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  control: Control<T>;
+}
 
-const CalendarControllerDate = ({
+const CalendarControllerDate = <T extends FieldValues>({
   name,
   control,
-}: Props) => {
+}: Props<T>) => {
   return (
     <Controller
       name={name}

@@ -1,13 +1,16 @@
-import { UseFormRegister } from "react-hook-form";
-import { CreateTodoModel } from "../../../models/form.model";
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 import { SelectStyle } from "./styles";
 
-type Props = {
-  name: "title" | "description" | "status" | "date" | "id";
-  register: UseFormRegister<CreateTodoModel>;
-};
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  register: UseFormRegister<T>;
+}
 
-const Select = ({ name, register, ...props }: Props) => {
+const Select = <T extends FieldValues>({
+  name,
+  register,
+  ...props
+}: Props<T>) => {
   return (
     <SelectStyle {...register(name)} {...props}>
       <option value="todo">Todo</option>
