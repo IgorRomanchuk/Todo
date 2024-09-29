@@ -8,7 +8,7 @@ import { UserModel } from "../../models/user.model";
 
 const Router = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { setUser, logged } = useAuth();
+  const { setUser, logged, setIsLogged } = useAuth();
 
   const getUser = async () => {
     const token: string | null = AuthService.getToken();
@@ -16,17 +16,17 @@ const Router = () => {
       setLoading(true);
       const data = (await AuthService.profile(token)).data;
       setUser(data);
+      setIsLogged(true);
     } catch (err) {
       console.log(err);
       setUser({} as UserModel);
-
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    getUser()
+    getUser();
   }, [logged]);
 
   return loading ? <Loading /> : <RouterProvider router={router} />;

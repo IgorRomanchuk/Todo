@@ -33,11 +33,11 @@ const pages = [
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {setIsLogged} = useAuth();
+  const { setIsLogged } = useAuth();
 
   const signOut = () => {
     AuthService.removeToken();
-    setIsLogged(false)
+    setIsLogged(false);
     navigate(URL_REGISTER);
   };
 
@@ -55,7 +55,9 @@ const Header = () => {
             </HeaderMenuItemStyle>
           ))}
         </HeaderMenuStyle>
-        <HeaderSignOutStyle onClick={() => signOut()}>Sign out</HeaderSignOutStyle>
+        <HeaderSignOutStyle onClick={() => signOut()}>
+          Sign out
+        </HeaderSignOutStyle>
       </HeaderContainerStyle>
     </HeaderStyle>
   );
