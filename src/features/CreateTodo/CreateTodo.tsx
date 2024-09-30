@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
 import { useAuth } from "../../utils/hooks/useAuth";
 import { CreateTodoModel } from "../../models/form.model";
+import { TodosModel } from "../../models/todos.model";
 
 const CreateTodo = () => {
   const { user } = useAuth();
@@ -31,7 +32,7 @@ const CreateTodo = () => {
 
   const addTodo: SubmitHandler<CreateTodoModel> = async (todo) => {
     let arr = TodosService.getTodos();
-    let index = arr.findIndex((item: any) => item.id === user.id)
+    let index = arr.findIndex((item: TodosModel) => item.id === user.id)
     if (index > -1) {
       arr[index].todos.push(todo)
     } else {

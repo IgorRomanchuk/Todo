@@ -1,4 +1,4 @@
-import { TodoModel } from "../../../../models/todoItem.model";
+import { TodoModel } from "../../../../models/todos.model";
 import saveIcon from "../../../../assets/img/save.svg";
 import { SaveIconStyle, TextAreaStyle } from "./styles";
 import TodosService from "../../../../service/todos.service";
@@ -21,7 +21,9 @@ const SaveCard = ({ setTodoList, todo, setEdit, edit }: Props) => {
 
   const handleSetTodoList = async () => {
     const arr = await TodosService.getTodos();
-    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    const indexTodos = arr.findIndex(
+      (item: { id: number; todos: TodoModel[] }) => item.id === user.id
+    );
     arr[indexTodos].todos = arr[indexTodos].todos.map((item: TodoModel) => {
       if (todo.id === item.id) {
         return {

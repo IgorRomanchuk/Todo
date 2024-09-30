@@ -1,4 +1,4 @@
-import { TodoModel } from "../../../models/todoItem.model";
+import { TodoModel, TodosModel } from "../../../models/todos.model";
 import TodoCard from "../TodoCard/TodoCard";
 import { ContainerStyle } from "./styles";
 import DropArea from "../DropArea/DropArea";
@@ -24,7 +24,7 @@ const Column = ({
   const onDrop = async (status: string) => {
     if (draggableCard == null || draggableCard === undefined) return;
     const arr = await TodosService.getTodos();
-    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    const indexTodos = arr.findIndex((item: TodosModel) => item.id === user.id);
     const index = arr[indexTodos].todos.findIndex(
       (item: TodoModel) => item.id === draggableCard
     );

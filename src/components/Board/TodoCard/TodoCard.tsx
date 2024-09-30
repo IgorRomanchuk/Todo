@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TodoModel } from "../../../models/todoItem.model";
+import { TodoModel } from "../../../models/todos.model";
 import { CardStyle, ContainerStyle } from "./styles";
 import SaveCard from "./SaveCard/SaveCard";
 import EditCard from "./EditCard/EditCard";

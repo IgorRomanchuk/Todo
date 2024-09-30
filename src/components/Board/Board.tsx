@@ -1,7 +1,7 @@
 import moment, { Moment } from "moment";
 import Column from "./Column/Column";
 import { ColumnsContainerStyle, ColumnStyle } from "./styles";
-import { TodoModel } from "../../models/todoItem.model";
+import { TodoModel, TodosModel } from "../../models/todos.model";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../utils/hooks/useAuth";
 import TodosService from "../../service/todos.service";
@@ -17,9 +17,13 @@ const Board = ({ period, date }: Props) => {
   const { user } = useAuth();
   const [todoList, setTodoList] = useState<TodoModel[]>([]);
   const [draggableCard, setDraggableCard] = useState<null | string>(null);
-  
+
   useEffect(() => {
-    setTodoList(TodosService.getTodos().filter((item: any) => item.id === user.id)[0].todos);
+    setTodoList(
+      TodosService.getTodos().filter(
+        (item: TodosModel) => item.id === user.id
+      )[0].todos
+    );
   }, [user]);
 
   return (

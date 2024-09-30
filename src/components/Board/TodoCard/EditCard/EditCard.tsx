@@ -1,4 +1,4 @@
-import { TodoModel } from "../../../../models/todoItem.model";
+import { TodoModel, TodosModel } from "../../../../models/todos.model";
 import deleteIcon from "../../../../assets/img/delete.svg";
 import editIcon from "../../../../assets/img/edit.svg";
 import { useState } from "react";
@@ -22,8 +22,8 @@ const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
   const [selectValue, setSelectValue] = useState(todo.status);
   const handleDeleteTodo = async () => {
     const arr = await TodosService.getTodos();
-    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
-    arr[indexTodos].todos = arr[indexTodos].todos.filter((item: any) => item.id !== todo.id);
+    const indexTodos = arr.findIndex((item: TodosModel) => item.id === user.id);
+    arr[indexTodos].todos = arr[indexTodos].todos.filter((item: TodoModel) => item.id !== todo.id);
     setTodoList(arr[indexTodos].todos)
     await TodosService.setTodos(arr)
   };
@@ -35,7 +35,7 @@ const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
   const handleChangeStatus = async (status: string) => {
     setSelectValue(status);
     const arr = await TodosService.getTodos();
-    const indexTodos = arr.findIndex((item: any) => item.id === user.id);
+    const indexTodos = arr.findIndex((item: TodosModel) => item.id === user.id);
     arr[indexTodos].todos = arr[indexTodos].todos.map((item: TodoModel) => {
       if (todo.id === item.id) {
         return {
