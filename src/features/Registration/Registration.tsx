@@ -12,14 +12,14 @@ import { AuthModel } from "../../models/auth.model";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
-import { URL_HOME, URL_LOGIN } from "../../constants/clientUrl";
+import { URL_LOGIN } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";
 
 export const Registration = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  const { setIsLogged } = useAuth();
+  const { getUser } = useAuth();
 
   const {
     register,
@@ -37,11 +37,9 @@ export const Registration = () => {
   const registrate: SubmitHandler<AuthModel> = async (data) => {
     try {
       setLoading(true);
-      const token: string = (await AuthService.register(data)).data
-        .access_token;
+      const token: string = (await AuthService.register(data)).access_token;
       AuthService.setToken(token);
-      setIsLogged(true);
-      navigate(URL_HOME);
+      await getUser();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -85,9 +83,7 @@ export const Registration = () => {
       </form>
       <TextAccountStyle>
         Do you have an account?{" "}
-        <span onClick={() => navigate(URL_LOGIN)}>
-          sign in
-        </span>
+        <span onClick={() => navigate(URL_LOGIN)}>sign in</span>
       </TextAccountStyle>
     </ContainerStyle>
   );

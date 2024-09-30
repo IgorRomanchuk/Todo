@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Loading from "../Loading/Loading";
-import Router from "../../utils/router/router";
+import Router from "../Routes/router/router";
 import { AuthProvider } from "./context";
 
 function App() {

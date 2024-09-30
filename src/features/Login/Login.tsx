@@ -10,15 +10,12 @@ import AuthService from "../../service/auth.service";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { AuthModel } from "../../models/auth.model";
-import { useNavigate } from "react-router-dom";
-import { URL_HOME } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";
 
 export const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const navigate = useNavigate();
-  const { setIsLogged } = useAuth();
+  const { getUser } = useAuth();
   
   const {
     register,
@@ -36,10 +33,9 @@ export const Login = () => {
   const signIn: SubmitHandler<AuthModel> = async (data) => {
     try {
       setLoading(true);
-      const token: string = (await AuthService.signIn(data)).data.access_token;
+      const token: string = (await AuthService.signIn(data)).access_token;
       AuthService.setToken(token)
-      setIsLogged(true)
-      navigate(URL_HOME);
+      await getUser()
     } catch (err: any) {
       setError(err.message);
     } finally {

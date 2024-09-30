@@ -7,15 +7,15 @@ class AuthService {
   endpoint: string = "auth";
 
   register = async (params: AuthModel) =>
-    axios.post(`${BASE_URL}${this.endpoint}/register`, params);
+    (await axios.post(`${BASE_URL}${this.endpoint}/register`, params)).data;
 
   signIn = async (params: AuthModel) =>
-    axios.post(`${BASE_URL}${this.endpoint}/login`, params);
+    (await axios.post(`${BASE_URL}${this.endpoint}/login`, params)).data;
 
   profile = async (token: string | null) =>
-    axios.get(`${BASE_URL}${this.endpoint}/profile`, {
+    (await axios.get(`${BASE_URL}${this.endpoint}/profile`, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    })).data;
 
   getToken = () => localStorage.getItem("todo-token");
 
