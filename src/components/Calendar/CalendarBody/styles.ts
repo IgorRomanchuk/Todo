@@ -6,7 +6,10 @@ export const CalendarBodyStyle = styled.div`
   max-width: 350px;
 `;
 
-export const DayTextStyle = styled.span<{ $active?: boolean }>`
+export const DayTextStyle = styled.span<{
+  $active?: boolean;
+  $disabled?: boolean;
+}>`
   margin: 1px;
   font-size: 15px;
   cursor: pointer;
@@ -17,12 +20,22 @@ export const DayTextStyle = styled.span<{ $active?: boolean }>`
   width: 26px;
   line-height: 26px;
   ${(props) =>
+    props.$disabled &&
+    css`
+      pointer-events: none;
+      background-color: transparent;
+      opacity: 0.3;
+      background-color: white !important;
+      color: black !important;
+    `};
+
+  ${(props) =>
     props.$active &&
     css`
       border-radius: 50%;
       background-color: #282c34;
       color: white;
-    `}
+    `};
 `;
 
 export const DayNameTextStyle = styled.span`

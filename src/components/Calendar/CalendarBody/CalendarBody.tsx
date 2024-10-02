@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { CalendarBodyStyle, DayNameTextStyle, DayTextStyle } from "./styles";
 import { dateTypes } from "../../../constants/dateTypes";
 import { getAmountDays } from "../../../utils/getAmountDays";
@@ -11,10 +11,19 @@ type Props = {
   date: string | Moment;
   period?: number[];
   setDate: (e: Moment | string) => void;
+  disableDates?: string[];
+  getAvailableHours?: any;
 };
 
-const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
-  
+const CalendarBody = ({
+  period,
+  setPeriod,
+  date,
+  setDate,
+  disableDates,
+  getAvailableHours,
+}: Props) => {
+
   const handleDatePick = (day: number) => {
     if (period && setPeriod) {
       if (!period.length) return setPeriod([day]);
@@ -25,10 +34,16 @@ const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
       }
     } else {
       setDate(moment(date).date(day));
+      if (disableDates) getAvailableHours(moment(date).date(day).format('YYYY-MM-DD'));
     }
   };
 
   const days = useMemo(() => getAmountDays(moment(date).daysInMonth()), [date]);
+
+  useEffect(() => {
+    if (disableDates) getAvailableHours(moment(date).format('YYYY-MM-DD'))
+  }, [disableDates]);
+
   return (
     <CalendarBodyStyle>
       {weekDays.map((item) => (
@@ -45,6 +60,12 @@ const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
         <DayTextStyle
           onClick={() => handleDatePick(item)}
           key={item}
+          $disabled={
+            disableDates &&
+            !disableDates?.includes(
+              moment(date).date(item).format("YYYY-MM-DD")
+            )
+          }
           $active={
             (+moment(date).format("D") === item && !period) ||
             (period &&

@@ -19,9 +19,8 @@ export const HeaderContainerStyle = styled.div`
 export const HeaderMenuStyle = styled.ul`
   display: flex;
   justify-content: space-between;
-  max-width: 250px;
+  max-width: 350px;
   flex-grow: 1;
-  fontsize: 20px;
   color: white;
   font-weight: 600;
   padding: 10px 0;

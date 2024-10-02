@@ -3,6 +3,7 @@ import {
   URL_TODO_LIST,
   URL_CREATE_TODO,
   URL_HOME,
+  URL_SCHEDULE,
 } from "../../../constants/clientUrl";
 import { useAuth } from "../../../utils/hooks/useAuth";
 import {
@@ -25,6 +26,10 @@ const pages = [
   {
     name: "Create todo",
     url: URL_CREATE_TODO,
+  },
+  {
+    name: "Schedule",
+    url: URL_SCHEDULE,
   },
 ];
 
