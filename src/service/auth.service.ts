@@ -3,14 +3,18 @@ import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { AuthModel } from "../models/auth.model";
 
+export type AuthResponse = {
+  access_token: string;
+};
+
 class AuthService {
   endpoint: string = "auth";
 
-  register = async (params: AuthModel) =>
-    (await axios.post(`${BASE_URL}${this.endpoint}/register`, params)).data;
+  signUp = async (params: AuthModel) =>
+    (await axios.post<AuthResponse>(`${BASE_URL}${this.endpoint}/register`, params)).data;
 
   signIn = async (params: AuthModel) =>
-    (await axios.post(`${BASE_URL}${this.endpoint}/login`, params)).data;
+    (await axios.post<AuthResponse>(`${BASE_URL}${this.endpoint}/login`, params)).data;
 
   profile = async (token: string | null) =>
     (await axios.get(`${BASE_URL}${this.endpoint}/profile`, {
