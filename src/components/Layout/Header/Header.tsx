@@ -4,14 +4,17 @@ import {
   URL_CREATE_TODO,
   URL_HOME,
   URL_SCHEDULE,
+  URL_CREATE_APPOINTMENT,
 } from "../../../constants/clientUrl";
 import { useAuth } from "../../../utils/hooks/useAuth";
 import {
   HeaderContainerStyle,
   HeaderMenuItemStyle,
   HeaderMenuStyle,
+  HeaderProfileStyle,
   HeaderSignOutStyle,
   HeaderStyle,
+  ProfileUserNameStyle,
 } from "./styles";
 
 const pages = [
@@ -31,30 +34,39 @@ const pages = [
     name: "Schedule",
     url: URL_SCHEDULE,
   },
+  {
+    name: "Create appointment",
+    url: URL_CREATE_APPOINTMENT,
+  },
 ];
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   return (
-    <HeaderStyle>
-      <HeaderContainerStyle>
-        <HeaderMenuStyle>
-          {pages.map((item) => (
-            <HeaderMenuItemStyle
-              key={item.name}
-              $active={location.pathname === item.url ? true : false}
-              onClick={() => navigate(item.url)}
-            >
-              {item.name}
-            </HeaderMenuItemStyle>
-          ))}
-        </HeaderMenuStyle>
-        <HeaderSignOutStyle onClick={signOut}>Sign out</HeaderSignOutStyle>
-      </HeaderContainerStyle>
-    </HeaderStyle>
+    <>
+      <HeaderStyle>
+        <HeaderContainerStyle>
+          <HeaderMenuStyle>
+            {pages.map((item) => (
+              <HeaderMenuItemStyle
+                key={item.name}
+                $active={location.pathname === item.url ? true : false}
+                onClick={() => navigate(item.url)}
+              >
+                {item.name}
+              </HeaderMenuItemStyle>
+            ))}
+          </HeaderMenuStyle>
+          <HeaderProfileStyle>
+            <ProfileUserNameStyle>{user?.username}</ProfileUserNameStyle>
+            <HeaderSignOutStyle onClick={signOut}>Sign out</HeaderSignOutStyle>
+          </HeaderProfileStyle>
+        </HeaderContainerStyle>
+      </HeaderStyle>
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ export const HeaderContainerStyle = styled.div`
 export const HeaderMenuStyle = styled.ul`
   display: flex;
   justify-content: space-between;
-  max-width: 350px;
+  max-width: 500px;
   flex-grow: 1;
   color: white;
   font-weight: 600;
@@ -37,6 +37,15 @@ export const HeaderMenuItemStyle = styled.li<{ $active?: boolean }>`
     css`
       color: black;
     `}
+`;
+
+export const HeaderProfileStyle = styled.div`
+  display: flex;
+`;
+
+export const ProfileUserNameStyle = styled.p`
+  color: white;
+  margin-right: 10px;
 `;
 
 export const HeaderSignOutStyle = styled.p`

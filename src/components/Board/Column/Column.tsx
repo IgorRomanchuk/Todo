@@ -1,5 +1,5 @@
 import { TodoModel, TodosModel } from "../../../models/todos.model";
-import TodoCard from "../TodoCard/TodoCard";
+import TodoCard from "../../Cards/TodoCard";
 import { ContainerStyle } from "./styles";
 import DropArea from "../DropArea/DropArea";
 import TodosService from "../../../service/todos.service";

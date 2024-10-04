@@ -12,6 +12,7 @@ import {
   URL_REGISTER,
   URL_LOGIN,
   URL_SCHEDULE,
+  URL_CREATE_APPOINTMENT
 } from "../../../constants/clientUrl";
 
 const HomePage = lazy(() => import("../../../features/HomePage/HomePage"));
@@ -23,6 +24,7 @@ const TodoList = lazy(() => import("../../../features/TodoList"));
 const Registration = lazy(() => import("../../../features/Registration"));
 const Login = lazy(() => import("../../../features/Login"));
 const Schedule = lazy(() => import("../../../features/Schedule"));
+const CreateAppointment = lazy(() => import("../../../features/CreateAppointment"));
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +84,14 @@ export const router = createBrowserRouter([
         element: (
           <Layout>
             <Schedule  />
+          </Layout>
+        ),
+      },
+      {
+        path: URL_CREATE_APPOINTMENT,
+        element: (
+          <Layout>
+            <CreateAppointment  />
           </Layout>
         ),
       },

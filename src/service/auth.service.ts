@@ -6,11 +6,11 @@ import { AuthModel } from "../models/auth.model";
 class AuthService {
   endpoint: string = "auth";
 
-  register = async (params: AuthModel) =>
-    (await axios.post(`${BASE_URL}${this.endpoint}/register`, params)).data;
+  register = async (body: AuthModel) =>
+    (await axios.post(`${BASE_URL}${this.endpoint}/register`, body)).data;
 
-  signIn = async (params: AuthModel) =>
-    (await axios.post(`${BASE_URL}${this.endpoint}/login`, params)).data;
+  signIn = async (body: AuthModel) =>
+    (await axios.post(`${BASE_URL}${this.endpoint}/login`, body)).data;
 
   profile = async (token: string | null) =>
     (await axios.get(`${BASE_URL}${this.endpoint}/profile`, {
