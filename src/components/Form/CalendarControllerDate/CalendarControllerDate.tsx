@@ -4,15 +4,13 @@ import Calendar from "../../Calendar/Calendar";
 interface Props<T extends FieldValues> {
   name: Path<T>;
   control: Control<T>;
-  disableDates?: any;
-  getAvailableHours?: any;
+  availableDates?: string[];
 }
 
 const CalendarControllerDate = <T extends FieldValues>({
   name,
   control,
-  disableDates,
-  getAvailableHours,
+  availableDates,
 }: Props<T>) => {
   return (
     <Controller
@@ -23,8 +21,7 @@ const CalendarControllerDate = <T extends FieldValues>({
           <Calendar
             date={field.value}
             setDate={field.onChange}
-            disableDates={disableDates}
-            getAvailableHours={getAvailableHours}
+            availableDates={availableDates}
           />
         );
       }}

@@ -1,1 +1,1 @@
-export { Appointments as default } from "./AppointmentCard";
+export { Appointments as default } from "./Appointments";

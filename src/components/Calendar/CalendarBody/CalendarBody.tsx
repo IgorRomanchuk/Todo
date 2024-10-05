@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { CalendarBodyStyle, DayNameTextStyle, DayTextStyle } from "./styles";
 import { dateTypes } from "../../../constants/dateTypes";
 import { getAmountDays } from "../../../utils/getAmountDays";
@@ -11,8 +11,7 @@ type Props = {
   date: string | Moment;
   period?: number[];
   setDate: (e: Moment | string) => void;
-  disableDates?: string[];
-  getAvailableHours?: (e: string) => void;
+  availableDates?: string[];
 };
 
 const CalendarBody = ({
@@ -20,8 +19,7 @@ const CalendarBody = ({
   setPeriod,
   date,
   setDate,
-  disableDates,
-  getAvailableHours,
+  availableDates,
 }: Props) => {
   const handleDatePick = (day: number) => {
     if (period && setPeriod) {
@@ -37,10 +35,6 @@ const CalendarBody = ({
   };
 
   const days = useMemo(() => getAmountDays(moment(date).daysInMonth()), [date]);
-
-  useEffect(() => {
-    if (getAvailableHours) getAvailableHours(moment(date).format('YYYY-MM-DD'))
-  }, [date]);
 
   return (
     <CalendarBodyStyle>
@@ -59,8 +53,8 @@ const CalendarBody = ({
           onClick={() => handleDatePick(item)}
           key={item}
           $disabled={
-            disableDates &&
-            !disableDates?.includes(
+            availableDates &&
+            !availableDates?.includes(
               moment(date).date(item).format("YYYY-MM-DD")
             )
           }

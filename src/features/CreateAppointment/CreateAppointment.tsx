@@ -1,50 +1,52 @@
 import { useEffect, useState } from "react";
-import moment, { Moment } from "moment";
-import AvailableHours from "../../components/AvailableHours";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
 import { useAuth } from "../../utils/hooks/useAuth";
-import { ButtonStyle } from "./styles";
+import { ButtonStyle, CreateAppointmentPageStyle } from "./styles";
 import AppointmentsService from "../../service/appointments.service";
 import ScheduleService from "../../service/schedule.service";
-import { AppointmentModel } from "../../models/appointment.model";
 import { useForm } from "react-hook-form";
 import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
 import ControllerHour from "../../components/Form/ControllerHour";
+import { CreateAppointmentModel } from "../../models/form.model";
+import Loading from "../../components/Loading/Loading";
+import { URL_SCHEDULE } from "../../constants/clientUrl";
 
 export const CreateAppointment = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const [availableDates, setAvailableDates] = useState<string[]>([]);
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // const [date, setDate] = useState<Moment | string>(moment());
-  const [disableDates, setDisableDatse] = useState<string[]>();
-  const [availableHours, setAvailableHours] = useState<string | any>("");
-  // const [appointment, setAppointment] = useState<AppointmentModel[]>([]);
-
-  const getAvailableHours = async (date: string) => {
-    const data = await ScheduleService.getAvailableHours({ date });
-    setAvailableHours(data.hours);
-  };
-
-  const createAppointments = async (data: any) => {
-    const appointment = await AppointmentsService.createAppointments({
-      date: `${moment(data.date).format("YYYY-MM-DD")} ${data.hour}:00`,
-      user_id: user.id,
-    });
-    console.log(appointment);
+  const createAppointments = async (data: CreateAppointmentModel) => {
+    try {
+      setLoading(true);
+      await AppointmentsService.createAppointments({
+        date: `${moment(data.date).format("YYYY-MM-DD")} ${data.hour}:00`,
+        user_id: user.id,
+      });
+      navigate(URL_SCHEDULE);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getAvailableDays = async () => {
     const data = await ScheduleService.getAvailableDays();
-    setDisableDatse(
+    setAvailableDates(
       data.map((item: string) => moment(item).format("YYYY-MM-DD"))
     );
   };
 
   const {
-    register,
     handleSubmit,
+    setValue,
     control,
-    getValues,
     formState: { errors },
-  } = useForm<any>({
+  } = useForm<CreateAppointmentModel>({
     defaultValues: {
       date: moment(),
       hour: "",
@@ -54,40 +56,30 @@ export const CreateAppointment = () => {
 
   useEffect(() => {
     getAvailableDays();
-    // getAppointments();
   }, []);
 
-  // useEffect(() => {
-  //   setSelectedHour("");
-  // }, [availableHours]);
   return (
-    <div style={{width: '220px', margin: '0 auto', paddingTop: '100px'}}>
-      <form onSubmit={handleSubmit((data: any) => createAppointments(data))}>
+    <CreateAppointmentPageStyle>
+      <form onSubmit={handleSubmit((data) => createAppointments(data))}>
         <CalendarControllerDate
           control={control}
           name="date"
-          disableDates={disableDates}
-          getAvailableHours={getAvailableHours}
+          availableDates={availableDates}
         />
-        <ControllerHour control={control} name="hour" getValues={getValues} />
-        {/* <Calendar
-          date={date}
-          setDate={setDate}
-          disableDates={disableDates}
-          getAvailableHours={getAvailableHours}
-        /> */}
-        {/* <AvailableHours
-        // setSelectedHour={setSelectedHour}
-        // selectedHour={selectedHour}
-        hours={
-          availableHours?.length > 3
-            ? availableHours?.split(", ")
-            : availableHours?.trim().split(" ")
-        }
-      /> */}
-        {/* <ButtonStyle onClick={createAppointments}>create appointments</ButtonStyle> */}
-        <ButtonStyle type="submit">create appointments</ButtonStyle>
+        <ControllerHour
+          required={true}
+          error={errors.hour}
+          control={control}
+          setValue={setValue}
+          name="hour"
+        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <ButtonStyle type="submit">create appointments</ButtonStyle>
+        )}
+        {error && <p>{error}</p>}
       </form>
-    </div>
+    </CreateAppointmentPageStyle>
   );
 };
