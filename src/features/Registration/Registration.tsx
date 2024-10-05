@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Input from "../../components/Form/Input/Input";
 import {
   ButtonStyle,
@@ -7,23 +7,18 @@ import {
   TextAccountStyle,
   TitleStyle,
 } from "./styles";
-import AuthService from "../../service/auth.service";
 import { AuthModel } from "../../models/auth.model";
-import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { URL_LOGIN } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";
 
 export const Registration = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  const { getUser } = useAuth();
+  const { signUp, loading, error } = useAuth();
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<AuthModel>({
@@ -34,24 +29,10 @@ export const Registration = () => {
     },
   });
 
-  const registrate: SubmitHandler<AuthModel> = async (data) => {
-    try {
-      setLoading(true);
-      const token: string = (await AuthService.register(data)).access_token;
-      AuthService.setToken(token);
-      await getUser();
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-      reset();
-    }
-  };
-
   return (
     <ContainerStyle>
       <TitleStyle>Sign up</TitleStyle>
-      <form onSubmit={handleSubmit((data) => registrate(data))}>
+      <form onSubmit={handleSubmit((data) => signUp(data))}>
         <FormBoxStyle>
           <Input
             name="telegram_id"

@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Input from "../../components/Form/Input/Input";
 import {
   ButtonStyle,
@@ -6,20 +6,15 @@ import {
   FormBoxStyle,
   TitleStyle,
 } from "./styles";
-import AuthService from "../../service/auth.service";
-import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { AuthModel } from "../../models/auth.model";
 import { useAuth } from "../../utils/hooks/useAuth";
 
 export const Login = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const { getUser } = useAuth();
-  
+  const { signIn, loading, error } = useAuth();
+
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<AuthModel>({
@@ -29,20 +24,6 @@ export const Login = () => {
       password: "",
     },
   });
-
-  const signIn: SubmitHandler<AuthModel> = async (data) => {
-    try {
-      setLoading(true);
-      const token: string = (await AuthService.signIn(data)).access_token;
-      AuthService.setToken(token)
-      await getUser()
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-      reset();
-    }
-  };
 
   return (
     <ContainerStyle>
