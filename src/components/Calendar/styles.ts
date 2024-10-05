@@ -7,6 +7,7 @@ export const CalendarStyle = styled.div`
   border-radius: 10px;
   padding: 10px;
   background-color: white;
+  width: 196px;
 `;
 
 export const ButtonStyle = styled.button`

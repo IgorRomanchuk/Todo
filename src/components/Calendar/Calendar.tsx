@@ -8,8 +8,9 @@ type Props = {
   period?: number[];
   date: Moment | string;
   setDate: (e: Moment | string) => void;
+  availableDates?: string[]
 };
-const Calendar = ({ setPeriod, period, date, setDate }: Props) => {
+const Calendar = ({ setPeriod, period, date, setDate, availableDates }: Props) => {
   return (
     <CalendarStyle>
       <div>
@@ -19,6 +20,7 @@ const Calendar = ({ setPeriod, period, date, setDate }: Props) => {
           period={period}
           date={date}
           setPeriod={setPeriod}
+          availableDates={availableDates}
         />
         {setPeriod && (
           <ButtonStyle

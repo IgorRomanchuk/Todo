@@ -10,7 +10,7 @@ type Props = {
   setDraggableCard: (e: string | null) => void;
 };
 
-const TodoList = ({ todo, setTodoList, setDraggableCard }: Props) => {
+export const TodoCard = ({ todo, setTodoList, setDraggableCard }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
 
   return (
@@ -41,5 +41,3 @@ const TodoList = ({ todo, setTodoList, setDraggableCard }: Props) => {
     </ContainerStyle>
   );
 };
-
-export default TodoList;

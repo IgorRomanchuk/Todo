@@ -5,6 +5,7 @@ export const CalendarHeaderStyle = styled.div`
   justify-content: space-between;
   padding-bottom: 5px;
   border-bottom: 2px solid black;
+  text-align: center;
 `;
 
 export const CalendarHeaderTextStyle = styled.p`

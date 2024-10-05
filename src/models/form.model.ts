@@ -7,3 +7,9 @@ export interface CreateTodoModel {
   date: Moment | string,
   id: string,
 }
+
+export interface CreateAppointmentModel {
+  date: string | Moment;
+  hour: string;
+  user_id: number;
+}

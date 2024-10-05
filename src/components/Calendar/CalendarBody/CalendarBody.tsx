@@ -11,10 +11,16 @@ type Props = {
   date: string | Moment;
   period?: number[];
   setDate: (e: Moment | string) => void;
+  availableDates?: string[];
 };
 
-const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
-  
+const CalendarBody = ({
+  period,
+  setPeriod,
+  date,
+  setDate,
+  availableDates,
+}: Props) => {
   const handleDatePick = (day: number) => {
     if (period && setPeriod) {
       if (!period.length) return setPeriod([day]);
@@ -29,6 +35,7 @@ const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
   };
 
   const days = useMemo(() => getAmountDays(moment(date).daysInMonth()), [date]);
+
   return (
     <CalendarBodyStyle>
       {weekDays.map((item) => (
@@ -45,6 +52,12 @@ const CalendarBody = ({ period, setPeriod, date, setDate }: Props) => {
         <DayTextStyle
           onClick={() => handleDatePick(item)}
           key={item}
+          $disabled={
+            availableDates &&
+            !availableDates?.includes(
+              moment(date).date(item).format("YYYY-MM-DD")
+            )
+          }
           $active={
             (+moment(date).format("D") === item && !period) ||
             (period &&
