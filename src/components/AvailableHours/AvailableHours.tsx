@@ -12,12 +12,16 @@ export const AvailableHours = ({ setHour, value, selectedDate }: Props) => {
   const [availableHours, setAvailableHours] = useState([]);
 
   const getAvailableHours = async (date: string) => {
-    const data = await ScheduleService.getAvailableHours({ date });
-    setAvailableHours(
-      data?.hours.length > 3
-        ? data?.hours.split(", ")
-        : data?.hours.trim().split(" ")
-    );
+    try {
+      const data = await ScheduleService.getAvailableHours({ date });
+      setAvailableHours(
+        data?.hours.length > 3
+          ? data?.hours.split(", ")
+          : data?.hours.trim().split(" ")
+      );
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   useEffect(() => {
