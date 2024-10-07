@@ -7,6 +7,16 @@ export const SchedulePageStyle = styled.div`
   align-items: center;
 `;
 
+export const ContainerStyle = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 20px;
+`;
+
+export const CalendarContainerStyle = styled.div`
+  display: inline-block;
+`;
+
 export const TitleStyle = styled.h1`
   font-size: 2em;
   color: white;
