@@ -8,6 +8,7 @@ import {
 } from "../../utils/getCalendarAppointments";
 import SwitchWeek from "../SwitchWeek";
 import {
+  ActiveDayStyle,
   ContainerStyle,
   SwitchWeekContainerStyle,
   TableBodyStyle,
@@ -16,6 +17,7 @@ import {
   TdStyle,
   ThStyle,
 } from "./styles";
+import { dateTypes } from "../../constants/dateTypes";
 
 type Props = {
   date: Moment | string;
@@ -44,9 +46,10 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     const currentHour = moment().hour();
     const currentRow = tableBodyRef.current?.querySelector(
       `tr:nth-child(${currentHour + 1})`
-    );
+    ) as HTMLElement;
     if (currentRow) {
       currentRow.scrollIntoView({ behavior: "smooth", block: "center" });
+      currentRow.style.borderBottom = "3px solid red";
     }
   }, [tableBody]);
 
@@ -74,8 +77,15 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
             <ThStyle></ThStyle>
             {tableHead.map((day, i) => (
               <ThStyle key={i}>
-                <p>{moment(day.date, "YYYY-MM-DD").format("dd")}</p>
-                <p>{moment(day.date, "YYYY-MM-DD").format("D")}</p>
+                <p>{moment(day.date, dateTypes.date).format("dd")}</p>
+                <ActiveDayStyle
+                  $active={
+                    moment(day.date).format(dateTypes.date) ===
+                    moment().format(dateTypes.date)
+                  }
+                >
+                  {moment(day.date, dateTypes.date).format("D")}
+                </ActiveDayStyle>
               </ThStyle>
             ))}
           </tr>

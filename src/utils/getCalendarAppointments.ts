@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Moment } from "moment";
 import { AppointmentModel } from "../models/appointment.model";
+import { dateTypes } from "../constants/dateTypes";
 
 export type TableBody = (AppointmentModel | { date: null })[];
 
@@ -13,7 +14,7 @@ export function getAppointmentsTableConfiguration(
   let tableBody: TableBody[] = [];
   for (let i = 0; i <= 6; i++) {
     const day = moment(date).week(weekNumber).day(i);
-    tableHead.push({ date: day.format("YYYY-MM-DD") });
+    tableHead.push({ date: day.format(dateTypes.date) });
   }
 
   for (let i = 0; i < 24; i++) {
@@ -21,8 +22,8 @@ export function getAppointmentsTableConfiguration(
     for (let j = 0; j < tableHead.length; j++) {
       const appoinment = appointments.find(
         (item) =>
-          moment(item.date).format("YYYY-MM-DD") ===
-            moment(tableHead[j].date).format("YYYY-MM-DD") &&
+          moment(item.date).format(dateTypes.date) ===
+            moment(tableHead[j].date).format(dateTypes.date) &&
           +moment(item.date).format("H") === i
       );
       if (appoinment) {

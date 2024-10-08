@@ -11,6 +11,7 @@ import ControllerHour from "../../components/Form/ControllerHour";
 import { CreateAppointmentModel } from "../../models/form.model";
 import Loading from "../../components/Loading/Loading";
 import { URL_SCHEDULE } from "../../constants/clientUrl";
+import { dateTypes } from "../../constants/dateTypes";
 
 export const CreateAppointment = () => {
   const { user } = useAuth();
@@ -23,7 +24,7 @@ export const CreateAppointment = () => {
     try {
       setLoading(true);
       await AppointmentsService.createAppointments({
-        date: `${moment(data.date).format("YYYY-MM-DD")} ${data.hour}:00`,
+        date: `${moment(data.date).format(dateTypes.date)} ${data.hour}:00`,
         user_id: user.id,
       });
       navigate(URL_SCHEDULE);
@@ -37,7 +38,7 @@ export const CreateAppointment = () => {
   const getAvailableDays = async () => {
     const data = await ScheduleService.getAvailableDays();
     setAvailableDates(
-      data.map((item: string) => moment(item).format("YYYY-MM-DD"))
+      data.map((item: string) => moment(item).format(dateTypes.date))
     );
   };
 

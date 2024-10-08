@@ -17,16 +17,16 @@ type Props = {
 
 const CalendarHeader = ({ setDate, date }: Props) => {
   const changeYearToRight = () =>
-    setDate(moment(date, "YYYY-MM-DD").add(1, "y"));
+    setDate(moment(date, dateTypes.date).add(1, "y"));
 
   const changeYearToLeft = () =>
-    setDate(moment(date, "YYYY-MM-DD").subtract(1, "y"));
+    setDate(moment(date, dateTypes.date).subtract(1, "y"));
 
   const changeMonthToRight = () =>
-    setDate(moment(date, "YYYY-MM-DD").add(1, "M"));
+    setDate(moment(date, dateTypes.date).add(1, "M"));
 
   const changeMonthToLeft = () =>
-    setDate(moment(date, "YYYY-MM-DD").subtract(1, "M"));
+    setDate(moment(date, dateTypes.date).subtract(1, "M"));
 
   return (
     <CalendarHeaderStyle>

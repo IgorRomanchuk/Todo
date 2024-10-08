@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ContainerStyle = styled.div`
   position: relative;
@@ -10,8 +10,6 @@ export const CardStyle = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
   p {
     font-size: 10px;
   }
@@ -61,4 +59,20 @@ export const TdStyle = styled.td`
   text-align: center;
   background-color: white;
   font-size: 10px;
+`;
+
+export const ActiveDayStyle = styled.p<{
+  $active?: boolean;
+}>`
+  color: black;
+    ${(props) =>
+      props.$active &&
+      css`
+        background-color: black;
+        border-radius: 50%;
+        color: white;
+        height: 20px;
+        width: 20px;
+        margin: 0 auto;
+      `};
 `;

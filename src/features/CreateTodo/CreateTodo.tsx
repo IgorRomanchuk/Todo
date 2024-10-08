@@ -10,6 +10,7 @@ import CalendarControllerDate from "../../components/Form/CalendarControllerDate
 import { useAuth } from "../../utils/hooks/useAuth";
 import { CreateTodoModel } from "../../models/form.model";
 import { TodosModel } from "../../models/todos.model";
+import { dateTypes } from "../../constants/dateTypes";
 
 const CreateTodo = () => {
   const { user } = useAuth();
@@ -25,7 +26,7 @@ const CreateTodo = () => {
       title: "",
       description: "",
       status: "todo",
-      date: moment().format("YYYY-MM-DD"),
+      date: moment().format(dateTypes.date),
       id: new Date().toISOString(),
     },
   });

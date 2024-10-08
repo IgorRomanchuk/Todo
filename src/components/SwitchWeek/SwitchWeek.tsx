@@ -12,12 +12,12 @@ type Props = {
 export const SwitchWeek = ({ date, setDate }: Props) => {
   const changeWeekToRight = () => {
     let numberWeek = moment(date).week();
-    setDate(moment(date, "YYYY-MM-DD").week(++numberWeek));
+    setDate(moment(date, dateTypes.date).week(++numberWeek));
   };
 
   const changeWeekToLeft = () => {
     let numberWeek = moment(date).week();
-    setDate(moment(date, "YYYY-MM-DD").week(--numberWeek));
+    setDate(moment(date, dateTypes.date).week(--numberWeek));
   };
 
   return (
