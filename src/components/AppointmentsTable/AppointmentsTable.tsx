@@ -57,7 +57,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
       });
       currentRow.style.borderBottom = "3px solid red";
     }
-  }, [tableBody]);
+  }, [appointments]);
 
   useEffect(() => {
     getAppointments();
