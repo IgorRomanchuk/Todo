@@ -26,9 +26,16 @@ export const TableStyle = styled.table`
 `;
 
 export const TableHeadStyle = styled.thead`
-  width: calc(100% - 17px);
+  width: calc(100% - 8px);
   display: table;
   table-layout: fixed;
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f0f0f0;
+  }
 `;
 
 export const TableBodyStyle = styled.tbody`
@@ -36,6 +43,17 @@ export const TableBodyStyle = styled.tbody`
   height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+
   tr {
     display: table;
     width: 100%;
@@ -65,14 +83,14 @@ export const ActiveDayStyle = styled.p<{
   $active?: boolean;
 }>`
   color: black;
-    ${(props) =>
-      props.$active &&
-      css`
-        background-color: black;
-        border-radius: 50%;
-        color: white;
-        height: 20px;
-        width: 20px;
-        margin: 0 auto;
-      `};
+  ${(props) =>
+    props.$active &&
+    css`
+      background-color: black;
+      border-radius: 50%;
+      color: white;
+      height: 20px;
+      width: 20px;
+      margin: 0 auto;
+    `};
 `;

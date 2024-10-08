@@ -66,6 +66,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     setTableHead(tableHead);
     setTableBody(tableBody);
   }, [date, appointments]);
+  
   return (
     <ContainerStyle>
       <SwitchWeekContainerStyle>
