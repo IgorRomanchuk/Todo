@@ -11,10 +11,17 @@ export const ContainerStyle = styled.div`
   width: 100%;
   display: flex;
   gap: 20px;
+  @media (max-width: 950px) {
+    flex-direction: column;
+  }
 `;
 
 export const CalendarContainerStyle = styled.div`
   display: inline-block;
+  @media (max-width: 950px) {
+    margin: 0 auto;
+    margin-bottom: 20px
+  }
 `;
 
 export const TitleStyle = styled.h1`

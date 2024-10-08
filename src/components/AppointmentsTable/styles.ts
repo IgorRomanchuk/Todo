@@ -4,17 +4,6 @@ export const ContainerStyle = styled.div`
   position: relative;
 `;
 
-export const CardStyle = styled.div`
-  padding: 8px 12px;
-  height: 58px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  p {
-    font-size: 10px;
-  }
-`;
-
 export const SwitchWeekContainerStyle = styled.div`
   position: absolute;
   top: -5%;
@@ -23,6 +12,9 @@ export const SwitchWeekContainerStyle = styled.div`
 export const TableStyle = styled.table`
   width: 100%;
   border-collapse: collapse;
+  @media (max-width: 950px) {
+    margin-bottom: 15px;
+  }
 `;
 
 export const TableHeadStyle = styled.thead`
@@ -40,10 +32,10 @@ export const TableHeadStyle = styled.thead`
 
 export const TableBodyStyle = styled.tbody`
   display: block;
-  height: 500px;
+  max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  width: 100%;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -77,6 +69,11 @@ export const TdStyle = styled.td`
   text-align: center;
   background-color: white;
   font-size: 10px;
+
+  @media (max-width: 950px) {
+    font-size: 8px;
+    word-break: break-all;
+  }
 `;
 
 export const ActiveDayStyle = styled.p<{

@@ -47,8 +47,14 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     const currentRow = tableBodyRef.current?.querySelector(
       `tr:nth-child(${currentHour + 1})`
     ) as HTMLElement;
-    if (currentRow) {
-      currentRow.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    if (currentRow && tableBodyRef.current) {
+      const tbody = tableBodyRef.current;
+      const rowPosition = currentRow.offsetTop;
+      tbody.scrollTo({
+        top: rowPosition - tbody.clientHeight / 2,
+        behavior: "smooth",
+      });
       currentRow.style.borderBottom = "3px solid red";
     }
   }, [tableBody]);
@@ -66,7 +72,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     setTableHead(tableHead);
     setTableBody(tableBody);
   }, [date, appointments]);
-  
+
   return (
     <ContainerStyle>
       <SwitchWeekContainerStyle>

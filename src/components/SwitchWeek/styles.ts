@@ -11,9 +11,12 @@ export const CalendarHeaderStyle = styled.div`
 export const DateTextStyle = styled.p`
   font-size: 15px;
   width: 115px;
+  color: white;
 `;
 
 export const ImageStyle = styled.img`
   width: 20px;
   height: 20px;
+  background-color: white;
+  margin-left: 9px
 `;
