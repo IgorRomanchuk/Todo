@@ -55,7 +55,7 @@ const CalendarBody = ({
           $disabled={
             availableDates &&
             !availableDates?.includes(
-              moment(date).date(item).format("YYYY-MM-DD")
+              moment(date).date(item).format(dateTypes.date)
             )
           }
           $active={

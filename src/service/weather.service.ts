@@ -14,7 +14,7 @@ class WeatherService {
       params: {
         key,
         q: "Гродно",
-        dt: moment(`${date}-${period[0]}`, "YYYY-MM-DD").format(dateTypes.date),
+        dt: moment(`${date}-${period[0]}`, dateTypes.date).format(dateTypes.date),
       },
     });
 }

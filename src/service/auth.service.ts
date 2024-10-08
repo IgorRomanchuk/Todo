@@ -2,7 +2,7 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { AuthModel } from "../models/auth.model";
-import { AuthResponse } from "../utils/dto/authorization";
+import { AuthResponse } from "../models/auth.model";
 
 class AuthService {
   endpoint: string = "auth";
