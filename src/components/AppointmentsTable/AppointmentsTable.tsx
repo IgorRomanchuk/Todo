@@ -22,10 +22,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
   const [tableHead, setTableHead] = useState<{ date: string }[]>([]);
   const [tableBody, setTableBody] = useState<TableBodyModel[]>([]);
 
-  const getAppointments = async (
-    date: string | null = moment().format(dateTypes.date),
-    period: string = "month"
-  ) => {
+  const getAppointments = async (date: string, period: string = "month") => {
     try {
       const data = await AppointmentsService.getAppointments({
         date,
@@ -43,8 +40,8 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
   };
 
   useEffect(() => {
-    getAppointments();
-  }, []);
+    getAppointments(moment(date).format(dateTypes.date));
+  }, [moment(date).format("YYYY-MM")]);
 
   useEffect(() => {
     const { tableBody, tableHead } = getAppointmentsTableConfiguration(
