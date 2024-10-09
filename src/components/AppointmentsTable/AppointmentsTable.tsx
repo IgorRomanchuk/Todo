@@ -20,21 +20,25 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
   >([]);
   const [tableHead, setTableHead] = useState<{ date: string }[]>([]);
   const [tableBody, setTableBody] = useState<TableBodyModel[]>([]);
-  
+
   const getAppointments = async (
     date: string | null = null,
     period: string = "month"
   ) => {
-    const data = await AppointmentsService.getAppointments({
-      date,
-      period,
-    });
-    
-    setAppointments(
-      Object.entries(
-        Object.groupBy(data, ({ date }: AppointmentModel) => date)
-      ).reverse()
-    );
+    try {
+      const data = await AppointmentsService.getAppointments({
+        date,
+        period,
+      });
+
+      setAppointments(
+        Object.entries(
+          Object.groupBy(data, ({ date }: AppointmentModel) => date)
+        ).reverse()
+      );
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   useEffect(() => {

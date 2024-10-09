@@ -19,11 +19,10 @@ const Board = ({ period, date }: Props) => {
   const [draggableCard, setDraggableCard] = useState<null | string>(null);
 
   useEffect(() => {
-    setTodoList(
-      TodosService.getTodos().filter(
-        (item: TodosModel) => item.id === user.id
-      )[0].todos
-    );
+    const todos = TodosService.getTodos().filter(
+      (item: TodosModel) => item.id === user.id
+    )[0]?.todos;
+    setTodoList(todos ? todos : []);
   }, [user]);
 
   return (
