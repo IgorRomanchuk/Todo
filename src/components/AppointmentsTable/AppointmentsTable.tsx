@@ -1,23 +1,13 @@
 import moment, { Moment } from "moment";
 import { AppointmentModel } from "../../models/appointment.model";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import AppointmentsService from "../../service/appointments.service";
-import {
-  getAppointmentsTableConfiguration,
-  TableBody,
-} from "../../utils/getCalendarAppointments";
+import { getAppointmentsTableConfiguration } from "../../utils/getCalendarAppointments";
 import SwitchWeek from "../SwitchWeek";
-import {
-  ActiveDayStyle,
-  ContainerStyle,
-  SwitchWeekContainerStyle,
-  TableBodyStyle,
-  TableHeadStyle,
-  TableStyle,
-  TdStyle,
-  ThStyle,
-} from "./styles";
-import { dateTypes } from "../../constants/dateTypes";
+import { ContainerStyle, SwitchWeekContainerStyle, TableStyle } from "./styles";
+import { TableBodyModel } from "../../utils/getCalendarAppointments";
+import TableHead from "./TableHead";
+import TableBody from "./TableBody";
 
 type Props = {
   date: Moment | string;
@@ -25,39 +15,27 @@ type Props = {
 };
 
 export const AppointmentsTable = ({ date, setDate }: Props) => {
-  const [appointments, setAppointments] = useState<AppointmentModel[]>([]);
+  const [appointments, setAppointments] = useState<
+    [string, AppointmentModel[] | undefined][]
+  >([]);
   const [tableHead, setTableHead] = useState<{ date: string }[]>([]);
-  const [tableBody, setTableBody] = useState<TableBody[]>([]);
-
-  const tableBodyRef = useRef<HTMLTableSectionElement>(null);
-
+  const [tableBody, setTableBody] = useState<TableBodyModel[]>([]);
+  
   const getAppointments = async (
     date: string | null = null,
     period: string = "month"
   ) => {
-    const data: AppointmentModel[] = await AppointmentsService.getAppointments({
+    const data = await AppointmentsService.getAppointments({
       date,
       period,
     });
-    setAppointments(data.sort((a, b) => +moment(a.date) - +moment(b.date)));
+    
+    setAppointments(
+      Object.entries(
+        Object.groupBy(data, ({ date }: AppointmentModel) => date)
+      ).reverse()
+    );
   };
-
-  useEffect(() => {
-    const currentHour = moment().hour();
-    const currentRow = tableBodyRef.current?.querySelector(
-      `tr:nth-child(${currentHour + 1})`
-    ) as HTMLElement;
-
-    if (currentRow && tableBodyRef.current) {
-      const tbody = tableBodyRef.current;
-      const rowPosition = currentRow.offsetTop;
-      tbody.scrollTo({
-        top: rowPosition - tbody.clientHeight / 2,
-        behavior: "smooth",
-      });
-      currentRow.style.borderBottom = "3px solid red";
-    }
-  }, [appointments]);
 
   useEffect(() => {
     getAppointments();
@@ -79,39 +57,8 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
         <SwitchWeek date={date} setDate={setDate} />
       </SwitchWeekContainerStyle>
       <TableStyle>
-        <TableHeadStyle>
-          <tr>
-            <ThStyle></ThStyle>
-            {tableHead.map((day, i) => (
-              <ThStyle key={i}>
-                <p>{moment(day.date, dateTypes.date).format("dd")}</p>
-                <ActiveDayStyle
-                  $active={
-                    moment(day.date).format(dateTypes.date) ===
-                    moment().format(dateTypes.date)
-                  }
-                >
-                  {moment(day.date, dateTypes.date).format("D")}
-                </ActiveDayStyle>
-              </ThStyle>
-            ))}
-          </tr>
-        </TableHeadStyle>
-        <TableBodyStyle ref={tableBodyRef}>
-          {tableBody.map((item, i: number) => (
-            <tr key={i}>
-              <ThStyle>{i}:00</ThStyle>
-              {item.map((day, i) => (
-                <TdStyle key={i}>
-                  {day.date && <p>Appointment fro {day?.user.username}</p>}
-                  {day.date && (
-                    <p>{moment(day?.date).format("DD-MM-YYYY HH:mm")}</p>
-                  )}
-                </TdStyle>
-              ))}
-            </tr>
-          ))}
-        </TableBodyStyle>
+        <TableHead tableHead={tableHead} />
+        <TableBody tableBody={tableBody} appointments={appointments} />
       </TableStyle>
     </ContainerStyle>
   );
