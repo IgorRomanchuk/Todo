@@ -34,21 +34,17 @@ export const TableBody = ({ appointments, tableBody }: Props) => {
       {tableBody.map((item, i) => (
         <tr key={i}>
           <ThStyle>{i}:00</ThStyle>
-          {item.map((day, i) => {
-            if (day)
-              return (
-                <TdStyle key={i}>
-                  {day.map((appointment, i) => (
-                    <p key={i}>{appointment.user.username}</p>
-                  ))}
-                </TdStyle>
-              );
-            return (
-              <TdStyle key={i}>
+          {item.map((day, i) => (
+            <TdStyle key={i}>
+              {!!day?.length ? (
+                day.map((appointment, i) => (
+                  <p key={i}>{appointment.user.username}</p>
+                ))
+              ) : (
                 <p></p>
-              </TdStyle>
-            );
-          })}
+              )}
+            </TdStyle>
+          ))}
         </tr>
       ))}
     </TableBodyStyle>
