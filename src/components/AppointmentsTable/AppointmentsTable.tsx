@@ -40,7 +40,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
   };
 
   useEffect(() => {
-    getAppointments(moment(date).format(dateTypes.date));
+    getAppointments(moment().format(dateTypes.date));
   }, [moment(date).format("YYYY-MM")]);
 
   useEffect(() => {

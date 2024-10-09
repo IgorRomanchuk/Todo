@@ -24,7 +24,6 @@ export const TableBodyStyle = styled.tbody`
 `;
 
 export const TdStyle = styled.td`
-  height: 40px;
   padding: 10px;
   border: 1px solid #000;
   text-align: center;
@@ -40,7 +39,6 @@ export const TdStyle = styled.td`
 export const ThStyle = styled.th`
   background-color: #f0f0f0;
   font-size: 14px;
-  height: 40px;
   padding: 10px;
   border: 1px solid #000;
   text-align: center;
