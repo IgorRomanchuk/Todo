@@ -8,6 +8,7 @@ import { ContainerStyle, SwitchWeekContainerStyle, TableStyle } from "./styles";
 import { TableBodyModel } from "../../utils/getCalendarAppointments";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
+import { dateTypes } from "../../constants/dateTypes";
 
 type Props = {
   date: Moment | string;
@@ -22,7 +23,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
   const [tableBody, setTableBody] = useState<TableBodyModel[]>([]);
 
   const getAppointments = async (
-    date: string | null = null,
+    date: string | null = moment().format(dateTypes.date),
     period: string = "month"
   ) => {
     try {
