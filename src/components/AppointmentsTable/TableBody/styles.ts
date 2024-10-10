@@ -23,19 +23,6 @@ export const TableBodyStyle = styled.tbody`
   }
 `;
 
-export const TdStyle = styled.td`
-  padding: 10px;
-  border: 1px solid #000;
-  text-align: center;
-  background-color: white;
-  font-size: 10px;
-
-  @media (max-width: 950px) {
-    font-size: 8px;
-    word-break: break-all;
-  }
-`;
-
 export const ThStyle = styled.th`
   background-color: #f0f0f0;
   font-size: 14px;

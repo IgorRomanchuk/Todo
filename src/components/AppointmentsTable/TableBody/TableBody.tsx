@@ -1,16 +1,27 @@
 import moment from "moment";
-import { useEffect, useRef } from "react";
-import { TableBodyStyle, TdStyle, ThStyle } from "./styles";
-import { AppointmentModel } from "../../../models/appointment.model";
+import { useEffect, useRef, useState } from "react";
+import {
+  TableBodyStyle,
+  ThStyle,
+} from "./styles";
 import { TableBodyModel } from "../../../utils/getCalendarAppointments";
+import AppointmentsModal from "../../Modals/AppointmentsModal";
+import { AppointmentModel } from "../../../models/appointment.model";
+import TableDataCell from "../TableDataCell";
 
 type Props = {
-  appointments: [string, AppointmentModel[] | undefined][];
   tableBody: TableBodyModel[];
 };
 
-export const TableBody = ({ appointments, tableBody }: Props) => {
+export const TableBody = ({ tableBody }: Props) => {
+  const [modalContent, setModalContent] = useState<AppointmentModel[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
+
+  const handleOpenModal = (day: AppointmentModel[]) => {
+    setModalContent(day);
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     const currentHour = moment().hour();
@@ -27,26 +38,23 @@ export const TableBody = ({ appointments, tableBody }: Props) => {
       });
       currentRow.style.borderBottom = "3px solid red";
     }
-  }, [appointments]);
+  }, [tableBody]);
 
   return (
-    <TableBodyStyle ref={tableBodyRef}>
-      {tableBody.map((item, i) => (
-        <tr key={i}>
-          <ThStyle>{i}:00</ThStyle>
-          {item.map((day, i) => (
-            <TdStyle key={i}>
-              {!!day?.length ? (
-                day.map((appointment, i) => (
-                  <p key={i}>{appointment.user.username}</p>
-                ))
-              ) : (
-                <p></p>
-              )}
-            </TdStyle>
-          ))}
-        </tr>
-      ))}
-    </TableBodyStyle>
+    <>
+      <TableBodyStyle ref={tableBodyRef}>
+        {tableBody.map((item, i) => (
+          <tr key={i}>
+            <ThStyle>{i}:00</ThStyle>
+            {item.map((day, i) => (
+              <TableDataCell day={day} handleOpenModal={handleOpenModal}/>
+            ))}
+          </tr>
+        ))}
+      </TableBodyStyle>
+      {isOpen && (
+        <AppointmentsModal modalContent={modalContent} setIsOpen={setIsOpen} />
+      )}
+    </>
   );
 };
