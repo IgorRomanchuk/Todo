@@ -13,7 +13,6 @@ export const TdContentStyle = styled.div`
   overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 export const TdStyle = styled.td<{
