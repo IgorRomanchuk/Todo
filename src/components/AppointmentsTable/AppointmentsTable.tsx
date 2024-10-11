@@ -1,6 +1,6 @@
 import moment, { Moment } from "moment";
 import { AppointmentModel } from "../../models/appointment.model";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AppointmentsService from "../../service/appointments.service";
 import { getAppointmentsTableConfiguration } from "../../utils/getCalendarAppointments";
 import SwitchWeek from "../SwitchWeek";
@@ -39,9 +39,11 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     }
   };
 
+  const formattedDate = useMemo(() => moment(date).format("YYYY-MM"), [date])
+
   useEffect(() => {
     getAppointments(moment().format(dateTypes.date));
-  }, [moment(date).format("YYYY-MM")]);
+  }, [formattedDate]);
 
   useEffect(() => {
     const { tableBody, tableHead } = getAppointmentsTableConfiguration(

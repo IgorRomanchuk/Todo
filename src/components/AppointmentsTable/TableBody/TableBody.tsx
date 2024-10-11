@@ -47,7 +47,7 @@ export const TableBody = ({ tableBody }: Props) => {
           <tr key={i}>
             <ThStyle>{i}:00</ThStyle>
             {item.map((day, i) => (
-              <TableDataCell day={day} handleOpenModal={handleOpenModal}/>
+              <TableDataCell day={day} handleOpenModal={handleOpenModal} key={i}/>
             ))}
           </tr>
         ))}
