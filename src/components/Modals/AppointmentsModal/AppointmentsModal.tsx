@@ -17,7 +17,7 @@ export const AppointmentsModal = ({ modalContent, setIsOpen }: Props) => {
       <ContantStlye>
         <ImageStyle src={closModal} alt="close" onClick={handleClose} />
         {modalContent.map((item) => (
-          <p>{item.user.username}</p>
+          <p key={item.id}>{item.user.username}</p>
         ))}
       </ContantStlye>
     </ContainerStyle>
