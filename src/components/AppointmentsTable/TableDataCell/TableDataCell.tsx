@@ -11,7 +11,7 @@ export const TableDataCell = ({ day, handleOpenModal }: Props) => {
   return (
     <TdStyle
       $pointer={!!day && day.length > 2}
-      onClick={() => day && day.length > 1 && handleOpenModal(day)}
+      onClick={() => day && day.length > 2 && handleOpenModal(day)}
     >
       <TdContentStyle>
         <ImageStyle src={openModal} alt="open" />
