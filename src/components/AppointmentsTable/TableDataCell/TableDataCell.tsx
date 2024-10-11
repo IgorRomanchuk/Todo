@@ -10,7 +10,7 @@ type Props = {
 export const TableDataCell = ({ day, handleOpenModal }: Props) => {
   return (
     <TdStyle
-      $pointer={!!day && day.length > 1}
+      $pointer={!!day && day.length > 2}
       onClick={() => day && day.length > 1 && handleOpenModal(day)}
     >
       <TdContentStyle>

@@ -9,7 +9,7 @@ export const ImageStyle = styled.img`
 `;
 
 export const TdContentStyle = styled.div`
-  height: 20px;
+  height: 25px;
   overflow: hidden;
   display: flex;
   justify-content: center;
