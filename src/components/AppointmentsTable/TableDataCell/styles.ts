@@ -31,6 +31,10 @@ export const TdStyle = styled.td<{
   text-align: center;
   background-color: white;
   font-size: 10px;
+  &:hover div {
+    opacity: 1;
+  }
+
   ${(props) =>
     props.$pointer &&
     css`

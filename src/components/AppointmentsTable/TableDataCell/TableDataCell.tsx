@@ -1,18 +1,15 @@
 import openModal from "../../../assets/img/open-modal.svg";
 import { AppointmentModel } from "../../../models/appointment.model";
 import { ImageStyle, TdContentStyle, TdStyle } from "./styles";
+import Tooltip from "./Tooltip";
 
 type Props = {
   day: null | AppointmentModel[];
-  handleOpenModal: (e: AppointmentModel[]) => void;
 };
 
-export const TableDataCell = ({ day, handleOpenModal }: Props) => {
+export const TableDataCell = ({ day }: Props) => {
   return (
-    <TdStyle
-      $pointer={!!day && day.length > 2}
-      onClick={() => day && day.length > 2 && handleOpenModal(day)}
-    >
+    <TdStyle $pointer={!!day && day.length > 2}>
       <TdContentStyle $tooltip={!!day && day.length > 2}>
         <ImageStyle src={openModal} alt="open" />
         <div>
@@ -21,6 +18,7 @@ export const TableDataCell = ({ day, handleOpenModal }: Props) => {
               <p key={i}>{appointment.user.username}</p>
             ))}
         </div>
+        <Tooltip day={day} />
       </TdContentStyle>
     </TdStyle>
   );

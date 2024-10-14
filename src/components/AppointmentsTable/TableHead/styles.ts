@@ -4,13 +4,9 @@ export const TableHeadStyle = styled.thead`
   width: calc(100% - 8px);
   display: table;
   table-layout: fixed;
-
-  th {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: #f0f0f0;
-  }
+  background-color: #f0f0f0;
+  position: sticky;
+  z-index: 10;
 `;
 
 export const ActiveDayStyle = styled.p<{
