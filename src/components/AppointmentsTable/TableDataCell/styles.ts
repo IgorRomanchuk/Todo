@@ -8,11 +8,19 @@ export const ImageStyle = styled.img`
   width: 10px;
 `;
 
-export const TdContentStyle = styled.div`
+export const TdContentStyle = styled.div<{
+  $tooltip?: boolean;
+}>`
   height: 25px;
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
+  ${(props) =>
+    props.$tooltip &&
+    css`
+      align-items: flex-start;
+    `};
 `;
 
 export const TdStyle = styled.td<{

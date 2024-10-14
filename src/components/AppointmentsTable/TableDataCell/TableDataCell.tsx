@@ -13,11 +13,11 @@ export const TableDataCell = ({ day, handleOpenModal }: Props) => {
       $pointer={!!day && day.length > 2}
       onClick={() => day && day.length > 2 && handleOpenModal(day)}
     >
-      <TdContentStyle>
+      <TdContentStyle $tooltip={!!day && day.length > 2}>
         <ImageStyle src={openModal} alt="open" />
         <div>
           {!!day?.length &&
-            day.map((appointment: any, i: any) => (
+            day.map((appointment, i) => (
               <p key={i}>{appointment.user.username}</p>
             ))}
         </div>

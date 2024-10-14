@@ -39,10 +39,10 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     }
   };
 
-  const formattedDate = useMemo(() => moment(date).format("YYYY-MM"), [date])
+  const formattedDate = useMemo(() => moment(date).format("YYYY-MM"), [date]);
 
   useEffect(() => {
-    getAppointments(moment().format(dateTypes.date));
+    getAppointments(moment().startOf("month").format(dateTypes.date));
   }, [formattedDate]);
 
   useEffect(() => {
