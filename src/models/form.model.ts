@@ -11,5 +11,5 @@ export interface CreateTodoModel {
 export interface CreateAppointmentModel {
   date: string | Moment;
   hour: string;
-  user_id: number;
+  user_id: string;
 }

@@ -42,7 +42,7 @@ export const ControllerHour = <T extends FieldValues>({
         return (
           <>
             <AvailableHours
-              setHour={field.onChange}
+              onChange={field.onChange}
               value={field.value}
               selectedDate={selectedDate}
             />

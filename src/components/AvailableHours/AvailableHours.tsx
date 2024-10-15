@@ -3,12 +3,12 @@ import { ContainerStyle, HourStyle } from "./styles";
 import ScheduleService from "../../service/schedule.service";
 
 type Props = {
-  setHour: (e: string) => void;
+  onChange: (e: string) => void;
   value: string;
   selectedDate: string;
 };
 
-export const AvailableHours = ({ setHour, value, selectedDate }: Props) => {
+export const AvailableHours = ({ onChange, value, selectedDate }: Props) => {
   const [availableHours, setAvailableHours] = useState([]);
 
   const getAvailableHours = async (date: string) => {
@@ -25,7 +25,7 @@ export const AvailableHours = ({ setHour, value, selectedDate }: Props) => {
   };
 
   useEffect(() => {
-    setHour("");
+    onChange("");
     getAvailableHours(selectedDate);
   }, [selectedDate]);
 
@@ -36,7 +36,7 @@ export const AvailableHours = ({ setHour, value, selectedDate }: Props) => {
         availableHours.map((item) => (
           <HourStyle
             $active={item === value ? true : false}
-            onClick={() => setHour(item)}
+            onClick={() => onChange(item)}
             key={item}
           >
             {`${item}:00`}

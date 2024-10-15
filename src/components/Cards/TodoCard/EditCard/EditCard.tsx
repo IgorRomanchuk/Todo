@@ -20,12 +20,15 @@ type Props = {
 const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
   const { user } = useAuth();
   const [selectValue, setSelectValue] = useState(todo.status);
+
   const handleDeleteTodo = async () => {
     const arr = await TodosService.getTodos();
     const indexTodos = arr.findIndex((item: TodosModel) => item.id === user.id);
-    arr[indexTodos].todos = arr[indexTodos].todos.filter((item: TodoModel) => item.id !== todo.id);
-    setTodoList(arr[indexTodos].todos)
-    await TodosService.setTodos(arr)
+    arr[indexTodos].todos = arr[indexTodos].todos.filter(
+      (item: TodoModel) => item.id !== todo.id
+    );
+    setTodoList(arr[indexTodos].todos);
+    await TodosService.setTodos(arr);
   };
 
   const handleClickEdit = () => {
@@ -46,8 +49,8 @@ const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
         return item;
       }
     });
-    setTodoList(arr[indexTodos].todos)
-    await TodosService.setTodos(arr)
+    setTodoList(arr[indexTodos].todos);
+    await TodosService.setTodos(arr);
   };
   return (
     <>

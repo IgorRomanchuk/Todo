@@ -5,8 +5,6 @@ import { useAuth } from "../../utils/hooks/useAuth";
 import { ButtonStyle, CreateAppointmentPageStyle } from "./styles";
 import AppointmentsService from "../../service/appointments.service";
 import ScheduleService from "../../service/schedule.service";
-import AuthService from "../../service/auth.service";
-import UsersService from "../../service/users.service";
 import { useForm } from "react-hook-form";
 import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
 import ControllerHour from "../../components/Form/ControllerHour";
@@ -14,6 +12,7 @@ import { CreateAppointmentModel } from "../../models/form.model";
 import Loading from "../../components/Loading/Loading";
 import { URL_SCHEDULE } from "../../constants/clientUrl";
 import { dateTypes } from "../../constants/dateTypes";
+import ControllerUser from "../../components/Form/ControllerUser";
 
 export const CreateAppointment = () => {
   const { user } = useAuth();
@@ -27,7 +26,7 @@ export const CreateAppointment = () => {
       setLoading(true);
       await AppointmentsService.createAppointments({
         date: `${moment(data.date).format(dateTypes.date)} ${data.hour}:00`,
-        user_id: user.id,
+        user_id: +data.user_id,
       });
       navigate(URL_SCHEDULE);
     } catch (err: any) {
@@ -44,15 +43,6 @@ export const CreateAppointment = () => {
     );
   };
 
-  const getUsers = async () => {
-    try {
-      const data = await UsersService.getUsers();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const {
     handleSubmit,
     setValue,
@@ -62,13 +52,12 @@ export const CreateAppointment = () => {
     defaultValues: {
       date: moment(),
       hour: "",
-      user_id: user.id,
+      user_id: undefined,
     },
   });
 
   useEffect(() => {
     getAvailableDays();
-    getUsers();
   }, []);
 
   return (
@@ -86,6 +75,14 @@ export const CreateAppointment = () => {
           setValue={setValue}
           name="hour"
         />
+        {user.id === 1 && (
+          <ControllerUser
+            required={true}
+            error={errors.user_id}
+            control={control}
+            name="user_id"
+          />
+        )}
         {loading ? (
           <Loading />
         ) : (
