@@ -9,16 +9,17 @@ type Props = {
 };
 
 export const AvailableHours = ({ onChange, value, selectedDate }: Props) => {
-  const [availableHours, setAvailableHours] = useState([]);
+  const [availableHours, setAvailableHours] = useState<string[] | string>([]);
 
   const getAvailableHours = async (date: string) => {
     try {
       const data = await ScheduleService.getAvailableHours({ date });
-      setAvailableHours(
-        data?.hours.length > 3
-          ? data?.hours.split(", ")
-          : data?.hours.trim().split(" ")
-      );
+      if (data?.hours) {
+        const hours = data?.hours.replace(/\s+/g, "");
+        setAvailableHours(hours.split(","));
+      } else {
+        setAvailableHours("no hours available, please choose another day");
+      }
     } catch (err: any) {
       console.log(err.message);
     }
@@ -31,8 +32,7 @@ export const AvailableHours = ({ onChange, value, selectedDate }: Props) => {
 
   return (
     <ContainerStyle>
-      {!!availableHours?.length &&
-        availableHours[0] !== "" &&
+      {Array.isArray(availableHours) ? (
         availableHours.map((item) => (
           <HourStyle
             $active={item === value ? true : false}
@@ -41,7 +41,10 @@ export const AvailableHours = ({ onChange, value, selectedDate }: Props) => {
           >
             {`${item}:00`}
           </HourStyle>
-        ))}
+        ))
+      ) : (
+        <p>{availableHours}</p>
+      )}
     </ContainerStyle>
   );
 };

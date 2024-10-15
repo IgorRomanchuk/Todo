@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const ContainerStyle = styled.div`
-  width: 100%;
+  width: calc(100% - 20px);
   background-color: white;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -10,7 +10,7 @@ export const ContainerStyle = styled.div`
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 10px 0;
+  padding: 10px;
 `;
 
 export const HourStyle = styled.p<{
