@@ -47,7 +47,7 @@ const CreateTodo = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit((data) => addTodo(data))}>
+    <form onSubmit={handleSubmit(addTodo)}>
       <FormBoxStyle>
         <CalendarControllerDate name="date" control={control} />
         <Input

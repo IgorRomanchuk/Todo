@@ -62,7 +62,7 @@ export const CreateAppointment = () => {
 
   return (
     <CreateAppointmentPageStyle>
-      <form onSubmit={handleSubmit((data) => createAppointments(data))}>
+      <form onSubmit={handleSubmit(createAppointments)}>
         <CalendarControllerDate
           control={control}
           name="date"

@@ -28,7 +28,7 @@ export const Login = () => {
   return (
     <ContainerStyle>
       <TitleStyle>Sign in</TitleStyle>
-      <form onSubmit={handleSubmit((data) => signIn(data))}>
+      <form onSubmit={handleSubmit(signIn)}>
         <FormBoxStyle>
           <Input
             name="telegram_id"

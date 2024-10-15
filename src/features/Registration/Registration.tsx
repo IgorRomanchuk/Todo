@@ -32,7 +32,7 @@ export const Registration = () => {
   return (
     <ContainerStyle>
       <TitleStyle>Sign up</TitleStyle>
-      <form onSubmit={handleSubmit((data) => signUp(data))}>
+      <form onSubmit={handleSubmit(signUp)}>
         <FormBoxStyle>
           <Input
             name="telegram_id"
