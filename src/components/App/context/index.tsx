@@ -26,10 +26,9 @@ export const AuthProvider = ({ children }: Props) => {
   const [error, setError] = useState<string>("");
 
   const getUser = async () => {
-    const token: string | null = AuthService.getToken();
     try {
       setLoading(true);
-      const data = await AuthService.profile(token);
+      const data = await AuthService.profile();
       setUser(data);
     } catch (err) {
       console.log(err);

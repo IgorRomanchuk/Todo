@@ -5,6 +5,8 @@ import { useAuth } from "../../utils/hooks/useAuth";
 import { ButtonStyle, CreateAppointmentPageStyle } from "./styles";
 import AppointmentsService from "../../service/appointments.service";
 import ScheduleService from "../../service/schedule.service";
+import AuthService from "../../service/auth.service";
+import UsersService from "../../service/users.service";
 import { useForm } from "react-hook-form";
 import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
 import ControllerHour from "../../components/Form/ControllerHour";
@@ -42,6 +44,15 @@ export const CreateAppointment = () => {
     );
   };
 
+  const getUsers = async () => {
+    try {
+      const data = await UsersService.getUsers();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const {
     handleSubmit,
     setValue,
@@ -57,6 +68,7 @@ export const CreateAppointment = () => {
 
   useEffect(() => {
     getAvailableDays();
+    getUsers();
   }, []);
 
   return (

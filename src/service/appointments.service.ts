@@ -1,7 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import axios from "axios";
-import { BASE_URL } from "../utils/api";
-import AuthService from "./auth.service";
+import { api } from "../utils/api";
 import {
   createAppointmentPayload,
   getAppointmentPayload,
@@ -9,22 +7,16 @@ import {
 
 class AppointmentsService {
   endpoint: string = "appointments";
-  token: string | null = AuthService.getToken();
 
   getAppointments = async (params: getAppointmentPayload) =>
     (
-      await axios.get(`${BASE_URL}${this.endpoint}`, {
+      await api.get(`${this.endpoint}`, {
         params,
-        headers: { Authorization: `Bearer ${this.token}` },
       })
     ).data;
 
   createAppointments = async (body: createAppointmentPayload) =>
-    (
-      await axios.post(`${BASE_URL}${this.endpoint}`, body, {
-        headers: { Authorization: `Bearer ${this.token}` },
-      })
-    ).data;
+    (await api.post(`${this.endpoint}`, body)).data;
 }
 
 export default new AppointmentsService();

@@ -7,7 +7,6 @@ export const TooltipStyle = styled.div`
   border-radius: 5px;
   padding: 5px 0;
   position: absolute;
-  z-index: 1000;
   bottom: 115%; 
   left: 50%;
   transform: translateX(-50%);
