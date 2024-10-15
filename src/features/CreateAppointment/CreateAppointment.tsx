@@ -25,7 +25,7 @@ export const CreateAppointment = () => {
     try {
       setLoading(true);
       await AppointmentsService.createAppointments({
-        date: `${moment(data.date).format(dateTypes.date)} ${data.hour}:00`,
+        date: `${moment(data.date).format(dateTypes.date)} ${data.hour}`,
         user_id: +data.user_id,
       });
       navigate(URL_SCHEDULE);
