@@ -7,11 +7,13 @@ export interface IAuthContext {
   user: UserModel;
   setUser: (e: UserModel) => void;
   loading: boolean;
+  isLogged: boolean | null;
   error: string;
   signUp: (e: AuthModel) => void;
   signIn: (e: AuthModel) => void;
   signOut: () => void;
   getUser: () => void;
+  setIsLogged: (e: boolean) => void;
 }
 
 type Props = {
@@ -24,14 +26,17 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState({} as UserModel);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-
+  const [isLogged, setIsLogged] = useState<null | boolean>(null);
+  
   const getUser = async () => {
     try {
       setLoading(true);
       const data = await AuthService.profile();
       setUser(data);
+      setIsLogged(true)
     } catch (err) {
       console.log(err);
+      setIsLogged(false)
       setUser({} as UserModel);
     } finally {
       setLoading(false);
@@ -79,11 +84,13 @@ export const AuthProvider = ({ children }: Props) => {
         setUser,
         user,
         loading,
+        isLogged,
         error,
         signUp,
         signIn,
         signOut,
         getUser,
+        setIsLogged,
       }}
     >
       {children}

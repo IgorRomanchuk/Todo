@@ -38,7 +38,7 @@ export const CreateAppointment = () => {
 
   const getAvailableDays = async () => {
     const data = await ScheduleService.getAvailableDays();
-    console.log(data)
+
     setAvailableDates(
       data.map((item: string) => moment(item).format(dateTypes.date))
     );

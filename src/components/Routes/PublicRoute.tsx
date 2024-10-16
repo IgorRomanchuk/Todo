@@ -3,9 +3,9 @@ import { URL_HOME } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";
 
 export const PublicRoute = () => {
-  const { user } = useAuth();
+  const { isLogged } = useAuth();
 
-  if (!!Object.keys(user).length) return <Navigate to={URL_HOME} />;
+  if (isLogged) return <Navigate to={URL_HOME} />;
 
   return <Outlet />;
 };
