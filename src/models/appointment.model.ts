@@ -9,12 +9,12 @@ export interface AppointmentModel {
   };
 }
 
-export interface getAppointmentPayload {
+export interface GetAppointmentPayload {
   date: string | null;
   period: string;
 }
 
-export interface createAppointmentPayload {
+export interface CreateAppointmentPayload {
   date: string;
   user_id: number;
   tmpUser?: any;

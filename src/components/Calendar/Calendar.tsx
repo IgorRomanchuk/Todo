@@ -1,6 +1,6 @@
 import { ButtonStyle, CalendarStyle } from "./styles";
-import CalendarHeader from "./CalendarHeader/CalendarHeader";
-import CalendarBody from "./CalendarBody/CalendarBody";
+import CalendarHeader from "./CalendarHeader";
+import CalendarBody from "./CalendarBody";
 import { Moment } from "moment";
 
 type Props = {
@@ -8,9 +8,16 @@ type Props = {
   period?: number[];
   date: Moment | string;
   setDate: (e: Moment | string) => void;
-  availableDates?: string[]
+  availableDates?: string[];
 };
-const Calendar = ({ setPeriod, period, date, setDate, availableDates }: Props) => {
+
+export const Calendar = ({
+  setPeriod,
+  period,
+  date,
+  setDate,
+  availableDates,
+}: Props) => {
   return (
     <CalendarStyle>
       <div>
@@ -35,5 +42,3 @@ const Calendar = ({ setPeriod, period, date, setDate, availableDates }: Props) =
     </CalendarStyle>
   );
 };
-
-export default Calendar;

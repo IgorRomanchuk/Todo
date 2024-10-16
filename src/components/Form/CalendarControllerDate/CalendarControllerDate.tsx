@@ -1,5 +1,5 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import Calendar from "../../Calendar/Calendar";
+import Calendar from "../../Calendar";
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
@@ -7,7 +7,7 @@ interface Props<T extends FieldValues> {
   availableDates?: string[];
 }
 
-const CalendarControllerDate = <T extends FieldValues>({
+export const CalendarControllerDate = <T extends FieldValues>({
   name,
   control,
   availableDates,
@@ -28,5 +28,3 @@ const CalendarControllerDate = <T extends FieldValues>({
     />
   );
 };
-
-export default CalendarControllerDate;

@@ -14,7 +14,7 @@ interface Props<T extends FieldValues> {
   error?: FieldError;
 }
 
-const Input = <T extends FieldValues>({
+export const Input = <T extends FieldValues>({
   name,
   register,
   required = false,
@@ -31,5 +31,3 @@ const Input = <T extends FieldValues>({
     </>
   );
 };
-
-export default Input;

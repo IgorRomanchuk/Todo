@@ -6,7 +6,7 @@ interface Props<T extends FieldValues> {
   register: UseFormRegister<T>;
 }
 
-const Select = <T extends FieldValues>({
+export const Select = <T extends FieldValues>({
   name,
   register,
   ...props
@@ -19,5 +19,3 @@ const Select = <T extends FieldValues>({
     </SelectStyle>
   );
 };
-
-export default Select;

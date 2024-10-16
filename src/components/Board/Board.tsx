@@ -1,10 +1,10 @@
 import moment, { Moment } from "moment";
-import Column from "./Column/Column";
+import Column from "./components/Column";
 import { ColumnsContainerStyle, ColumnStyle } from "./styles";
 import { TodoModel, TodosModel } from "../../models/todos.model";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../utils/hooks/useAuth";
-import TodosService from "../../service/todos.service";
+import TodosService from "../../services/todos.service";
 
 const statusTodos = ["todo", "in progress", "done"];
 
@@ -13,7 +13,7 @@ type Props = {
   date: Moment | string;
 };
 
-const Board = ({ period, date }: Props) => {
+export const Board = ({ period, date }: Props) => {
   const { user } = useAuth();
   const [todoList, setTodoList] = useState<TodoModel[]>([]);
   const [draggableCard, setDraggableCard] = useState<null | string>(null);
@@ -56,5 +56,3 @@ const Board = ({ period, date }: Props) => {
     </>
   );
 };
-
-export default Board;

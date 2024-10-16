@@ -14,7 +14,7 @@ type Props = {
   availableDates?: string[];
 };
 
-const CalendarBody = ({
+export const CalendarBody = ({
   period,
   setPeriod,
   date,
@@ -72,4 +72,3 @@ const CalendarBody = ({
     </CalendarBodyStyle>
   );
 };
-export default CalendarBody;

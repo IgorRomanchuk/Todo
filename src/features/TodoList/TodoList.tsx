@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Calendar from "../../components/Calendar/Calendar";
+import Calendar from "../../components/Calendar";
 import { dateTypes } from "../../constants/dateTypes";
 import moment, { Moment } from "moment";
-import Board from "../../components/Board/Board";
+import Board from "../../components/Board";
 import { ContainerStyle, HomePageStyle } from "./styles";
 
 export const TodoList = () => {

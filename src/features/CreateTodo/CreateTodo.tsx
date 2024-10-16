@@ -1,18 +1,18 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
-import TodosService from "../../service/todos.service";
+import TodosService from "../../services/todos.service";
 import { ButtonStyle, FormBoxStyle } from "./styles";
-import Input from "../../components/Form/Input/Input";
-import Select from "../../components/Form/Select/Select";
+import Input from "../../components/Form/Input";
+import Select from "../../components/Form/Select";
 import { URL_HOME } from "../../constants/clientUrl";
 import { useNavigate } from "react-router-dom";
-import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
+import CalendarControllerDate from "../../components/Form/CalendarControllerDate";
 import { useAuth } from "../../utils/hooks/useAuth";
-import { CreateTodoModel } from "../../models/form.model";
+import { CreateTodoModel } from "./create-todo.model";
 import { TodosModel } from "../../models/todos.model";
 import { dateTypes } from "../../constants/dateTypes";
 
-const CreateTodo = () => {
+export const CreateTodo = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -33,14 +33,14 @@ const CreateTodo = () => {
 
   const addTodo: SubmitHandler<CreateTodoModel> = async (todo) => {
     let arr = TodosService.getTodos();
-    let index = arr.findIndex((item: TodosModel) => item.id === user.id)
+    let index = arr.findIndex((item: TodosModel) => item.id === user.id);
     if (index > -1) {
-      arr[index].todos.push(todo)
+      arr[index].todos.push(todo);
     } else {
       arr.push({
         id: user.id,
-        todos: [todo]
-      })
+        todos: [todo],
+      });
     }
     await TodosService.setTodos(arr);
     navigate(URL_HOME);
@@ -63,5 +63,3 @@ const CreateTodo = () => {
     </form>
   );
 };
-
-export default CreateTodo;

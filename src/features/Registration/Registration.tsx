@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import Input from "../../components/Form/Input/Input";
+import Input from "../../components/Form/Input";
 import {
   ButtonStyle,
   ContainerStyle,
@@ -8,7 +8,7 @@ import {
   TitleStyle,
 } from "./styles";
 import { AuthModel } from "../../models/auth.model";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import { URL_LOGIN } from "../../constants/clientUrl";
 import { useAuth } from "../../utils/hooks/useAuth";

@@ -15,7 +15,7 @@ type Props = {
   setDate: (e: string | Moment) => void;
 };
 
-const CalendarHeader = ({ setDate, date }: Props) => {
+export const CalendarHeader = ({ setDate, date }: Props) => {
   const changeYearToRight = () =>
     setDate(moment(date, dateTypes.date).add(1, "y"));
 
@@ -40,5 +40,3 @@ const CalendarHeader = ({ setDate, date }: Props) => {
     </CalendarHeaderStyle>
   );
 };
-
-export default CalendarHeader;

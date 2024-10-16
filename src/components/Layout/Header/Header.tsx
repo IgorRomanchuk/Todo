@@ -40,7 +40,7 @@ const pages = [
   },
 ];
 
-const Header = () => {
+export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { signOut, user } = useAuth();
@@ -69,5 +69,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

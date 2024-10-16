@@ -1,1 +1,0 @@
-export {AppointmentsModal as default} from "./AppointmentsModal"

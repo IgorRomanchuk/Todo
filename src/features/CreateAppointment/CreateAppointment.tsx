@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useAuth } from "../../utils/hooks/useAuth";
 import { ButtonStyle, CreateAppointmentPageStyle } from "./styles";
-import AppointmentsService from "../../service/appointments.service";
-import ScheduleService from "../../service/schedule.service";
+import AppointmentsService from "../../services/appointments.service";
+import ScheduleService from "../../services/schedule.service";
 import { useForm } from "react-hook-form";
-import CalendarControllerDate from "../../components/Form/CalendarControllerDate/CalendarControllerDate";
+import CalendarControllerDate from "../../components/Form/CalendarControllerDate";
 import ControllerHour from "../../components/Form/ControllerHour";
-import { CreateAppointmentModel } from "../../models/form.model";
-import Loading from "../../components/Loading/Loading";
+import { CreateAppointmentModel } from "./models/create-appointment.model";
+import Loading from "../../components/Loading";
 import { URL_SCHEDULE } from "../../constants/clientUrl";
 import { dateTypes } from "../../constants/dateTypes";
 import ControllerUser from "../../components/Form/ControllerUser";
@@ -38,6 +38,7 @@ export const CreateAppointment = () => {
 
   const getAvailableDays = async () => {
     const data = await ScheduleService.getAvailableDays();
+    console.log(data)
     setAvailableDates(
       data.map((item: string) => moment(item).format(dateTypes.date))
     );

@@ -6,7 +6,7 @@ import {
   Path,
 } from "react-hook-form";
 import { ErrorTextStyle } from "./styles";
-import { SelectUser } from "../../SelectUser/SelectUser";
+import { SelectUser } from "./components/SelectUser/SelectUser";
 
 interface Props<T extends FieldValues> {
   name: Path<T>;

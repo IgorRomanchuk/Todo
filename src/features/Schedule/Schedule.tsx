@@ -1,6 +1,11 @@
-import { CalendarContainerStyle, ContainerStyle, SchedulePageStyle, TitleStyle } from "./styles";
-import AppointmentsTable from "../../components/AppointmentsTable";
-import Calendar from "../../components/Calendar/Calendar";
+import {
+  CalendarContainerStyle,
+  ContainerStyle,
+  SchedulePageStyle,
+  TitleStyle,
+} from "./styles";
+import AppointmentsTable from "./components/AppointmentsTable";
+import Calendar from "../../components/Calendar";
 import { useState } from "react";
 import moment, { Moment } from "moment";
 
@@ -14,7 +19,7 @@ export const Schedule = () => {
         <CalendarContainerStyle>
           <Calendar date={date} setDate={setDate} />
         </CalendarContainerStyle>
-        <AppointmentsTable date={date} setDate={setDate}/>
+        <AppointmentsTable date={date} setDate={setDate} />
       </ContainerStyle>
     </SchedulePageStyle>
   );

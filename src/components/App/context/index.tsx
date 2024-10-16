@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { UserModel } from "../../../models/user.model";
+import { UserModel } from "../models/user.model";
 import { AuthModel } from "../../../models/auth.model";
-import AuthService from "../../../service/auth.service";
+import AuthService from "../services/auth.service";
 
 export interface IAuthContext {
   user: UserModel;

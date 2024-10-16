@@ -5,7 +5,7 @@ import {
   FieldValues,
   Path,
 } from "react-hook-form";
-import AvailableHours from "../../AvailableHours";
+import AvailableHours from "./components/AvailableHours";
 import { useWatch } from "react-hook-form";
 import { ErrorTextStyle } from "./styles";
 import { useEffect } from "react";

@@ -1,11 +1,11 @@
 import { dateTypes } from "../../constants/dateTypes";
 import moment from "moment";
-import Weather from "../../components/Weather/Weather";
-import Board from "../../components/Board/Board";
+import Weather from "./components/Weather";
+import Board from "../../components/Board";
 import { HomePageStyle, ContainerStyle, TitleStyle } from "./styles";
 import { useAuth } from "../../utils/hooks/useAuth";
 
-const HomePage = () => {
+export const HomePage = () => {
   const { user } = useAuth();
 
   return (
@@ -13,12 +13,10 @@ const HomePage = () => {
       <ContainerStyle>
         <TitleStyle>
           {`Hello ${user?.username}`} <br /> Your todo list for today
-          </TitleStyle>
+        </TitleStyle>
         <Board date={moment()} period={[+moment().format(dateTypes.day)]} />
       </ContainerStyle>
       <Weather date={moment()} period={[+moment().format(dateTypes.day)]} />
     </HomePageStyle>
   );
 };
-
-export default HomePage;

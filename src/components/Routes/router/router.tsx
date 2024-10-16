@@ -1,6 +1,6 @@
 import { router } from "./config";
 import { RouterProvider } from "react-router-dom";
-import Loading from "../../Loading/Loading";
+import Loading from "../../Loading";
 import { useAuth } from "../../../utils/hooks/useAuth";
 
 const Router = () => {
