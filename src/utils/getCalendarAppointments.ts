@@ -10,8 +10,8 @@ export function getAppointmentsTableConfiguration(
   weekNumber: number,
   appointments: [string, AppointmentModel[] | undefined][]
 ) {
-  let tableHead: { date: string }[] = [];
-  let tableBody: TableBodyModel[] = [];
+  const tableHead: { date: string }[] = [];
+  const tableBody: TableBodyModel[] = [];
   for (let i = 0; i <= 6; i++) {
     const day = moment(date).week(weekNumber).day(i);
     tableHead.push({ date: day.format(dateTypes.date) });

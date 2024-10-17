@@ -32,8 +32,8 @@ export const CreateTodo = () => {
   });
 
   const addTodo: SubmitHandler<CreateTodoModel> = async (todo) => {
-    let arr = TodosService.getTodos();
-    let index = arr.findIndex((item: TodosModel) => item.id === user.id);
+    const arr = TodosService.getTodos();
+    const index = arr.findIndex((item: TodosModel) => item.id === user.id);
     if (index > -1) {
       arr[index].todos.push(todo);
     } else {

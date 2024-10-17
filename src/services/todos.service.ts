@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { TodosModel } from "../models/todos.model";
 
 class TodosService {

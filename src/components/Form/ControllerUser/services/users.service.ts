@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { UsersModel } from "../models/users.model";
 import { api } from "../../../../utils/api";
 

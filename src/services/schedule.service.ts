@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { AvailableHoursResponse } from "../components/Form/ControllerHour/models/available-hours.model";
 import { api } from "../utils/api";
 import { Moment } from "moment";
