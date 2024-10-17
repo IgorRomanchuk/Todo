@@ -39,14 +39,21 @@ export const CreateAppointment = () => {
   };
 
   const getUserRole = async () => {
-    const users = await UsersService.getUsers();
-    setUserRole(users.find((item) => item.id === user.id)?.role);
+    try {
+      const users = await UsersService.getUsers();
+      setUserRole(users.find((item) => item.id === user.id)?.role);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getAvailableDays = async () => {
-    const data = await ScheduleService.getAvailableDays();
-
-    setAvailableDates(data.map((item: string) => moment(item).format(dateTypes.date)));
+    try {
+      const data = await ScheduleService.getAvailableDays();
+      setAvailableDates(data.map((item: string) => moment(item).format(dateTypes.date)));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const {
