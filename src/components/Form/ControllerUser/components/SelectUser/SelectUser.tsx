@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import UsersService from "../../services/users.service";
+import UsersService from "../../../../../services/users.service";
 import { UsersModel } from "../../models/users.model";
 import { useAuth } from "../../../../../utils/hooks/useAuth";
 import { SelectStyle } from "./styles";

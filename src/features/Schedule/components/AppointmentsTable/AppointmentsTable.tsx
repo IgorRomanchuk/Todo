@@ -2,12 +2,14 @@ import moment, { Moment } from "moment";
 import { AppointmentModel } from "../../../../models/appointment.model";
 import { useEffect, useMemo, useState } from "react";
 import AppointmentsService from "../../../../services/appointments.service";
+import UsersService from "../../../../services/users.service";
 import { getAppointmentsTableConfiguration } from "../../../../utils/getCalendarAppointments";
 import SwitchWeek from "./SwitchWeek";
 import { ContainerStyle, SwitchWeekContainerStyle, TableStyle } from "./styles";
 import { TableBodyModel } from "../../../../utils/getCalendarAppointments";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
+import { useAuth } from "../../../../utils/hooks/useAuth";
 import { dateTypes } from "../../../../constants/dateTypes";
 
 type Props = {
@@ -16,23 +18,27 @@ type Props = {
 };
 
 export const AppointmentsTable = ({ date, setDate }: Props) => {
-  const [appointments, setAppointments] = useState<
-    [string, AppointmentModel[] | undefined][]
-  >([]);
+  const { user } = useAuth();
+  const [appointments, setAppointments] = useState<[string, AppointmentModel[] | undefined][]>([]);
   const [tableHead, setTableHead] = useState<{ date: string }[]>([]);
   const [tableBody, setTableBody] = useState<TableBodyModel[]>([]);
 
   const getAppointments = async (date: string, period: string = "month") => {
     try {
-      const data = await AppointmentsService.getAppointments({
-        date,
-        period,
-      });
-      
+      const users = await UsersService.getUsers()
+      const role = users.find(item => item.id === user.id)?.role
+      let data = []
+      if (role === 1) {
+        data = await AppointmentsService.getAppointments({
+          date,
+          period,
+        });
+      } else {
+        data = await UsersService.getAppointments(user.id)
+      }
+
       setAppointments(
-        Object.entries(
-          Object.groupBy(data, ({ date }: AppointmentModel) => date)
-        ).reverse()
+        Object.entries(Object.groupBy(data, ({ date }: AppointmentModel) => date)).reverse(),
       );
     } catch (err: any) {
       console.log(err.message);
@@ -49,7 +55,7 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
     const { tableBody, tableHead } = getAppointmentsTableConfiguration(
       moment(date),
       moment(date).week(),
-      appointments
+      appointments,
     );
     setTableHead(tableHead);
     setTableBody(tableBody);

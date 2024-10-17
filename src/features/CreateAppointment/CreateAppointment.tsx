@@ -12,6 +12,7 @@ import { CreateAppointmentModel } from "./models/create-appointment.model";
 import Loading from "../../components/Loading";
 import { URL_SCHEDULE } from "../../constants/clientUrl";
 import { dateTypes } from "../../constants/dateTypes";
+import UsersService from "../../services/users.service";
 import ControllerUser from "../../components/Form/ControllerUser";
 
 export const CreateAppointment = () => {
@@ -20,13 +21,14 @@ export const CreateAppointment = () => {
   const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [userRole, setUserRole] = useState<number | undefined>();
 
   const createAppointments = async (data: CreateAppointmentModel) => {
     try {
       setLoading(true);
       await AppointmentsService.createAppointments({
         date: `${moment(data.date).format(dateTypes.date)} ${data.hour}`,
-        user_id: +data.user_id,
+        user_id: +data.user_id || user.id,
       });
       navigate(URL_SCHEDULE);
     } catch (err: any) {
@@ -36,12 +38,15 @@ export const CreateAppointment = () => {
     }
   };
 
+  const getUserRole = async () => {
+    const users = await UsersService.getUsers();
+    setUserRole(users.find((item) => item.id === user.id)?.role);
+  };
+
   const getAvailableDays = async () => {
     const data = await ScheduleService.getAvailableDays();
 
-    setAvailableDates(
-      data.map((item: string) => moment(item).format(dateTypes.date))
-    );
+    setAvailableDates(data.map((item: string) => moment(item).format(dateTypes.date)));
   };
 
   const {
@@ -59,16 +64,13 @@ export const CreateAppointment = () => {
 
   useEffect(() => {
     getAvailableDays();
+    getUserRole();
   }, []);
 
   return (
     <CreateAppointmentPageStyle>
       <form onSubmit={handleSubmit(createAppointments)}>
-        <CalendarControllerDate
-          control={control}
-          name="date"
-          availableDates={availableDates}
-        />
+        <CalendarControllerDate control={control} name="date" availableDates={availableDates} />
         <ControllerHour
           required={true}
           error={errors.hour}
@@ -76,19 +78,10 @@ export const CreateAppointment = () => {
           setValue={setValue}
           name="hour"
         />
-        {user.id === 1 && (
-          <ControllerUser
-            required={true}
-            error={errors.user_id}
-            control={control}
-            name="user_id"
-          />
+        {userRole === 1 && (
+          <ControllerUser required={true} error={errors.user_id} control={control} name="user_id" />
         )}
-        {loading ? (
-          <Loading />
-        ) : (
-          <ButtonStyle type="submit">create appointments</ButtonStyle>
-        )}
+        {loading ? <Loading /> : <ButtonStyle type="submit">create appointments</ButtonStyle>}
         {error && <p>{error}</p>}
       </form>
     </CreateAppointmentPageStyle>
