@@ -5,8 +5,8 @@ import {
   URL_HOME,
   URL_SCHEDULE,
   URL_CREATE_APPOINTMENT,
-} from "../../../constants/clientUrl";
-import { useAuth } from "../../../utils/hooks/useAuth";
+} from "src/constants/clientUrl";
+import { useAuth } from "src/utils/hooks/useAuth";
 import {
   HeaderContainerStyle,
   HeaderMenuItemStyle,

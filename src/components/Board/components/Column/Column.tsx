@@ -1,9 +1,9 @@
-import { TodoModel, TodosModel } from "../../../../models/todos.model";
+import { TodoModel, TodosModel } from "src/models/todos.model";
 import TodoCard from "../TodoCard";
 import { ContainerStyle } from "./styles";
 import DropArea from "../DropArea";
-import TodosService from "../../../../services/todos.service";
-import { useAuth } from "../../../../utils/hooks/useAuth";
+import TodosService from "src/services/todos.service";
+import { useAuth } from "src/utils/hooks/useAuth";
 
 type Props = {
   todoList: TodoModel[];
@@ -26,21 +26,17 @@ export const Column = ({
     if (draggableCard == null || draggableCard === undefined) return;
     const arr = await TodosService.getTodos();
     const indexTodos = arr.findIndex((item: TodosModel) => item.id === user.id);
-    const index = arr[indexTodos].todos.findIndex(
-      (item: TodoModel) => item.id === draggableCard
-    );
-    arr[indexTodos].todos = arr[indexTodos].todos.map(
-      (item: TodoModel, i: number) => {
-        if (i === index) {
-          return {
-            ...item,
-            status,
-          };
-        } else {
-          return item;
-        }
+    const index = arr[indexTodos].todos.findIndex((item: TodoModel) => item.id === draggableCard);
+    arr[indexTodos].todos = arr[indexTodos].todos.map((item: TodoModel, i: number) => {
+      if (i === index) {
+        return {
+          ...item,
+          status,
+        };
+      } else {
+        return item;
       }
-    );
+    });
     setTodoList(arr[indexTodos].todos);
     await TodosService.setTodos(arr);
   };
@@ -52,11 +48,7 @@ export const Column = ({
         todoList.map((item: TodoModel) => (
           <ContainerStyle key={item.id}>
             <>
-              <TodoCard
-                setDraggableCard={setDraggableCard}
-                todo={item}
-                setTodoList={setTodoList}
-              />
+              <TodoCard setDraggableCard={setDraggableCard} todo={item} setTodoList={setTodoList} />
               <DropArea onDrop={() => onDrop(status)} />
             </>
           </ContainerStyle>

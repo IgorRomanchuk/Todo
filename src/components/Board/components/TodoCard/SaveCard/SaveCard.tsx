@@ -1,9 +1,9 @@
-import { TodoModel } from "../../../../../models/todos.model";
-import saveIcon from "../../../../../assets/img/save.svg";
+import { TodoModel } from "src/models/todos.model";
+import saveIcon from "src/assets/img/save.svg";
 import { SaveIconStyle, TextAreaStyle } from "./styles";
-import TodosService from "../../../../../services/todos.service";
+import TodosService from "src/services/todos.service";
 import { useState } from "react";
-import { useAuth } from "../../../../../utils/hooks/useAuth";
+import { useAuth } from "src/utils/hooks/useAuth";
 
 type Props = {
   todo: TodoModel;

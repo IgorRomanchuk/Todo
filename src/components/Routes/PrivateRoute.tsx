@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { URL_REGISTER } from "../../constants/clientUrl";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { URL_REGISTER } from "src/constants/clientUrl";
+import { useAuth } from "src/utils/hooks/useAuth";
 import Loading from "../Loading";
 
 export const PrivateRoute = () => {

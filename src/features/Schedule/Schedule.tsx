@@ -1,11 +1,6 @@
-import {
-  CalendarContainerStyle,
-  ContainerStyle,
-  SchedulePageStyle,
-  TitleStyle,
-} from "./styles";
+import { CalendarContainerStyle, ContainerStyle, SchedulePageStyle, TitleStyle } from "./styles";
 import AppointmentsTable from "./components/AppointmentsTable";
-import Calendar from "../../components/Calendar";
+import Calendar from "src/components/Calendar";
 import { useState } from "react";
 import moment, { Moment } from "moment";
 

@@ -1,16 +1,16 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
-import TodosService from "../../services/todos.service";
+import TodosService from "src/services/todos.service";
 import { ButtonStyle, FormBoxStyle } from "./styles";
-import Input from "../../components/Form/Input";
-import Select from "../../components/Form/Select";
-import { URL_HOME } from "../../constants/clientUrl";
+import Input from "src/components/Form/Input";
+import Select from "src/components/Form/Select";
+import { URL_HOME } from "src/constants/clientUrl";
 import { useNavigate } from "react-router-dom";
-import CalendarControllerDate from "../../components/Form/CalendarControllerDate";
-import { useAuth } from "../../utils/hooks/useAuth";
+import CalendarControllerDate from "src/components/Form/CalendarControllerDate";
+import { useAuth } from "src/utils/hooks/useAuth";
 import { CreateTodoModel } from "./create-todo.model";
-import { TodosModel } from "../../models/todos.model";
-import { dateTypes } from "../../constants/dateTypes";
+import { TodosModel } from "src/models/todos.model";
+import { dateTypes } from "src/constants/dateTypes";
 
 export const CreateTodo = () => {
   const { user } = useAuth();
@@ -50,12 +50,7 @@ export const CreateTodo = () => {
     <form onSubmit={handleSubmit(addTodo)}>
       <FormBoxStyle>
         <CalendarControllerDate name="date" control={control} />
-        <Input
-          name="title"
-          register={register}
-          required={true}
-          error={errors.title}
-        />
+        <Input name="title" register={register} required={true} error={errors.title} />
         <Input name="description" register={register} />
         <Select name="status" register={register} />
         <ButtonStyle type="submit">Add todo</ButtonStyle>

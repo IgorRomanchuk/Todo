@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ContainerStyle, HourStyle } from "./styles";
-import ScheduleService from "../../../../../services/schedule.service";
+import ScheduleService from "src/services/schedule.service";
 
 type Props = {
   onChange: (e: string) => void;

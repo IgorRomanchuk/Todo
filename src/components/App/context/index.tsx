@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { UserModel } from "../models/user.model";
-import { AuthModel } from "../../../models/auth.model";
+import { AuthModel } from "src/models/auth.model";
 import AuthService from "../services/auth.service";
 
 export interface IAuthContext {
@@ -27,16 +27,16 @@ export const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [isLogged, setIsLogged] = useState<null | boolean>(null);
-  
+
   const getUser = async () => {
     try {
       setLoading(true);
       const data = await AuthService.profile();
       setUser(data);
-      setIsLogged(true)
+      setIsLogged(true);
     } catch (err) {
       console.log(err);
-      setIsLogged(false)
+      setIsLogged(false);
       setUser({} as UserModel);
     } finally {
       setLoading(false);

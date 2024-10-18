@@ -1,9 +1,4 @@
-import {
-  FieldError,
-  FieldValues,
-  Path,
-  UseFormRegister,
-} from "react-hook-form";
+import { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 import { IntputStyle } from "./styles";
 
 interface Props<T extends FieldValues> {
@@ -23,10 +18,7 @@ export const Input = <T extends FieldValues>({
 }: Props<T>) => {
   return (
     <>
-      <IntputStyle
-        placeholder={name}
-        {...register(name, { required, valueAsNumber })}
-      />
+      <IntputStyle placeholder={name} {...register(name, { required, valueAsNumber })} />
       {error && <p>{`${name} is required`}</p>}
     </>
   );

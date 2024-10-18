@@ -1,5 +1,5 @@
-import openModal from "../../../../../assets/img/open-modal.svg";
-import { AppointmentModel } from "../../../../../models/appointment.model";
+import openModal from "src/assets/img/open-modal.svg";
+import { AppointmentModel } from "src/models/appointment.model";
 import { ImageStyle, TdContentStyle, TdStyle } from "./styles";
 import Tooltip from "./Tooltip";
 
@@ -13,10 +13,7 @@ export const TableDataCell = ({ day }: Props) => {
       <TdContentStyle $tooltip={!!day && day.length > 2}>
         <ImageStyle src={openModal} alt="open" />
         <div>
-          {!!day?.length &&
-            day.map((appointment, i) => (
-              <p key={i}>{appointment.user.username}</p>
-            ))}
+          {!!day?.length && day.map((appointment, i) => <p key={i}>{appointment.user.username}</p>)}
         </div>
         <Tooltip day={day} />
       </TdContentStyle>

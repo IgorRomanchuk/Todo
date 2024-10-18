@@ -1,15 +1,10 @@
-import { TodoModel, TodosModel } from "../../../../../models/todos.model";
-import deleteIcon from "../../../../../assets/img/delete.svg";
-import editIcon from "../../../../../assets/img/edit.svg";
+import { TodoModel, TodosModel } from "src/models/todos.model";
+import deleteIcon from "src/assets/img/delete.svg";
+import editIcon from "src/assets/img/edit.svg";
 import { useState } from "react";
-import {
-  IconStyle,
-  ImageContainerStyle,
-  TextDescriptionStyle,
-  TextTitleStyle,
-} from "./styles";
-import TodosService from "../../../../../services/todos.service";
-import { useAuth } from "../../../../../utils/hooks/useAuth";
+import { IconStyle, ImageContainerStyle, TextDescriptionStyle, TextTitleStyle } from "./styles";
+import TodosService from "src/services/todos.service";
+import { useAuth } from "src/utils/hooks/useAuth";
 
 type Props = {
   todo: TodoModel;
@@ -24,9 +19,7 @@ export const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
   const handleDeleteTodo = async () => {
     const arr = await TodosService.getTodos();
     const indexTodos = arr.findIndex((item: TodosModel) => item.id === user.id);
-    arr[indexTodos].todos = arr[indexTodos].todos.filter(
-      (item: TodoModel) => item.id !== todo.id
-    );
+    arr[indexTodos].todos = arr[indexTodos].todos.filter((item: TodoModel) => item.id !== todo.id);
     setTodoList(arr[indexTodos].todos);
     await TodosService.setTodos(arr);
   };
@@ -55,15 +48,10 @@ export const EditCard = ({ setTodoList, todo, setEdit }: Props) => {
   return (
     <>
       <TextTitleStyle>{todo.title}</TextTitleStyle>
-      {todo.description && (
-        <TextDescriptionStyle>{todo?.description}</TextDescriptionStyle>
-      )}
+      {todo.description && <TextDescriptionStyle>{todo?.description}</TextDescriptionStyle>}
 
       <ImageContainerStyle>
-        <select
-          value={selectValue}
-          onChange={(e) => handleChangeStatus(e.target.value)}
-        >
+        <select value={selectValue} onChange={(e) => handleChangeStatus(e.target.value)}>
           <option value="todo">Todo</option>
           <option value="in progress">In progress</option>
           <option value="done">Done</option>

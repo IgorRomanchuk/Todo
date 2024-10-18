@@ -1,10 +1,4 @@
-import {
-  Control,
-  Controller,
-  FieldError,
-  FieldValues,
-  Path,
-} from "react-hook-form";
+import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-form";
 import { ErrorTextStyle } from "./styles";
 import { SelectUser } from "./components/SelectUser/SelectUser";
 
@@ -30,9 +24,7 @@ export const ControllerUser = <T extends FieldValues>({
         return (
           <>
             <SelectUser onChange={field.onChange} />
-            {error && (
-              <ErrorTextStyle>{`You have to select a user`}</ErrorTextStyle>
-            )}
+            {error && <ErrorTextStyle>{`You have to select a user`}</ErrorTextStyle>}
           </>
         );
       }}

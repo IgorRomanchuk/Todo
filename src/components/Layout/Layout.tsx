@@ -1,9 +1,5 @@
 import Header from "./Header";
-import {
-  MainLayoutContainerStyle,
-  MainLayoutContentStyle,
-  MainLayoutStyle,
-} from "./styles";
+import { MainLayoutContainerStyle, MainLayoutContentStyle, MainLayoutStyle } from "./styles";
 
 type Props = {
   children: JSX.Element;

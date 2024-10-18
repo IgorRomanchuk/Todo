@@ -1,9 +1,9 @@
-import { dateTypes } from "../../constants/dateTypes";
+import { dateTypes } from "src/constants/dateTypes";
 import moment from "moment";
 import Weather from "./components/Weather";
-import Board from "../../components/Board";
+import Board from "src/components/Board";
 import { HomePageStyle, ContainerStyle, TitleStyle } from "./styles";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { useAuth } from "src/utils/hooks/useAuth";
 
 export const HomePage = () => {
   const { user } = useAuth();

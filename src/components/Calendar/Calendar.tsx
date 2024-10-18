@@ -11,13 +11,7 @@ type Props = {
   availableDates?: string[];
 };
 
-export const Calendar = ({
-  setPeriod,
-  period,
-  date,
-  setDate,
-  availableDates,
-}: Props) => {
+export const Calendar = ({ setPeriod, period, date, setDate, availableDates }: Props) => {
   return (
     <CalendarStyle>
       <div>

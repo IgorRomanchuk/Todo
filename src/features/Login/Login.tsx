@@ -1,14 +1,9 @@
 import { useForm } from "react-hook-form";
-import Input from "../../components/Form/Input";
-import {
-  ButtonStyle,
-  ContainerStyle,
-  FormBoxStyle,
-  TitleStyle,
-} from "./styles";
-import Loading from "../../components/Loading";
-import { AuthModel } from "../../models/auth.model";
-import { useAuth } from "../../utils/hooks/useAuth";
+import Input from "src/components/Form/Input";
+import { ButtonStyle, ContainerStyle, FormBoxStyle, TitleStyle } from "./styles";
+import Loading from "src/components/Loading";
+import { AuthModel } from "src/models/auth.model";
+import { useAuth } from "src/utils/hooks/useAuth";
 
 export const Login = () => {
   const { signIn, loading, error } = useAuth();
@@ -37,23 +32,9 @@ export const Login = () => {
             valueAsNumber={true}
             error={errors.telegram_id}
           />
-          <Input
-            name="username"
-            register={register}
-            required={true}
-            error={errors.username}
-          />
-          <Input
-            name="password"
-            register={register}
-            required={true}
-            error={errors.password}
-          />
-          {loading ? (
-            <Loading />
-          ) : (
-            <ButtonStyle type="submit">Sign in</ButtonStyle>
-          )}
+          <Input name="username" register={register} required={true} error={errors.username} />
+          <Input name="password" register={register} required={true} error={errors.password} />
+          {loading ? <Loading /> : <ButtonStyle type="submit">Sign in</ButtonStyle>}
 
           {error && <p>{error}</p>}
         </FormBoxStyle>

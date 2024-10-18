@@ -1,7 +1,7 @@
-import rightArrow from "../../../../../assets/img/rightArrow.svg";
-import leftArrow from "../../../../../assets/img/leftArrow.svg";
+import rightArrow from "src/assets/img/rightArrow.svg";
+import leftArrow from "src/assets/img/leftArrow.svg";
 import moment, { Moment } from "moment";
-import { dateTypes } from "../../../../../constants/dateTypes";
+import { dateTypes } from "src/constants/dateTypes";
 import { CalendarHeaderStyle, DateTextStyle, ImageStyle } from "./styles";
 
 type Props = {
@@ -24,9 +24,7 @@ export const SwitchWeek = ({ date, setDate }: Props) => {
     <CalendarHeaderStyle>
       <ImageStyle src={leftArrow} onClick={changeWeekToLeft} alt="arros" />
       <ImageStyle src={rightArrow} onClick={changeWeekToRight} alt="arrow" />
-      <DateTextStyle>
-        {moment(date, "YYYY-MM").format(dateTypes.yearAndMonth)}
-      </DateTextStyle>
+      <DateTextStyle>{moment(date, "YYYY-MM").format(dateTypes.yearAndMonth)}</DateTextStyle>
     </CalendarHeaderStyle>
   );
 };

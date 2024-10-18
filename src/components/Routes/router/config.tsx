@@ -1,6 +1,6 @@
 import React, { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import Layout from "../../Layout";
+import Layout from "src/components/Layout";
 import { PublicRoute } from "../PublicRoute";
 import { PrivateRoute } from "../PrivateRoute";
 
@@ -13,18 +13,16 @@ import {
   URL_LOGIN,
   URL_SCHEDULE,
   URL_CREATE_APPOINTMENT,
-} from "../../../constants/clientUrl";
+} from "src/constants/clientUrl";
 
-const HomePage = lazy(() => import("../../../features/HomePage"));
-const CreateTodo = lazy(() => import("../../../features/CreateTodo"));
-const NotFound = lazy(() => import("../../../features/NotFound"));
-const TodoList = lazy(() => import("../../../features/TodoList"));
-const Registration = lazy(() => import("../../../features/Registration"));
-const Login = lazy(() => import("../../../features/Login"));
-const Schedule = lazy(() => import("../../../features/Schedule"));
-const CreateAppointment = lazy(
-  () => import("../../../features/CreateAppointment")
-);
+const HomePage = lazy(() => import("src/features/HomePage"));
+const CreateTodo = lazy(() => import("src/features/CreateTodo"));
+const NotFound = lazy(() => import("src/features/NotFound"));
+const TodoList = lazy(() => import("src/features/TodoList"));
+const Registration = lazy(() => import("src/features/Registration"));
+const Login = lazy(() => import("src/features/Login"));
+const Schedule = lazy(() => import("src/features/Schedule"));
+const CreateAppointment = lazy(() => import("src/features/CreateAppointment"));
 
 export const router = createBrowserRouter([
   {

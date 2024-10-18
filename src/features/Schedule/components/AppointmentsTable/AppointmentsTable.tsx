@@ -25,10 +25,8 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
 
   const getAppointments = async (date: string, period: string = "month") => {
     try {
-      const users = await UsersService.getUsers()
-      const role = users.find(item => item.id === user.id)?.role
       let data = []
-      if (role === 1) {
+      if (user.role === 1) {
         data = await AppointmentsService.getAppointments({
           date,
           period,

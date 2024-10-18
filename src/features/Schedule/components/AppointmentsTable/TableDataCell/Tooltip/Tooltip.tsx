@@ -1,4 +1,4 @@
-import { AppointmentModel } from "../../../../../../models/appointment.model";
+import { AppointmentModel } from "src/models/appointment.model";
 import { TooltipStyle } from "./styles";
 
 type Props = {
@@ -10,10 +10,7 @@ export const Tooltip = ({ day }: Props) => {
     <>
       {!!day && day.length > 2 && (
         <TooltipStyle>
-          {!!day?.length &&
-            day.map((appointment, i) => (
-              <p key={i}>{appointment.user.username}</p>
-            ))}
+          {!!day?.length && day.map((appointment, i) => <p key={i}>{appointment.user.username}</p>)}
         </TooltipStyle>
       )}
     </>

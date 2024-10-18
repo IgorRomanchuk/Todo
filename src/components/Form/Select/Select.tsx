@@ -6,11 +6,7 @@ interface Props<T extends FieldValues> {
   register: UseFormRegister<T>;
 }
 
-export const Select = <T extends FieldValues>({
-  name,
-  register,
-  ...props
-}: Props<T>) => {
+export const Select = <T extends FieldValues>({ name, register, ...props }: Props<T>) => {
   return (
     <SelectStyle {...register(name)} {...props}>
       <option value="todo">Todo</option>

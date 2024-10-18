@@ -1,10 +1,7 @@
 import moment from "moment";
 import { useEffect, useRef } from "react";
-import {
-  TableBodyStyle,
-  ThStyle,
-} from "./styles";
-import { TableBodyModel } from "../../../../../utils/getCalendarAppointments";
+import { TableBodyStyle, ThStyle } from "./styles";
+import { TableBodyModel } from "src/utils/getCalendarAppointments";
 import TableDataCell from "../TableDataCell";
 
 type Props = {
@@ -14,11 +11,10 @@ type Props = {
 export const TableBody = ({ tableBody }: Props) => {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
 
-
   useEffect(() => {
     const currentHour = moment().hour();
     const currentRow = tableBodyRef.current?.querySelector(
-      `tr:nth-child(${currentHour + 1})`
+      `tr:nth-child(${currentHour + 1})`,
     ) as HTMLElement;
 
     if (currentRow && tableBodyRef.current) {
@@ -39,7 +35,7 @@ export const TableBody = ({ tableBody }: Props) => {
           <tr key={i}>
             <ThStyle>{i}:00</ThStyle>
             {item.map((day, i) => (
-              <TableDataCell day={day} key={i}/>
+              <TableDataCell day={day} key={i} />
             ))}
           </tr>
         ))}

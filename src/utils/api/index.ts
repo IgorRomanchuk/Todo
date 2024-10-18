@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import AuthService from '../../components/App/services/auth.service';
+import AuthService from 'src/components/App/services/auth.service';
 
 const BASE_URL = 'http://localhost:3000/';
 

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { useAuth } from "src/utils/hooks/useAuth";
 import { ButtonStyle, CreateAppointmentPageStyle } from "./styles";
-import AppointmentsService from "../../services/appointments.service";
-import ScheduleService from "../../services/schedule.service";
+import AppointmentsService from "src/services/appointments.service";
+import ScheduleService from "src/services/schedule.service";
 import { useForm } from "react-hook-form";
-import CalendarControllerDate from "../../components/Form/CalendarControllerDate";
-import ControllerHour from "../../components/Form/ControllerHour";
+import CalendarControllerDate from "src/components/Form/CalendarControllerDate";
+import ControllerHour from "src/components/Form/ControllerHour";
 import { CreateAppointmentModel } from "./models/create-appointment.model";
-import Loading from "../../components/Loading";
-import { URL_SCHEDULE } from "../../constants/clientUrl";
-import { dateTypes } from "../../constants/dateTypes";
-import UsersService from "../../services/users.service";
-import ControllerUser from "../../components/Form/ControllerUser";
+import Loading from "src/components/Loading";
+import { URL_SCHEDULE } from "src/constants/clientUrl";
+import { dateTypes } from "src/constants/dateTypes";
+import ControllerUser from "src/components/Form/ControllerUser";
 
 export const CreateAppointment = () => {
   const { user } = useAuth();
@@ -21,7 +20,6 @@ export const CreateAppointment = () => {
   const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [userRole, setUserRole] = useState<number | undefined>();
 
   const createAppointments = async (data: CreateAppointmentModel) => {
     try {
@@ -35,15 +33,6 @@ export const CreateAppointment = () => {
       setError(err.message);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const getUserRole = async () => {
-    try {
-      const users = await UsersService.getUsers();
-      setUserRole(users.find((item) => item.id === user.id)?.role);
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -71,7 +60,6 @@ export const CreateAppointment = () => {
 
   useEffect(() => {
     getAvailableDays();
-    getUserRole();
   }, []);
 
   return (
@@ -85,7 +73,7 @@ export const CreateAppointment = () => {
           setValue={setValue}
           name="hour"
         />
-        {userRole === 1 && (
+        {user.role === 1 && (
           <ControllerUser required={true} error={errors.user_id} control={control} name="user_id" />
         )}
         {loading ? <Loading /> : <ButtonStyle type="submit">create appointments</ButtonStyle>}

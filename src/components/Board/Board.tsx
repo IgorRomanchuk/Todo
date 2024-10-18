@@ -1,10 +1,10 @@
 import moment, { Moment } from "moment";
 import Column from "./components/Column";
 import { ColumnsContainerStyle, ColumnStyle } from "./styles";
-import { TodoModel, TodosModel } from "../../models/todos.model";
+import { TodoModel, TodosModel } from "src/models/todos.model";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../utils/hooks/useAuth";
-import TodosService from "../../services/todos.service";
+import { useAuth } from "src/utils/hooks/useAuth";
+import TodosService from "src/services/todos.service";
 
 const statusTodos = ["todo", "in progress", "done"];
 
@@ -19,9 +19,8 @@ export const Board = ({ period, date }: Props) => {
   const [draggableCard, setDraggableCard] = useState<null | string>(null);
 
   useEffect(() => {
-    const todos = TodosService.getTodos().filter(
-      (item: TodosModel) => item.id === user.id
-    )[0]?.todos;
+    const todos = TodosService.getTodos().filter((item: TodosModel) => item.id === user.id)[0]
+      ?.todos;
     setTodoList(todos ? todos : []);
   }, [user]);
 
@@ -40,10 +39,8 @@ export const Board = ({ period, date }: Props) => {
                     moment(date)
                       .date(period[period.length - 1])
                       .isSameOrAfter(item.date, "date") &&
-                    moment(date)
-                      .date(period[0])
-                      .isSameOrBefore(item.date, "date") &&
-                    item.status === status
+                    moment(date).date(period[0]).isSameOrBefore(item.date, "date") &&
+                    item.status === status,
                 )}
                 setTodoList={setTodoList}
                 draggableCard={draggableCard}
