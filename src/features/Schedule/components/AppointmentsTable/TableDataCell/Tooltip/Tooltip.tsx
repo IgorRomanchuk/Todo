@@ -1,6 +1,6 @@
 import { AppointmentModel } from "src/models/appointment.model";
 import { TooltipStyle } from "./styles";
-
+  
 type Props = {
   day: null | AppointmentModel[];
 };

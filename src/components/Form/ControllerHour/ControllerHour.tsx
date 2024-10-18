@@ -1,10 +1,4 @@
-import {
-  Control,
-  Controller,
-  FieldError,
-  FieldValues,
-  Path,
-} from "react-hook-form";
+import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-form";
 import AvailableHours from "./components/AvailableHours";
 import { useWatch } from "react-hook-form";
 import { ErrorTextStyle } from "./styles";
@@ -46,9 +40,7 @@ export const ControllerHour = <T extends FieldValues>({
               value={field.value}
               selectedDate={selectedDate}
             />
-            {error && (
-              <ErrorTextStyle>{`You have to choose the time`}</ErrorTextStyle>
-            )}
+            {error && <ErrorTextStyle>{`You have to choose the time`}</ErrorTextStyle>}
           </>
         );
       }}
