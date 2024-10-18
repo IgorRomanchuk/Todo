@@ -6,6 +6,7 @@ import eslintReact from "eslint-plugin-react";
 import prettierPlugin from "eslint-plugin-prettier";
 import globals from "globals";
 import eslintConfigPrettier from "eslint-config-prettier";
+import airbnbTypeScript from "eslint-config-airbnb-typescript";
 
 export default [
   {
@@ -14,6 +15,7 @@ export default [
       react: eslintReact,
       "react-refresh": eslintReactRefresh,
       prettier: prettierPlugin,
+      "airbnb-typescript": airbnbTypeScript
     },
   },
   {
@@ -28,13 +30,26 @@ export default [
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     rules: {
       ...eslintConfigPrettier.rules,
-      curly: "off",
-      "no-unexpected-multiline": "off",
-      "@typescript-eslint/lines-around-comment": "off",
+      // Disable prefer default export
+      "import/prefer-default-export": "off",
+      "import/extensions": "off",
+      "import/no-extraneous-dependencies": "off",
+      "react/jsx-filename-extension": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/naming-convention": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      // since redux-slice changes state directly
+      "no-param-reassign": [
+        "error",
+        {
+          props: true,
+          ignorePropertyModificationsFor: ["state", "config"],
+        },
+      ],
       "@typescript-eslint/no-explicit-any": "off",
-      "no-unused-vars": "off",
       "no-undef": "off",
-      "@typescript-eslint/no-unused-vars": "warn",
+      "no-unused-vars": "off",
     },
   },
 ];
