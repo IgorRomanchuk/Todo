@@ -13,6 +13,7 @@ import Loading from "src/components/Loading";
 import { URL_SCHEDULE } from "src/constants/clientUrl";
 import { dateTypes } from "src/constants/dateTypes";
 import ControllerUser from "src/components/Form/ControllerUser";
+import StepProgressBar from "./components/StepProgressBar";
 
 export const CreateAppointment = () => {
   const { user } = useAuth();
@@ -48,6 +49,7 @@ export const CreateAppointment = () => {
   const {
     handleSubmit,
     setValue,
+    watch,
     control,
     formState: { errors },
   } = useForm<CreateAppointmentModel>({
@@ -57,7 +59,7 @@ export const CreateAppointment = () => {
       user_id: undefined,
     },
   });
-
+  
   useEffect(() => {
     getAvailableDays();
   }, []);
@@ -65,19 +67,51 @@ export const CreateAppointment = () => {
   return (
     <CreateAppointmentPageStyle>
       <form onSubmit={handleSubmit(createAppointments)}>
-        <CalendarControllerDate control={control} name="date" availableDates={availableDates} />
-        <ControllerHour
-          required={true}
-          error={errors.hour}
-          control={control}
-          setValue={setValue}
-          name="hour"
+        <StepProgressBar
+          error={error}
+          data={[
+            {
+              reactNode: (
+                <CalendarControllerDate
+                  control={control}
+                  name="date"
+                  availableDates={availableDates}
+                />
+              ),
+              disabled: watch("date") ? false : true,
+            },
+            {
+              reactNode: (
+                <ControllerHour
+                  required={true}
+                  error={errors.hour}
+                  control={control}
+                  setValue={setValue}
+                  name="hour"
+                />
+              ),
+              disabled: watch("hour") ? false : true,
+            },
+            {
+              reactNode: (
+                <ControllerUser
+                  required={true}
+                  error={errors.user_id}
+                  control={control}
+                  name="user_id"
+                />
+              ),
+              disabled: watch("user_id") ? false : true,
+            },
+            {
+              reactNode: loading ? (
+                <Loading />
+              ) : (
+                <ButtonStyle type="submit">create appointments</ButtonStyle>
+              ),
+            },
+          ]}
         />
-        {user.role === 1 && (
-          <ControllerUser required={true} error={errors.user_id} control={control} name="user_id" />
-        )}
-        {loading ? <Loading /> : <ButtonStyle type="submit">create appointments</ButtonStyle>}
-        {error && <p>{error}</p>}
       </form>
     </CreateAppointmentPageStyle>
   );

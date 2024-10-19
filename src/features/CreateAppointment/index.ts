@@ -1,1 +1,1 @@
-export {CreateAppointment as default} from "./CreateAppointment"
+export { CreateAppointment as default } from "./CreateAppointment";

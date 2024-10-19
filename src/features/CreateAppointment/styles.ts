@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 
 export const CreateAppointmentPageStyle = styled.div`
-  width: 220px;
   margin: 0 auto;
   padding-top: 100px;
 `;
