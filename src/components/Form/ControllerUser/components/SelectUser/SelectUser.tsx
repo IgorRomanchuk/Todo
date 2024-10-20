@@ -6,9 +6,10 @@ import { SelectStyle } from "./styles";
 
 type Props = {
   onChange: (e: string) => void;
+  selectedUser: string;
 };
 
-export const SelectUser = ({ onChange }: Props) => {
+export const SelectUser = ({ onChange, selectedUser }: Props) => {
   const { user } = useAuth();
   const [users, setUsers] = useState<UsersModel[]>([]);
 
@@ -19,10 +20,14 @@ export const SelectUser = ({ onChange }: Props) => {
 
   useEffect(() => {
     getUsers();
+    if (selectedUser) onChange(selectedUser);
   }, []);
 
   return (
-    <SelectStyle defaultValue="" onChange={(e) => onChange(e.target.value)}>
+    <SelectStyle
+      value={selectedUser ? selectedUser : ""}
+      onChange={(e) => onChange(e.target.value)}
+    >
       <option value="" disabled hidden>
         Please choose user...
       </option>

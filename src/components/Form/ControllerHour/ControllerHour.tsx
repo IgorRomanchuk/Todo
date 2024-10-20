@@ -20,10 +20,11 @@ export const ControllerHour = <T extends FieldValues>({
   setValue,
 }: Props<T>) => {
   const selectedDate = useWatch({ control, name: "date" as Path<T> });
+  const selectedHour = useWatch({ control, name: "hour" as Path<T> });
 
   useEffect(() => {
     if (selectedDate) {
-      setValue(name, null);
+      // setValue(name, null);
     }
   }, [selectedDate, setValue, name]);
 
@@ -39,6 +40,7 @@ export const ControllerHour = <T extends FieldValues>({
               onChange={field.onChange}
               value={field.value}
               selectedDate={selectedDate}
+              selectedHour={selectedHour}
             />
             {error && <ErrorTextStyle>{`You have to choose the time`}</ErrorTextStyle>}
           </>

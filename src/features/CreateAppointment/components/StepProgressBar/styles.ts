@@ -60,9 +60,20 @@ export const ContainerButtonsStyle = styled.div`
   margin-top: 20px;
 `;
 
-export const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button<{
+  $disabled?: boolean;
+}>`
   width: 100px;
   padding: 10px;
-  background-color: red;
+  background-color: #de7f0e;
+  border-radius: 5px;
+  color: white;
   margin: 0 10px;
+  cursor: pointer;
+  ${(props) =>
+    props.$disabled &&
+    css`
+      pointer-events: none;
+      background-color: #bd6c0d;
+    `}
 `;

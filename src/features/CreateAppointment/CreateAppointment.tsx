@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useAuth } from "src/utils/hooks/useAuth";
-import { ButtonStyle, CreateAppointmentPageStyle } from "./styles";
+import { ButtonStyle, CreateAppointmentPageStyle, ErrorTextStyle } from "./styles";
 import AppointmentsService from "src/services/appointments.service";
 import ScheduleService from "src/services/schedule.service";
 import { useForm } from "react-hook-form";
@@ -54,12 +54,12 @@ export const CreateAppointment = () => {
     formState: { errors },
   } = useForm<CreateAppointmentModel>({
     defaultValues: {
-      date: moment(),
+      date: "",
       hour: "",
       user_id: undefined,
     },
   });
-  
+
   useEffect(() => {
     getAvailableDays();
   }, []);
@@ -98,6 +98,7 @@ export const CreateAppointment = () => {
                   required={true}
                   error={errors.user_id}
                   control={control}
+                  setValue={setValue}
                   name="user_id"
                 />
               ),
@@ -107,7 +108,10 @@ export const CreateAppointment = () => {
               reactNode: loading ? (
                 <Loading />
               ) : (
-                <ButtonStyle type="submit">create appointments</ButtonStyle>
+                <>
+                  <ButtonStyle>create appointments</ButtonStyle>
+                  {error && <ErrorTextStyle>{error}</ErrorTextStyle>}
+                </>
               ),
             },
           ]}

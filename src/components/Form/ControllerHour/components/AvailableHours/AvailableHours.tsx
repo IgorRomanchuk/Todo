@@ -6,9 +6,10 @@ type Props = {
   onChange: (e: string) => void;
   value: string;
   selectedDate: string;
+  selectedHour: string;
 };
 
-export const AvailableHours = ({ onChange, value, selectedDate }: Props) => {
+export const AvailableHours = ({ onChange, value, selectedDate, selectedHour }: Props) => {
   const [availableHours, setAvailableHours] = useState<string[] | string>([]);
 
   const getAvailableHours = async (date: string) => {
@@ -27,7 +28,11 @@ export const AvailableHours = ({ onChange, value, selectedDate }: Props) => {
   };
 
   useEffect(() => {
-    onChange("");
+    if (selectedHour) onChange(selectedHour);
+  }, []);
+
+  useEffect(() => {
+    onChange('')
     getAvailableHours(selectedDate);
   }, [selectedDate]);
 

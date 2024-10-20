@@ -1,4 +1,4 @@
-import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-form";
+import { Control, Controller, FieldError, FieldValues, Path, useWatch } from "react-hook-form";
 import { ErrorTextStyle } from "./styles";
 import { SelectUser } from "./components/SelectUser/SelectUser";
 
@@ -7,6 +7,7 @@ interface Props<T extends FieldValues> {
   control: Control<T>;
   required: boolean;
   error?: FieldError;
+  setValue: (name: Path<T>, value: null) => void;
 }
 
 export const ControllerUser = <T extends FieldValues>({
@@ -15,6 +16,8 @@ export const ControllerUser = <T extends FieldValues>({
   required,
   error,
 }: Props<T>) => {
+  const selectedUser = useWatch({ control, name: "user_id" as Path<T> });
+
   return (
     <Controller
       name={name}
@@ -23,7 +26,7 @@ export const ControllerUser = <T extends FieldValues>({
       render={({ field }) => {
         return (
           <>
-            <SelectUser onChange={field.onChange} />
+            <SelectUser selectedUser={selectedUser} onChange={field.onChange} />
             {error && <ErrorTextStyle>{`You have to select a user`}</ErrorTextStyle>}
           </>
         );

@@ -1,5 +1,6 @@
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import Calendar from "../../Calendar";
+import moment from "moment";
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
@@ -18,7 +19,7 @@ export const CalendarControllerDate = <T extends FieldValues>({
       control={control}
       render={({ field }) => {
         return (
-          <Calendar date={field.value} setDate={field.onChange} availableDates={availableDates} />
+          <Calendar date={field.value || moment()} setDate={field.onChange} availableDates={availableDates} />
         );
       }}
     />

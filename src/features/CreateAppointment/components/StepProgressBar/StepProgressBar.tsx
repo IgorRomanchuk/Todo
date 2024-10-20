@@ -22,7 +22,6 @@ export const StepProgressBar = ({ data }: Props) => {
 
   const stepForward = () => {
     if (currentStep === steps.length + 1) {
-      console.log("navigate to schedule");
       return;
     }
     setCurrentStep((prev) => prev + 1);
@@ -60,8 +59,8 @@ export const StepProgressBar = ({ data }: Props) => {
         {data[currentStep - 1].reactNode}
       </div>
       <ContainerButtonsStyle>
-        <ButtonStyle onClick={stepBack}>Prev</ButtonStyle>
-        <ButtonStyle disabled={data[currentStep - 1].disabled} onClick={stepForward}>
+        <ButtonStyle type="button" onClick={stepBack}>Prev</ButtonStyle>
+        <ButtonStyle type="button" $disabled={data[currentStep - 1].disabled} onClick={stepForward}>
           Next
         </ButtonStyle>
       </ContainerButtonsStyle>
