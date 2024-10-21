@@ -13,7 +13,7 @@ import Loading from "src/components/Loading";
 import { URL_SCHEDULE } from "src/constants/clientUrl";
 import { dateTypes } from "src/constants/dateTypes";
 import ControllerUser from "src/components/Form/ControllerUser";
-import StepProgressBar from "./components/StepProgressBar";
+import StepProgressBar from "../../components/StepProgressBar";
 
 export const CreateAppointment = () => {
   const { user } = useAuth();
@@ -68,7 +68,7 @@ export const CreateAppointment = () => {
     <CreateAppointmentPageStyle>
       <form onSubmit={handleSubmit(createAppointments)}>
         <StepProgressBar
-          error={error}
+          steps={["first step", "second step", ...(user.role === 1 ? ["third step"] : [])]}
           data={[
             {
               reactNode: (
@@ -92,18 +92,22 @@ export const CreateAppointment = () => {
               ),
               disabled: watch("hour") ? false : true,
             },
-            {
-              reactNode: (
-                <ControllerUser
-                  required={true}
-                  error={errors.user_id}
-                  control={control}
-                  setValue={setValue}
-                  name="user_id"
-                />
-              ),
-              disabled: watch("user_id") ? false : true,
-            },
+            ...(user.role === 1
+              ? [
+                  {
+                    reactNode: (
+                      <ControllerUser
+                        required={true}
+                        error={errors.user_id}
+                        control={control}
+                        setValue={setValue}
+                        name="user_id"
+                      />
+                    ),
+                    disabled: watch("user_id") ? false : true,
+                  },
+                ]
+              : []),
             {
               reactNode: loading ? (
                 <Loading />

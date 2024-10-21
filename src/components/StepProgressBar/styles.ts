@@ -1,8 +1,25 @@
 import styled, { css } from "styled-components";
 
+export const ContainerStyle = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const ContainerStepsStyle = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+export const ContentContainerStyle = styled.div`
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const StepItemStyle = styled.div<{

@@ -2,7 +2,6 @@ import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-f
 import AvailableHours from "./components/AvailableHours";
 import { useWatch } from "react-hook-form";
 import { ErrorTextStyle } from "./styles";
-import { useEffect } from "react";
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
@@ -17,16 +16,9 @@ export const ControllerHour = <T extends FieldValues>({
   control,
   required,
   error,
-  setValue,
 }: Props<T>) => {
   const selectedDate = useWatch({ control, name: "date" as Path<T> });
   const selectedHour = useWatch({ control, name: "hour" as Path<T> });
-
-  useEffect(() => {
-    if (selectedDate) {
-      // setValue(name, null);
-    }
-  }, [selectedDate, setValue, name]);
 
   return (
     <Controller

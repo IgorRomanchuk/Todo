@@ -3,21 +3,21 @@ import {
   ButtonStyle,
   ContainerButtonsStyle,
   ContainerStepsStyle,
+  ContainerStyle,
+  ContentContainerStyle,
   StepItemStyle,
   StepStyle,
 } from "./styles";
 
-const steps = ["first step", "second step", "third step"];
-
 type Props = {
+  steps: string[];
   data: {
     reactNode: ReactNode;
     disabled?: boolean;
   }[];
-  error: string;
 };
 
-export const StepProgressBar = ({ data }: Props) => {
+export const StepProgressBar = ({ data, steps }: Props) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   const stepForward = () => {
@@ -33,7 +33,7 @@ export const StepProgressBar = ({ data }: Props) => {
   };
 
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+    <ContainerStyle>
       <ContainerStepsStyle>
         {steps.map((item: string, i) => (
           <StepItemStyle key={i} $complited={i + 1 < currentStep}>
@@ -44,26 +44,15 @@ export const StepProgressBar = ({ data }: Props) => {
           </StepItemStyle>
         ))}
       </ContainerStepsStyle>
-      <div
-        style={{
-          width: "220px",
-          height: "220px",
-          margin: "0 auto",
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        {data[currentStep - 1].reactNode}
-      </div>
+      <ContentContainerStyle>{data[currentStep - 1].reactNode}</ContentContainerStyle>
       <ContainerButtonsStyle>
-        <ButtonStyle type="button" onClick={stepBack}>Prev</ButtonStyle>
+        <ButtonStyle type="button" onClick={stepBack}>
+          Prev
+        </ButtonStyle>
         <ButtonStyle type="button" $disabled={data[currentStep - 1].disabled} onClick={stepForward}>
           Next
         </ButtonStyle>
       </ContainerButtonsStyle>
-    </div>
+    </ContainerStyle>
   );
 };

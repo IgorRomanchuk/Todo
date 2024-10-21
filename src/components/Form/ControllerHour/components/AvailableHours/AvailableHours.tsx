@@ -32,7 +32,7 @@ export const AvailableHours = ({ onChange, value, selectedDate, selectedHour }: 
   }, []);
 
   useEffect(() => {
-    onChange('')
+    // onChange('')
     getAvailableHours(selectedDate);
   }, [selectedDate]);
 
