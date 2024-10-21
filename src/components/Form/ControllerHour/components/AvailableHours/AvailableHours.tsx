@@ -28,11 +28,16 @@ export const AvailableHours = ({ onChange, value, selectedDate, selectedHour }: 
   };
 
   useEffect(() => {
+    if (!availableHours.includes(selectedHour)) {
+      onChange("");
+    }
+  }, [availableHours]);
+
+  useEffect(() => {
     if (selectedHour) onChange(selectedHour);
   }, []);
 
   useEffect(() => {
-    // onChange('')
     getAvailableHours(selectedDate);
   }, [selectedDate]);
 

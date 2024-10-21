@@ -19,7 +19,7 @@ export const CalendarControllerDate = <T extends FieldValues>({
       control={control}
       render={({ field }) => {
         return (
-          <Calendar date={field.value || moment()} setDate={field.onChange} availableDates={availableDates} />
+          <Calendar date={moment()} setDate={field.onChange} availableDates={availableDates} />
         );
       }}
     />
