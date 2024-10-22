@@ -13,8 +13,3 @@ export const ButtonStyle = styled.button`
   cursor: pointer;
   font-weight: 600;
 `;
-
-export const ErrorTextStyle = styled.p`
-  margin: 10px 0;
-  text-align: center;
-`;

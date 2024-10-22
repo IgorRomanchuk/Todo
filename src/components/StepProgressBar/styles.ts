@@ -34,7 +34,7 @@ export const StepItemStyle = styled.div<{
   &:not(:first-child)::before {
     content: "";
     width: 100%;
-    top: 35%;
+    top: 50%;
     transform: translateX(-50%);
     height: 3px;
     background-color: white;
@@ -59,16 +59,22 @@ export const StepStyle = styled.div<{
   z-index: 10;
   position: relative;
   background-color: grey;
+  color: white;
   border-radius: 50%;
+  pointer-events: none;
   ${(props) =>
     props.$active &&
     css`
       background-color: #de7f0e;
+      cursor: pointer;
+      pointer-events: auto;
     `};
   ${(props) =>
     props.$complite &&
     css`
       background-color: green;
+      cursor: pointer;
+      pointer-events: auto;
     `};
 `;
 
@@ -80,7 +86,7 @@ export const ContainerButtonsStyle = styled.div`
 export const ButtonStyle = styled.button<{
   $disabled?: boolean;
 }>`
-  width: 100px;
+  min-width: 100px;
   padding: 10px;
   background-color: #de7f0e;
   border-radius: 5px;
@@ -93,4 +99,9 @@ export const ButtonStyle = styled.button<{
       pointer-events: none;
       background-color: #bd6c0d;
     `}
+`;
+
+export const ErrorTextStyle = styled.p`
+  margin: 10px 0;
+  text-align: center;
 `;

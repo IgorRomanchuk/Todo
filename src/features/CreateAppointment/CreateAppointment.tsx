@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useAuth } from "src/utils/hooks/useAuth";
-import { ButtonStyle, CreateAppointmentPageStyle, ErrorTextStyle } from "./styles";
+import { CreateAppointmentPageStyle } from "./styles";
 import AppointmentsService from "src/services/appointments.service";
 import ScheduleService from "src/services/schedule.service";
 import { useForm } from "react-hook-form";
 import CalendarControllerDate from "src/components/Form/CalendarControllerDate";
 import ControllerHour from "src/components/Form/ControllerHour";
 import { CreateAppointmentModel } from "./models/create-appointment.model";
-import Loading from "src/components/Loading";
 import { URL_SCHEDULE } from "src/constants/clientUrl";
 import { dateTypes } from "src/constants/dateTypes";
 import ControllerUser from "src/components/Form/ControllerUser";
@@ -40,9 +39,9 @@ export const CreateAppointment = () => {
   const getAvailableDays = async () => {
     try {
       const data = await ScheduleService.getAvailableDays();
-      const date = data.map((item: string) => moment(item).format(dateTypes.date))
+      const date = data.map((item: string) => moment(item).format(dateTypes.date));
       setAvailableDates(date);
-      setValue('date', date.includes(moment().format(dateTypes.date)) ? moment() : '')
+      setValue("date", date.includes(moment().format(dateTypes.date)) ? moment() : "");
     } catch (err) {
       console.log(err);
     }
@@ -62,6 +61,8 @@ export const CreateAppointment = () => {
     },
   });
 
+  const selectedUser = watch("user_id");
+
   useEffect(() => {
     getAvailableDays();
   }, []);
@@ -70,7 +71,10 @@ export const CreateAppointment = () => {
     <CreateAppointmentPageStyle>
       <form onSubmit={handleSubmit(createAppointments)}>
         <StepProgressBar
-          steps={["first step", "second step", ...(user.role === 1 ? ["third step"] : [])]}
+          selectedUser={selectedUser}
+          setValue={setValue}
+          error={error}
+          loading={loading}
           data={[
             {
               reactNode: (
@@ -80,7 +84,8 @@ export const CreateAppointment = () => {
                   availableDates={availableDates}
                 />
               ),
-              disabled: watch("date") ? false : true,
+              disabled: !watch("date"),
+              name: "date",
             },
             {
               reactNode: (
@@ -92,7 +97,8 @@ export const CreateAppointment = () => {
                   name="hour"
                 />
               ),
-              disabled: watch("hour") ? false : true,
+              disabled: !watch("hour"),
+              name: "hour",
             },
             ...(user.role === 1
               ? [
@@ -106,20 +112,11 @@ export const CreateAppointment = () => {
                         name="user_id"
                       />
                     ),
-                    disabled: watch("user_id") ? false : true,
+                    disabled: !watch("user_id"),
+                    name: "user_id",
                   },
                 ]
               : []),
-            {
-              reactNode: loading ? (
-                <Loading />
-              ) : (
-                <>
-                  <ButtonStyle>create appointments</ButtonStyle>
-                  {error && <ErrorTextStyle>{error}</ErrorTextStyle>}
-                </>
-              ),
-            },
           ]}
         />
       </form>

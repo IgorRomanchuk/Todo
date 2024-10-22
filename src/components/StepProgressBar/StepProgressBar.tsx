@@ -1,27 +1,30 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import {
   ButtonStyle,
   ContainerButtonsStyle,
   ContainerStepsStyle,
   ContainerStyle,
   ContentContainerStyle,
+  ErrorTextStyle,
   StepItemStyle,
   StepStyle,
 } from "./styles";
+import { StepItemModel } from "./models/step-item.model";
+import Loading from "../Loading";
 
 type Props = {
-  steps: string[];
-  data: {
-    reactNode: ReactNode;
-    disabled?: boolean;
-  }[];
+  data: StepItemModel[];
+  selectedUser: string;
+  setValue: any;
+  error: string;
+  loading: boolean;
 };
 
-export const StepProgressBar = ({ data, steps }: Props) => {
+export const StepProgressBar = ({ data, selectedUser, setValue, error, loading }: Props) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   const stepForward = () => {
-    if (currentStep === steps.length + 1) {
+    if (currentStep === data.length + 1) {
       return;
     }
     setCurrentStep((prev) => prev + 1);
@@ -30,17 +33,26 @@ export const StepProgressBar = ({ data, steps }: Props) => {
   const stepBack = () => {
     if (currentStep === 1) return;
     setCurrentStep((prev) => prev - 1);
+    setValue(data[currentStep - 1].name, "");
+  };
+
+  const handleClickCircle = (data: StepItemModel[], step: number) => {
+    data.forEach((item) => setValue(item.name, ""));
+    setCurrentStep(step + 1);
   };
 
   return (
     <ContainerStyle>
       <ContainerStepsStyle>
-        {steps.map((item: string, i) => (
-          <StepItemStyle key={i} $complited={i + 1 < currentStep}>
-            <StepStyle $active={i + 1 === currentStep} $complite={i + 1 < currentStep}>
+        {data.map((_, i) => (
+          <StepItemStyle key={i} $complited={i < currentStep}>
+            <StepStyle
+              $active={i + 1 === currentStep}
+              $complite={i + 1 < currentStep}
+              onClick={() => handleClickCircle(data.slice(i + 1, currentStep), i)}
+            >
               {i + 1}
             </StepStyle>
-            <p>{item}</p>
           </StepItemStyle>
         ))}
       </ContainerStepsStyle>
@@ -49,9 +61,24 @@ export const StepProgressBar = ({ data, steps }: Props) => {
         <ButtonStyle type="button" onClick={stepBack}>
           Prev
         </ButtonStyle>
-        <ButtonStyle type="button" $disabled={data[currentStep - 1].disabled} onClick={stepForward}>
-          Next
-        </ButtonStyle>
+        {selectedUser ? (
+          loading ? (
+            <Loading />
+          ) : (
+            <>
+              <ButtonStyle type="submit">Create appointment</ButtonStyle>
+              {error && <ErrorTextStyle>{error}</ErrorTextStyle>}
+            </>
+          )
+        ) : (
+          <ButtonStyle
+            type="button"
+            $disabled={data[currentStep - 1].disabled}
+            onClick={stepForward}
+          >
+            Next
+          </ButtonStyle>
+        )}
       </ContainerButtonsStyle>
     </ContainerStyle>
   );
