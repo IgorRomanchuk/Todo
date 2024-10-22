@@ -7,17 +7,17 @@ export const TooltipStyle = styled.div`
   border-radius: 5px;
   padding: 5px 0;
   position: absolute;
-  bottom: 115%; 
+  bottom: 115%;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0;
+  display: none;
   transition: opacity 0.3s;
   border: 1px solid black;
 
   &::after {
     content: "";
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     border-width: 5px;
@@ -28,7 +28,7 @@ export const TooltipStyle = styled.div`
   &::before {
     content: "";
     position: absolute;
-    top: 100%; 
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     border-width: 6px;
