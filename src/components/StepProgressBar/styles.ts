@@ -81,11 +81,14 @@ export const StepStyle = styled.div<{
 export const ContainerButtonsStyle = styled.div`
   margin: 0 auto;
   margin-top: 20px;
+  display: flex;
+  align-items: center;
 `;
 
 export const ButtonStyle = styled.button<{
   $disabled?: boolean;
 }>`
+  height: 36px;
   min-width: 100px;
   padding: 10px;
   background-color: #de7f0e;

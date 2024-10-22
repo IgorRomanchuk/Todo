@@ -11,6 +11,7 @@ import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { useAuth } from "../../../../utils/hooks/useAuth";
 import { dateTypes } from "../../../../constants/dateTypes";
+import ScheduleUtilsService from "../../services/schedule-utils.service";
 
 type Props = {
   date: Moment | string;
@@ -25,18 +26,20 @@ export const AppointmentsTable = ({ date, setDate }: Props) => {
 
   const getAppointments = async (date: string, period: string = "month") => {
     try {
-      let data = []
+      let data = [];
       if (user.role === 1) {
         data = await AppointmentsService.getAppointments({
           date,
           period,
         });
       } else {
-        data = await UsersService.getAppointments(user.id)
+        data = await UsersService.getAppointments(user.id);
       }
 
       setAppointments(
-        Object.entries(Object.groupBy(data, ({ date }: AppointmentModel) => date)).reverse(),
+        Object.entries(
+          ScheduleUtilsService.myGroupBy(data, ({ date }: AppointmentModel) => date),
+        ).reverse(),
       );
     } catch (err: any) {
       console.log(err.message);
