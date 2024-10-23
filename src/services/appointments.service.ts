@@ -18,6 +18,8 @@ class AppointmentsService {
 
   createAppointments = async (body: CreateAppointmentPayload) =>
     (await api.post<CreateAppointmentRequest>(`${this.endpoint}`, body)).data;
+
+  deleteAppointment = async (id: number) => await api.delete(`${this.endpoint}/${id}`);
 }
 
 export default new AppointmentsService();

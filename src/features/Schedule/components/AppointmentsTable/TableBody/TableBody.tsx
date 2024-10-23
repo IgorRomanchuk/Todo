@@ -6,9 +6,10 @@ import TableDataCell from "../TableDataCell";
 
 type Props = {
   tableBody: TableBodyModel[];
+  getAppointments: any;
 };
 
-export const TableBody = ({ tableBody }: Props) => {
+export const TableBody = ({ tableBody, getAppointments }: Props) => {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const TableBody = ({ tableBody }: Props) => {
           <tr key={i}>
             <ThStyle>{i}:00</ThStyle>
             {item.map((day, i) => (
-              <TableDataCell day={day} key={i} />
+              <TableDataCell day={day} key={i} getAppointments={getAppointments} />
             ))}
           </tr>
         ))}

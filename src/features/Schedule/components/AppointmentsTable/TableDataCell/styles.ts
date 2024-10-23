@@ -37,9 +37,6 @@ export const TdStyle = styled.td<{
     css`
       cursor: pointer;
       position: relative;
-      &:hover div {
-        display: block;
-      }
     `};
 
   @media (max-width: 950px) {

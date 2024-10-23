@@ -1,23 +1,29 @@
 import { styled } from "styled-components";
 
+export const TooltipContainerStyle = styled.div`
+  padding: 15px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 100%;
+`;
+
 export const TooltipStyle = styled.div`
   width: 120px;
   background-color: #f0f0f0;
   text-align: center;
   border-radius: 5px;
-  padding: 5px 0;
+  padding: 5px;
   position: absolute;
-  bottom: 115%;
+  bottom: 6px;
   left: 50%;
-  transform: translateX(-50%);
-  display: none;
-  transition: opacity 0.3s;
+  transform: translate(-50%);
   border: 1px solid black;
 
   &::after {
     content: "";
     position: absolute;
-    top: 100%;
+    top: 99%;
     left: 50%;
     transform: translateX(-50%);
     border-width: 5px;
@@ -31,8 +37,8 @@ export const TooltipStyle = styled.div`
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 6px;
+    border-width: 5px;
     border-style: solid;
-    border-color: black transparent transparent transparent;
+    border-color: black transparent transparent;
   }
 `;
